@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ELNAZ</string>
+    <string name="title_feature_barcode">BarcodeScanner</string>
+    <string name="title_feature_additem">Add Item</string>
+</resources>
