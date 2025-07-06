@@ -19,6 +19,7 @@ androidx-test-core = "1.6.1"
 espresso-core = "3.6.1"
 appcompat = "1.7.1"
 material = "1.12.0"
+play-core = "1.10.3"
 
 [libraries]
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
@@ -41,6 +42,7 @@ androidx-test-core = { module = "androidx.test:core", version.ref = "androidx-te
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+google-play-core = { group = "com.google.android.play", name = "core", version.ref = "play-core" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle" }
