@@ -1,4 +1,4 @@
-package com.ajijul.elnaz.ui.theme
+package com.ajijul.elnaz.core.ui.theme
 
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
