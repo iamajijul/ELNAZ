@@ -23,6 +23,6 @@ rootProject.name = "ELNAZ"
 include(":app")
 include(":data")
 include(":domain")
-include(":ui")
 include(":feature-barcode")
 include(":feature-additem")
+include(":core")

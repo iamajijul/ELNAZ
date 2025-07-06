@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ajijul.elnaz.ui"
+    namespace = "com.ajijul.elnaz.core"
     compileSdk = 35
 
     defaultConfig {

@@ -1,4 +1,4 @@
-package com.ajijul.elnaz.ui
+package com.ajijul.elnaz.core
 
 import org.junit.Test
 
