@@ -3,11 +3,11 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.kotlin.compose.compiler)
 }
 
 android {
-    namespace = "com.ajijul.elnaz.data"
+    namespace = "com.ajijul.elnaz.inventory"
     compileSdk = 35
 
     defaultConfig {
@@ -33,16 +33,18 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
-
     implementation(project(":core"))
     implementation(project(":domain"))
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
-    implementation(libs.firebase.firestore)
-    implementation(libs.kotlinx.coroutines)
+    implementation(project(":data"))
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.hilt.navigation)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
