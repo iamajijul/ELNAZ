@@ -1,10 +1,9 @@
 package com.ajijul.elnaz.domain.usecases
 
-import com.ajijul.elnaz.data.repository.ItemRepository
 import com.ajijul.elnaz.domain.model.Item
-import javax.inject.Inject
+import com.ajijul.elnaz.domain.repository.ItemRepository
 
-class AddItemUseCase @Inject constructor(
+class AddItemUseCase(
     private val repository: ItemRepository
 ) {
     suspend operator fun invoke(item: Item) {

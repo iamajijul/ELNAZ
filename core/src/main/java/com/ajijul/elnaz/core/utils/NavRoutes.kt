@@ -1,4 +1,4 @@
-package com.ajijul.elnaz.core.common
+package com.ajijul.elnaz.core.utils
 
 object NavRoutes {
     const val INVENTORY = "inventory"

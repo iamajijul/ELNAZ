@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.ajijul.elnaz.core.common.NavRoutes
+import com.ajijul.elnaz.core.utils.NavRoutes
 import com.ajijul.elnaz.inventory.InventoryScreen
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
