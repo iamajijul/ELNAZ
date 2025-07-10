@@ -1,13 +1,12 @@
 package com.ajijul.elnaz.domain.usecases
 
-import com.ajijul.elnaz.data.repository.ItemRepository
 import com.ajijul.elnaz.domain.model.Item
+import com.ajijul.elnaz.domain.repository.ItemRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import java.util.Calendar
-import javax.inject.Inject
 
-class CheckStockAlertsUseCase @Inject constructor(
+class CheckStockAlertsUseCase constructor(
     private val repository: ItemRepository
 ) {
     data class StockAlert(

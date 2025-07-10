@@ -1,4 +1,4 @@
-package com.ajijul.elnaz.data.remote
+package com.ajijul.elnaz.data.network
 
 import com.ajijul.elnaz.data.local.entity.ItemEntity
 import com.google.firebase.firestore.FirebaseFirestore

@@ -2,7 +2,7 @@ package com.ajijul.elnaz.data.repository
 
 import com.ajijul.elnaz.data.local.dao.ItemDao
 import com.ajijul.elnaz.data.local.entity.ItemEntity
-import com.ajijul.elnaz.data.remote.FirebaseDataSource
+import com.ajijul.elnaz.data.network.FirebaseDataSource
 import com.ajijul.elnaz.domain.model.Item
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
