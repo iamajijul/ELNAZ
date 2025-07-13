@@ -37,6 +37,7 @@ android {
 dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
+    implementation(libs.androidx.room.runtime)
     implementation(libs.hilt.android)
     implementation(libs.firebase.firestore)
     kapt(libs.hilt.compiler)
