@@ -6,6 +6,7 @@ import com.ajijul.elnaz.data.mapper.toDataItemEntity
 import com.ajijul.elnaz.data.mapper.toDomainItem
 import com.ajijul.elnaz.domain.repository.ItemRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class ItemRepositoryImplementation @Inject constructor(
@@ -28,13 +29,13 @@ class ItemRepositoryImplementation @Inject constructor(
 
     override fun getLowStockItems(threshold: Int): Flow<List<Item>> {
         return itemDao.getLowStockItems(threshold).map { entities ->
-            entities.map { it.toDomain() }
+            entities.map { it.toDomainItem() }
         }
     }
 
     override fun getOldStockItems(timestamp: Long): Flow<List<Item>> {
         return itemDao.getOldStockItems(timestamp).map { entities ->
-            entities.map { it.toDomain() }
+            entities.map { it.toDomainItem() }
         }
     }
 }
