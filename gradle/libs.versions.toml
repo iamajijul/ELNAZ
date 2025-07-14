@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.1.21"
-kotin-ksp = "2.0.21-1.0.27"
+kotin-ksp = "2.1.21-2.0.1"
 android-gradle = "8.6.1"
 hilt = "2.52"
 androidx-core = "1.16.0"
@@ -20,6 +20,7 @@ espresso-core = "3.6.1"
 appcompat = "1.7.1"
 material = "1.12.0"
 play-core = "1.10.3"
+startup-runtime = "1.2.0"
 
 [libraries]
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
@@ -44,6 +45,7 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 google-play-core = { group = "com.google.android.play", name = "core", version.ref = "play-core" }
+androidx-startup-runtime = { group = "androidx.startup", name = "startup-runtime", version.ref = "startup-runtime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle" }

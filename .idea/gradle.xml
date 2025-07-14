@@ -15,8 +15,8 @@
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/di" />
             <option value="$PROJECT_DIR$/domain" />
-            <option value="$PROJECT_DIR$/feature-additem" />
-            <option value="$PROJECT_DIR$/feature-barcode" />
+            <option value="$PROJECT_DIR$/feature_additem" />
+            <option value="$PROJECT_DIR$/feature_barcode" />
             <option value="$PROJECT_DIR$/inventory" />
           </set>
         </option>
