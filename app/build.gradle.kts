@@ -40,7 +40,7 @@ android {
     buildFeatures {
         compose = true
     }
-    dynamicFeatures += setOf(":feature-barcode", ":feature-additem")
+    dynamicFeatures += setOf(":feature_barcode", ":feature_additem")
 }
 
 dependencies {
@@ -49,6 +49,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":inventory"))
+    implementation(project(":di"))
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
@@ -56,6 +57,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.hilt.navigation)
     implementation(libs.hilt.android)
+    implementation(libs.androidx.startup.runtime)
     kapt(libs.hilt.compiler)
     implementation(libs.google.play.core)
     implementation(libs.androidx.room.ktx)

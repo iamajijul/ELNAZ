@@ -2,7 +2,7 @@ package com.ajijul.elnaz.inventory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ajijul.elnaz.data.repository.ItemRepository
+import com.ajijul.elnaz.domain.repository.ItemRepository
 import com.ajijul.elnaz.domain.usecases.CheckStockAlertsUseCase
 import com.ajijul.elnaz.domain.usecases.GetItemsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

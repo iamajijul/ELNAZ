@@ -7,12 +7,14 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
     @Provides
+    @Singleton
     fun provideDatabase(application: Application): AppDatabase {
         return Room.databaseBuilder(
             application,
@@ -22,5 +24,6 @@ object DatabaseModule {
     }
 
     @Provides
+    @Singleton
     fun provideItemDao(database: AppDatabase) = database.itemDao()
 }

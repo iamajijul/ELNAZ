@@ -6,7 +6,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ajijul.elnaz.core.model.Item
+import com.ajijul.elnaz.domain.model.Item
 
 @Composable
 fun ItemCard(item: Item) {
