@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.kotlin.compose.compiler)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -50,6 +51,8 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":inventory"))
     implementation(project(":di"))
+    implementation(project(":logger"))
+    implementation(project(":extension"))
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
@@ -63,6 +66,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
     implementation(libs.firebase.firestore)
+    implementation(libs.google.gms.services)
     implementation(libs.accompanist.permissions)
     implementation(libs.kotlinx.coroutines)
     testImplementation(libs.junit)
