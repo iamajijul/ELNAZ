@@ -3,6 +3,7 @@ package com.ajijul.elnaz.application
 import android.app.Application
 import androidx.startup.AppInitializer
 import com.ajijul.elnaz.di.annotations.IODispatcher
+import com.ajijul.elnaz.logger.ElnazLogger
 import com.ajijul.elnaz.startup.FirebaseInitializer
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineDispatcher
@@ -32,6 +33,7 @@ class ElnazApplication : Application(), CoroutineScope {
 
     override fun onCreate() {
         super.onCreate()
+        ElnazLogger.initializeLogging(this)
         appInitializer()
     }
 

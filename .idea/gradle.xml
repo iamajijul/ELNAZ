@@ -15,9 +15,11 @@
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/di" />
             <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/extension" />
             <option value="$PROJECT_DIR$/feature_additem" />
             <option value="$PROJECT_DIR$/feature_barcode" />
             <option value="$PROJECT_DIR$/inventory" />
+            <option value="$PROJECT_DIR$/logger" />
           </set>
         </option>
       </GradleProjectSettings>
