@@ -10,8 +10,8 @@ fun ElnazInventoryTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        useDarkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        useDarkTheme -> darkColorSchemeFromXml()
+        else -> lightColorSchemeFromXml()
     }
     MaterialTheme(
         colorScheme = colorScheme,
