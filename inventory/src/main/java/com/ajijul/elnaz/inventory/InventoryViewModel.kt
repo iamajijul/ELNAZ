@@ -30,11 +30,11 @@ class InventoryViewModel @Inject constructor(
                 checkStockAlertsUseCase()
             ) { items, stats, alerts ->
                 InventoryState(
-                    items = items,
+                    products = items,
                     itemCount = stats.first,
                     totalValue = stats.second,
-                    lowStockItems = alerts.lowStockItems,
-                    oldStockItems = alerts.oldStockItems
+                    lowStockProducts = alerts.lowStockProducts,
+                    oldStockProducts = alerts.oldStockProducts
                 )
             }.collect { newState ->
                 _state.value = newState
