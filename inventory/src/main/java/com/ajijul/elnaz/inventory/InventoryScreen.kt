@@ -29,26 +29,26 @@ fun InventoryScreen(
             Text("Total Items: ${state.itemCount}")
             Text("Total Value: $${state.totalValue}")
         }
-        if (state.lowStockItems.isNotEmpty()) {
+/*        if (state.lowStockProducts.isNotEmpty()) {
             Text(
-                text = "⚠️ Out of Stock Items (${state.lowStockItems.size})",
+                text = "⚠️ Out of Stock Items (${state.lowStockProducts.size})",
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(16.dp)
             )
-            state.lowStockItems.forEach { item ->
+            state.lowStockProducts.forEach { item ->
                 ItemCard(item)
             }
         }
-        if (state.oldStockItems.isNotEmpty()) {
+        if (state.oldStockProducts.isNotEmpty()) {
             Text(
-                text = "⚠️ Stock Older Than 1 Year (${state.oldStockItems.size})",
+                text = "⚠️ Stock Older Than 1 Year (${state.oldStockProducts.size})",
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(16.dp)
             )
-            state.oldStockItems.forEach { item ->
+            state.oldStockProducts.forEach { item ->
                 ItemCard(item)
             }
-        }
+        }*/
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -70,7 +70,7 @@ fun InventoryScreen(
         }
 
         LazyColumn {
-            items(state.items) { item ->
+            items(state.products) { item ->
                 ItemCard(item)
             }
         }

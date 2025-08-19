@@ -6,10 +6,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ajijul.elnaz.domain.model.Item
+import com.ajijul.elnaz.domain.model.ProductModel
 
 @Composable
-fun ItemCard(item: Item) {
+fun ItemCard(product: ProductModel) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -17,12 +17,10 @@ fun ItemCard(item: Item) {
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = item.name, style = MaterialTheme.typography.titleMedium)
-            Text(text = "Barcode: ${item.barcode}")
-            Text(text = "Quantity: ${item.quantity}")
-            Text(text = "Price: $${item.price}")
-            Text(text = "Location: ${item.location}")
-            Text(text = "Created: ${item.createdAt}") // Optional: Display creation date
+            Text(text = product.name, style = MaterialTheme.typography.titleMedium)
+            Text(text = "Barcode: ${product.barcode}")
+            Text(text = "Buy Price: $${product.buyPrice}")
+            Text(text = "Sale Price: $${product.salePrice}")
         }
     }
 }

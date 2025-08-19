@@ -1,6 +1,6 @@
 package com.ajijul.elnaz.domain.usecases
 
-import com.ajijul.elnaz.domain.model.Item
+import com.ajijul.elnaz.domain.model.ProductModel
 import com.ajijul.elnaz.domain.repository.ItemRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -10,8 +10,8 @@ class CheckStockAlertsUseCase constructor(
     private val repository: ItemRepository
 ) {
     data class StockAlert(
-        val lowStockItems: List<Item> = emptyList(),
-        val oldStockItems: List<Item> = emptyList()
+        val lowStockProducts: List<ProductModel> = emptyList(),
+        val oldStockProducts: List<ProductModel> = emptyList()
     )
 
     operator fun invoke(threshold: Int = 0, monthsOld: Int = 12): Flow<StockAlert> {

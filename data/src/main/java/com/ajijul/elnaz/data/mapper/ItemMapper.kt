@@ -1,26 +1,26 @@
 package com.ajijul.elnaz.data.mapper
 
-import com.ajijul.elnaz.data.local.entity.ItemEntity
-import com.ajijul.elnaz.domain.model.Item
+import com.ajijul.elnaz.data.local.entity.Product
+import com.ajijul.elnaz.domain.model.ProductModel
 
-fun ItemEntity.toDomainItem() = Item(
+fun Product.toDomain() = ProductModel(
     id = id,
     name = name,
     barcode = barcode,
-    quantity = quantity,
-    price = price,
-    lastUpdated = lastUpdated,
-    createdAt = createdAt,
-    location = location
+    buyPrice = buyPrice,
+    salePrice = salePrice,
+    categoryId = categoryId,
+    supplierId = supplierId,
+    lastUpdated = lastUpdated
 )
 
-fun Item.toDataItemEntity() = ItemEntity(
+fun ProductModel.toProductEntity() = Product(
     id = id,
     name = name,
     barcode = barcode,
-    quantity = quantity,
-    price = price,
-    lastUpdated = lastUpdated,
-    createdAt = createdAt,
-    location = location
+    buyPrice = buyPrice,
+    salePrice = salePrice,
+    categoryId = categoryId,
+    supplierId = supplierId,
+    lastUpdated = lastUpdated
 )

@@ -2,10 +2,34 @@ package com.ajijul.elnaz.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.ajijul.elnaz.data.local.dao.ItemDao
-import com.ajijul.elnaz.data.local.entity.ItemEntity
+import com.ajijul.elnaz.data.local.dao.ProductDao
+import com.ajijul.elnaz.data.local.entity.Category
+import com.ajijul.elnaz.data.local.entity.Customer
+import com.ajijul.elnaz.data.local.entity.Discount
+import com.ajijul.elnaz.data.local.entity.DiscountAssignment
+import com.ajijul.elnaz.data.local.entity.Inventory
+import com.ajijul.elnaz.data.local.entity.Order
+import com.ajijul.elnaz.data.local.entity.OrderItem
+import com.ajijul.elnaz.data.local.entity.Product
+import com.ajijul.elnaz.data.local.entity.Supplier
+import com.ajijul.elnaz.data.local.entity.Warehouse
+import com.ajijul.elnaz.data.local.entity.WarehousePricing
 
-@Database(entities = [ItemEntity::class], version = 1)
+@Database(
+    entities = [
+        Category::class,
+        Customer::class,
+        Discount::class,
+        DiscountAssignment::class,
+        Inventory::class,
+        Order::class,
+        OrderItem::class,
+        Product::class,
+        Supplier::class,
+        Warehouse::class,
+        WarehousePricing::class
+    ], version = 1
+)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun itemDao(): ItemDao
+    abstract fun productDao(): ProductDao
 }
