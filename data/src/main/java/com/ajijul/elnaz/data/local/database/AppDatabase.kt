@@ -2,7 +2,17 @@ package com.ajijul.elnaz.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.ajijul.elnaz.data.local.dao.CategoryDao
+import com.ajijul.elnaz.data.local.dao.CustomerDao
+import com.ajijul.elnaz.data.local.dao.DiscountAssignmentDao
+import com.ajijul.elnaz.data.local.dao.DiscountDao
+import com.ajijul.elnaz.data.local.dao.InventoryDao
+import com.ajijul.elnaz.data.local.dao.OrderDao
+import com.ajijul.elnaz.data.local.dao.OrderItemDao
 import com.ajijul.elnaz.data.local.dao.ProductDao
+import com.ajijul.elnaz.data.local.dao.SupplierDao
+import com.ajijul.elnaz.data.local.dao.WarehouseDao
+import com.ajijul.elnaz.data.local.dao.WarehousePricingDao
 import com.ajijul.elnaz.data.local.entity.Category
 import com.ajijul.elnaz.data.local.entity.Customer
 import com.ajijul.elnaz.data.local.entity.Discount
@@ -31,5 +41,15 @@ import com.ajijul.elnaz.data.local.entity.WarehousePricing
     ], version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
+    abstract fun categoryDao(): CategoryDao
+    abstract fun customerDao(): CustomerDao
+    abstract fun discountAssignmentDao(): DiscountAssignmentDao
+    abstract fun discountDao(): DiscountDao
+    abstract fun inventoryDao(): InventoryDao
+    abstract fun orderDao(): OrderDao
+    abstract fun orderItemDao(): OrderItemDao
     abstract fun productDao(): ProductDao
+    abstract fun supplierDao(): SupplierDao
+    abstract fun warehouseDao(): WarehouseDao
+    abstract fun warehousePricingDao(): WarehousePricingDao
 }

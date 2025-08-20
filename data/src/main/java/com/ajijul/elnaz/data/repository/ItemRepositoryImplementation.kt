@@ -17,12 +17,12 @@ class ItemRepositoryImplementation @Inject constructor(
 
     override suspend fun addItem(product: ProductModel) {
         val entity = product.toProductEntity()
-        productDao.insertItem(entity)
+        productDao.insertProduct(entity)
         dataFlowManager.syncData()
     }
 
     override suspend fun getItemByBarcode(barcode: String): ProductModel? {
-        return productDao.getItemByBarcode(barcode)?.toDomain()
+        return productDao.getProductByBarcode(barcode)?.toDomain()
     }
 
     override fun getInventoryStats(): Flow<Pair<Int, Double>> = flowOf(Pair(0, 0.0))
