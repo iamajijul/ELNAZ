@@ -1,13 +1,14 @@
 package com.ajijul.elnaz.domain.usecases
 
 import com.ajijul.elnaz.domain.model.ProductModel
-import com.ajijul.elnaz.domain.repository.ItemRepository
+import com.ajijul.elnaz.domain.repository.ProductRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOf
 import java.util.Calendar
 
 class CheckStockAlertsUseCase constructor(
-    private val repository: ItemRepository
+    private val repository: ProductRepository
 ) {
     data class StockAlert(
         val lowStockProducts: List<ProductModel> = emptyList(),
@@ -19,11 +20,6 @@ class CheckStockAlertsUseCase constructor(
             add(Calendar.MONTH, -monthsOld)
         }.timeInMillis
 
-        return combine(
-            repository.getLowStockItems(threshold),
-            repository.getOldStockItems(oneYearAgo)
-        ) { lowStock, oldStock ->
-            StockAlert(lowStock, oldStock)
-        }
+        return flowOf(StockAlert())
     }
 }
