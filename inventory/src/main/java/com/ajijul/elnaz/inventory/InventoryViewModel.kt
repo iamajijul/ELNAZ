@@ -2,9 +2,9 @@ package com.ajijul.elnaz.inventory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ajijul.elnaz.domain.repository.ItemRepository
+import com.ajijul.elnaz.domain.repository.ProductRepository
 import com.ajijul.elnaz.domain.usecases.CheckStockAlertsUseCase
-import com.ajijul.elnaz.domain.usecases.GetItemsUseCase
+import com.ajijul.elnaz.domain.usecases.GetProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,8 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class InventoryViewModel @Inject constructor(
-    private val getItemsUseCase: GetItemsUseCase,
-    private val repository: ItemRepository,
+    private val getProductsUseCase: GetProductsUseCase,
+    private val repository: ProductRepository,
     private val checkStockAlertsUseCase: CheckStockAlertsUseCase
 ) : ViewModel() {
     private val _state = MutableStateFlow(InventoryState())
@@ -25,7 +25,7 @@ class InventoryViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             combine(
-                getItemsUseCase(),
+                getProductsUseCase(),
                 repository.getInventoryStats(),
                 checkStockAlertsUseCase()
             ) { items, stats, alerts ->

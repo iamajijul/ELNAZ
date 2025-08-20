@@ -1,9 +1,9 @@
 package com.ajijul.elnaz.di.usecase
 
-import com.ajijul.elnaz.domain.repository.ItemRepository
+import com.ajijul.elnaz.domain.repository.ProductRepository
 import com.ajijul.elnaz.domain.usecases.AddItemUseCase
 import com.ajijul.elnaz.domain.usecases.CheckStockAlertsUseCase
-import com.ajijul.elnaz.domain.usecases.GetItemsUseCase
+import com.ajijul.elnaz.domain.usecases.GetProductsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,19 +16,19 @@ object UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideAddItemUseCase(itemRepository: ItemRepository): AddItemUseCase {
-        return AddItemUseCase(itemRepository)
+    fun provideAddItemUseCase(productRepository: ProductRepository): AddItemUseCase {
+        return AddItemUseCase(productRepository)
     }
 
     @Provides
     @Singleton
-    fun provideGetItemUseCase(itemRepository: ItemRepository): GetItemsUseCase {
-        return GetItemsUseCase(itemRepository)
+    fun provideGetItemUseCase(productRepository: ProductRepository): GetProductsUseCase {
+        return GetProductsUseCase(productRepository)
     }
 
     @Provides
     @Singleton
-    fun provideCheckStockAlertsUseCase(itemRepository: ItemRepository): CheckStockAlertsUseCase {
-        return CheckStockAlertsUseCase(itemRepository)
+    fun provideCheckStockAlertsUseCase(productRepository: ProductRepository): CheckStockAlertsUseCase {
+        return CheckStockAlertsUseCase(productRepository)
     }
 }

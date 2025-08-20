@@ -1,7 +1,7 @@
 package com.ajijul.elnaz.di.repositories
 
-import com.ajijul.elnaz.data.repository.ItemRepositoryImplementation
-import com.ajijul.elnaz.domain.repository.ItemRepository
+import com.ajijul.elnaz.data.repository.ProductRepositoryImplementation
+import com.ajijul.elnaz.domain.repository.ProductRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,6 +14,6 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindItemRepositoryWithItemRepositoryImplementation(itemRepositoryImplementation: ItemRepositoryImplementation): ItemRepository
+    abstract fun bindItemRepositoryWithItemRepositoryImplementation(itemRepositoryImplementation: ProductRepositoryImplementation): ProductRepository
 
 }
