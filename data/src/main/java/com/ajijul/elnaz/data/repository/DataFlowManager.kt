@@ -17,7 +17,7 @@ class DataFlowManager @Inject constructor(
     private val productDao: ProductDao,
     private val firebaseDataSource: FirebaseDataSource
 ) {
-    val itemsFlow: Flow<List<ProductModel>> = productDao.getAllItems().map { entities ->
+    val itemsFlow: Flow<List<ProductModel>> = productDao.getAllProducts().map { entities ->
         entities.map { it.toDomain() }
     }
 
@@ -30,10 +30,10 @@ class DataFlowManager @Inject constructor(
 
     suspend fun syncData() {
         try {
-            val localItems = productDao.getAllItems().map { it }.first()
+            val localItems = productDao.getAllProducts().map { it }.first()
             val remoteItems = firebaseDataSource.getItems()
             val mergedItems = mergeItems(localItems, remoteItems)
-            productDao.insertItems(mergedItems)
+            productDao.insertAllProducts(mergedItems)
             firebaseDataSource.syncItems(mergedItems)
         } catch (e: Exception) {
             // Offline: preserve local data
