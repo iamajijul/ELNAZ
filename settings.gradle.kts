@@ -20,13 +20,25 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "ELNAZ"
+
 include(":app")
 include(":data")
 include(":domain")
-include(":feature_barcode")
-include(":feature_additem")
 include(":core")
-include(":inventory")
 include(":di")
 include(":logger")
 include(":extension")
+include(":login")
+include(":auth")
+include(":user")
+
+include(":feature_barcode")
+include(":feature_discount")
+include(":feature_inventory")
+include(":feature_products")
+include(":feature_product_management")
+include(":feature_checkout")
+include(":feature_order")
+include(":feature_category")
+include(":feature_customer")
+include(":feature_supplier")

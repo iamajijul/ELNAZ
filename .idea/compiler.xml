@@ -2,6 +2,16 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="ELNAZ.category" target="21" />
+      <module name="ELNAZ.checkout" target="21" />
+      <module name="ELNAZ.customer" target="21" />
+      <module name="ELNAZ.discount" target="21" />
+      <module name="ELNAZ.feature_additem" target="21" />
+      <module name="ELNAZ.inventory" target="21" />
+      <module name="ELNAZ.order" target="21" />
+      <module name="ELNAZ.product_management" target="21" />
+      <module name="ELNAZ.products" target="21" />
+      <module name="ELNAZ.supplier" target="21" />
       <module name="ELNAZ.ui" target="21" />
     </bytecodeTargetLevel>
   </component>

@@ -41,7 +41,18 @@ android {
     buildFeatures {
         compose = true
     }
-    dynamicFeatures += setOf(":feature_barcode", ":feature_additem")
+    dynamicFeatures += setOf(
+        ":feature_barcode",
+        ":feature_discount",
+        ":feature_inventory",
+        ":feature_products",
+        ":feature_product_management",
+        ":feature_checkout",
+        ":feature_order",
+        ":feature_category",
+        ":feature_customer",
+        ":feature_supplier"
+    )
 }
 
 dependencies {
@@ -49,7 +60,6 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":domain"))
     implementation(project(":data"))
-    implementation(project(":inventory"))
     implementation(project(":di"))
     implementation(project(":logger"))
     implementation(project(":extension"))

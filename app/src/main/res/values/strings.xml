@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">ELNAZ</string>
     <string name="title_feature_barcode">BarcodeScanner</string>
-    <string name="title_feature_additem">Add Item</string>
+    <string name="title_feature_discount">Discount</string>
+    <string name="title_feature_inventory">Inventory</string>
+    <string name="title_feature_products">Products</string>
+    <string name="title_feature_product_management">Product Management</string>
+    <string name="title_feature_checkout">Checkout</string>
+    <string name="title_feature_order">Order</string>
+    <string name="title_feature_category">Category</string>
+    <string name="title_feature_customer">Customer</string>
+    <string name="title_feature_supplier">Supplier</string>
 </resources>
