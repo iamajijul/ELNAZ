@@ -1,4 +1,4 @@
-package com.ajijul.elnaz.domain.model.enums
+package com.ajijul.elnaz.domain.auth
 
 enum class UserRole {
     STAFF,
