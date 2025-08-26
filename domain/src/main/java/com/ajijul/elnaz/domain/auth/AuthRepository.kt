@@ -1,8 +1,5 @@
 package com.ajijul.elnaz.domain.auth
 
-import com.ajijul.elnaz.domain.auth.UserModel
-import com.ajijul.elnaz.domain.auth.UserRole
-
 interface AuthRepository {
     suspend fun login(email: String, password: String): UserModel
     suspend fun register(

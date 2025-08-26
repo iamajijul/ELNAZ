@@ -2,8 +2,8 @@ package com.ajijul.elnaz.startup
 
 import android.content.Context
 import androidx.startup.Initializer
-import com.ajijul.elnaz.extension.TAG
 import com.ajijul.elnaz.logger.ElnazLogger
+import com.ajijul.elnaz.logger.TAG
 import com.google.firebase.FirebaseApp
 
 class FirebaseInitializer : Initializer<Unit> {

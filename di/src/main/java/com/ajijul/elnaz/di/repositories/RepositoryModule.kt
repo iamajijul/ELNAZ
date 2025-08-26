@@ -1,6 +1,6 @@
 package com.ajijul.elnaz.di.repositories
 
-import com.ajijul.elnaz.data.repository.ProductRepositoryImplementation
+import com.ajijul.elnaz.data.repository.product.ProductRepositoryImplementation
 import com.ajijul.elnaz.domain.repository.ProductRepository
 import dagger.Binds
 import dagger.Module

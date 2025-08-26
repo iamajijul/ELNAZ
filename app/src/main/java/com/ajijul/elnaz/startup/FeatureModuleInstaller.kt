@@ -1,8 +1,8 @@
 package com.ajijul.elnaz.startup
 
 import android.content.Context
-import com.ajijul.elnaz.extension.TAG
 import com.ajijul.elnaz.logger.ElnazLogger
+import com.ajijul.elnaz.logger.TAG
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
 import dagger.hilt.android.qualifiers.ApplicationContext

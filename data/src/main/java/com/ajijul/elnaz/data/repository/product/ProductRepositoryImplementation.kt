@@ -1,8 +1,9 @@
-package com.ajijul.elnaz.data.repository
+package com.ajijul.elnaz.data.repository.product
 
 import com.ajijul.elnaz.data.local.dao.ProductDao
 import com.ajijul.elnaz.data.mapper.toDomain
 import com.ajijul.elnaz.data.mapper.toProductEntity
+import com.ajijul.elnaz.data.repository.DataFlowManager
 import com.ajijul.elnaz.domain.model.ProductModel
 import com.ajijul.elnaz.domain.repository.ProductRepository
 import kotlinx.coroutines.flow.Flow
