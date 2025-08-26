@@ -5,6 +5,11 @@ import com.ajijul.elnaz.extension.empty
 import timber.log.Timber
 import java.util.*
 
+val Any.TAG: String
+    get() {
+        return javaClass.simpleName
+    }
+
 object ElnazLogger {
 
     private var enableTimberFileLogger_ = false

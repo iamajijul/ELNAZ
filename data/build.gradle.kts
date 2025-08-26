@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.protobuf)
 }
 
 android {
@@ -34,16 +35,33 @@ android {
         jvmTarget = "11"
     }
 }
-
+protobuf {
+    protoc {
+        artifact = libs.google.protoc.get().toString()
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                // For Android we need lite runtime (smaller + faster)
+                create("java") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
 dependencies {
 
     implementation(project(":core"))
     implementation(project(":domain"))
+    implementation(project(":logger"))
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
     implementation(libs.firebase.firestore)
     implementation(libs.kotlinx.coroutines)
     implementation(libs.hilt.android)
+    implementation(libs.datastore)
+    implementation(libs.google.protobuf)
     kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.junit)
