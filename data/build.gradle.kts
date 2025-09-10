@@ -57,7 +57,13 @@ dependencies {
     implementation(project(":logger"))
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
+
+    //FireBase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    //Firebase End
+
     implementation(libs.kotlinx.coroutines)
     implementation(libs.hilt.android)
     implementation(libs.datastore)
