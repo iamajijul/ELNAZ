@@ -37,10 +37,16 @@ android {
 dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
+
+    //Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    //Firebase End
+
     implementation(libs.androidx.room.runtime)
     implementation(libs.hilt.android)
     implementation(libs.datastore)
-    implementation(libs.firebase.firestore)
     kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.junit)

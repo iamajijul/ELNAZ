@@ -10,6 +10,7 @@ androidx-lifecycle = "2.9.1"
 androidx-hilt = "1.2.0"
 androidx-room = "2.7.2"
 firebase = "25.1.4"
+firebaseBom = "34.2.0"
 accompanist = "0.34.0"
 coroutines = "1.8.1"
 junit = "4.13.2"
@@ -39,7 +40,9 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
-firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebase" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 junit = { module = "junit:junit", version.ref = "junit" }

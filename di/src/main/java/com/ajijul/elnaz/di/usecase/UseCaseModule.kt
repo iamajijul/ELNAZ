@@ -1,9 +1,15 @@
 package com.ajijul.elnaz.di.usecase
 
+import com.ajijul.elnaz.domain.auth.AuthRepository
+import com.ajijul.elnaz.domain.auth.usecases.CurrentUserUseCase
+import com.ajijul.elnaz.domain.auth.usecases.LoginUseCase
+import com.ajijul.elnaz.domain.auth.usecases.LogoutUseCase
+import com.ajijul.elnaz.domain.auth.usecases.RegisterUseCase
 import com.ajijul.elnaz.domain.repository.ProductRepository
 import com.ajijul.elnaz.domain.usecases.AddItemUseCase
 import com.ajijul.elnaz.domain.usecases.CheckStockAlertsUseCase
 import com.ajijul.elnaz.domain.usecases.GetProductsUseCase
+import com.ajijul.elnaz.domain.user.UserPreferenceRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,6 +19,42 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object UseCaseModule {
+    
+    @Provides
+    @Singleton
+    fun provideRegisterUseCase(
+        repo: AuthRepository,
+        userPreferenceRepository: UserPreferenceRepository
+    ): RegisterUseCase {
+        return RegisterUseCase(repo, userPreferenceRepository)
+    }
+    
+    @Provides
+    @Singleton
+    fun provideCurrentUserUseCase(
+        repo: AuthRepository,
+        userPreferenceRepository: UserPreferenceRepository
+    ): CurrentUserUseCase {
+        return CurrentUserUseCase(repo, userPreferenceRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLoginUseCase(
+        repo: AuthRepository,
+        userPreferenceRepository: UserPreferenceRepository
+    ): LoginUseCase {
+        return LoginUseCase(repo, userPreferenceRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLogoutUseCase(
+        repo: AuthRepository,
+        userPreferenceRepository: UserPreferenceRepository
+    ): LogoutUseCase {
+        return LogoutUseCase(repo, userPreferenceRepository)
+    }
 
     @Provides
     @Singleton
@@ -31,4 +73,5 @@ object UseCaseModule {
     fun provideCheckStockAlertsUseCase(productRepository: ProductRepository): CheckStockAlertsUseCase {
         return CheckStockAlertsUseCase(productRepository)
     }
+
 }

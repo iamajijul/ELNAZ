@@ -3,10 +3,9 @@ package com.ajijul.elnaz.data.repository
 import com.ajijul.elnaz.data.local.dao.ProductDao
 import com.ajijul.elnaz.data.local.entity.Product
 import com.ajijul.elnaz.data.mapper.toDomain
-import com.ajijul.elnaz.data.network.FirebaseDataSource
+import com.ajijul.elnaz.data.network.FirebaseFirestoreDataSource
 import com.ajijul.elnaz.domain.model.ProductModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -15,7 +14,7 @@ import javax.inject.Singleton
 @Singleton
 class DataFlowManager @Inject constructor(
     private val productDao: ProductDao,
-    private val firebaseDataSource: FirebaseDataSource
+    private val firebaseFirestoreDataSource: FirebaseFirestoreDataSource
 ) {
     val itemsFlow: Flow<List<ProductModel>> = productDao.getAllProducts().map { entities ->
         entities.map { it.toDomain() }
@@ -31,10 +30,10 @@ class DataFlowManager @Inject constructor(
     suspend fun syncData() {
         try {
             val localItems = productDao.getAllProducts().map { it }.first()
-            val remoteItems = firebaseDataSource.getItems()
+            val remoteItems = firebaseFirestoreDataSource.getItems()
             val mergedItems = mergeItems(localItems, remoteItems)
             productDao.insertAllProducts(mergedItems)
-            firebaseDataSource.syncItems(mergedItems)
+            firebaseFirestoreDataSource.syncItems(mergedItems)
         } catch (e: Exception) {
             // Offline: preserve local data
         }
