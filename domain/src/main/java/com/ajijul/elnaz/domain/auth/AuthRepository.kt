@@ -1,14 +1,20 @@
 package com.ajijul.elnaz.domain.auth
 
+import com.ajijul.elnaz.domain.model.enums.Resource
+
 interface AuthRepository {
-    suspend fun login(email: String, password: String): Result<UserModel?>
+
+    suspend fun login(email: String, password: String): Resource<UserModel?>
+
     suspend fun register(
         name: String,
         email: String,
         password: String,
         role: UserRole = UserRole.STAFF
-    ): Result<UserModel?>
+    ): Resource<UserModel?>
 
-    suspend fun logout(): Result<Boolean>
-    suspend fun currentUser(): Result<UserModel?>
+    suspend fun logout(): Resource<Boolean>
+
+    suspend fun currentUser(): Resource<UserModel?>
+
 }

@@ -29,11 +29,11 @@ class DataFlowManager @Inject constructor(
 
     suspend fun syncData() {
         try {
-            val localItems = productDao.getAllProducts().map { it }.first()
+            /*val localItems = productDao.getAllProducts().map { it }.first()
             val remoteItems = firebaseFirestoreDataSource.getItems()
             val mergedItems = mergeItems(localItems, remoteItems)
             productDao.insertAllProducts(mergedItems)
-            firebaseFirestoreDataSource.syncItems(mergedItems)
+            firebaseFirestoreDataSource.syncItems(mergedItems)*/
         } catch (e: Exception) {
             // Offline: preserve local data
         }
