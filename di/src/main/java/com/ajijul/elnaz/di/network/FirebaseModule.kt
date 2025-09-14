@@ -36,7 +36,7 @@ object FirebaseModule {
 
     @Provides
     @Singleton
-    fun provideFirebaseFirestoreDataSource(
+    fun provideFirebaseAuthSource(
         auth: FirebaseAuth
     ): FirebaseAuthSource {
         return FirebaseAuthSource(auth)
