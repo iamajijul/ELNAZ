@@ -10,4 +10,5 @@ plugins {
     alias(libs.plugins.android.dynamic.feature) apply false
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.protobuf) apply false
+    alias(libs.plugins.room) apply false
 }
