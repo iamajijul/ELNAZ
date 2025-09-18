@@ -62,6 +62,7 @@ android {
 dependencies {
 
     implementation(project(":core"))
+    implementation(project(":auth"))
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":di"))
