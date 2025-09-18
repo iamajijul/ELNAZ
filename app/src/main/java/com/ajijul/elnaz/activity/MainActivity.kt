@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.core.view.WindowCompat
 import com.ajijul.elnaz.components.AppNavigation
 import com.ajijul.elnaz.core.ui.theme.ElnazInventoryTheme
+import com.ajijul.elnaz.navigation.AppNavGraph
 import com.ajijul.elnaz.startup.FeatureModuleInstaller
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, true)
         super.onCreate(savedInstanceState)
         setContent {
-            ElnazInventoryTheme(content = { AppNavigation(featureModuleInstaller) })
+            ElnazInventoryTheme(content = { AppNavGraph(featureModuleInstaller) })
         }
     }
 }
