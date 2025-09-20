@@ -26,11 +26,16 @@ class UserPreferenceRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getUser(): UserModel {
+        val role =
+            dataStore.data.map { it.role }.first()?.takeIf { it.isNotEmpty() }?.let {
+                UserRole.valueOf(it)
+            } ?: UserRole.STAFF
+
         return UserModel(
             uid = dataStore.data.map { it.uid }.first(),
             email = dataStore.data.map { it.email }.first(),
             name = dataStore.data.map { it.name }.first(),
-            role = UserRole.valueOf(dataStore.data.map { it.role }.first()),
+            role = role,
             createdAt = dataStore.data.map { it.createdAt }.first()
         )
     }

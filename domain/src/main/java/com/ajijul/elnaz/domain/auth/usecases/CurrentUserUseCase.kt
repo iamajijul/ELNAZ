@@ -10,7 +10,7 @@ class CurrentUserUseCase(
 ) {
     suspend operator fun invoke(): Resource<UserModel?> {
         val user = userPreferenceRepository.getUser()
-        return if (user != null)
+        return if (user != null && user.uid.isNotEmpty())
             Resource.Success(user)
         else Resource.Error(AppError.Unauthorized)
     }

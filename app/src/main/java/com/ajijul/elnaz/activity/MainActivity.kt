@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.view.WindowCompat
-import com.ajijul.elnaz.components.AppNavigation
 import com.ajijul.elnaz.core.ui.theme.ElnazInventoryTheme
 import com.ajijul.elnaz.navigation.AppNavGraph
 import com.ajijul.elnaz.startup.FeatureModuleInstaller
