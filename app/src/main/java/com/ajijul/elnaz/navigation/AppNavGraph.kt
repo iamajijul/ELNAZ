@@ -14,6 +14,6 @@ fun AppNavGraph(featureModuleInstaller: FeatureModuleInstaller) {
         navController = navController,
         startDestination = NavGraphRoutes.AUTH.route
     ) {
-        authNavGraph()
+        authNavGraph(navController)
     }
 }

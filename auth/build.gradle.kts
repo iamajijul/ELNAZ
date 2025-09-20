@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.compose.compiler)
 }
 
 android {
@@ -36,6 +37,9 @@ android {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
@@ -43,13 +47,18 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":domain"))
     implementation(project(":di"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.compose.material3)
+
     implementation(libs.androidx.hilt.navigation)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.espresso.core)

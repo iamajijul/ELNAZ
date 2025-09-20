@@ -19,11 +19,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    currentUserUseCase: CurrentUserUseCase,
-    registerUseCase: RegisterUseCase,
-    loginUseCase: LoginUseCase,
-    logoutUseCase: LogoutUseCase,
-    @IODispatcher ioDispatcher: CoroutineDispatcher
+    private val currentUserUseCase: CurrentUserUseCase,
+    private val registerUseCase: RegisterUseCase,
+    private val loginUseCase: LoginUseCase,
+    private val logoutUseCase: LogoutUseCase,
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _authState = MutableStateFlow<AuthState>(AuthState.Loading)
     val authState: StateFlow<AuthState> = _authState
