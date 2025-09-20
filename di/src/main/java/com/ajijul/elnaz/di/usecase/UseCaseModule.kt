@@ -32,10 +32,9 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideCurrentUserUseCase(
-        repo: AuthRepository,
         userPreferenceRepository: UserPreferenceRepository
     ): CurrentUserUseCase {
-        return CurrentUserUseCase(repo, userPreferenceRepository)
+        return CurrentUserUseCase(userPreferenceRepository)
     }
 
     @Provides
