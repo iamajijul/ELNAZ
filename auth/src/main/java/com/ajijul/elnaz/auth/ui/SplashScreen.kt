@@ -1,13 +1,11 @@
 package com.ajijul.elnaz.auth.ui
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.Image
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -16,6 +14,7 @@ import com.ajijul.elnaz.auth.presentation.AuthViewModel
 import com.ajijul.elnaz.auth.utils.AuthState
 import com.ajijul.elnaz.core.ui.components.AppProgress
 import com.ajijul.elnaz.core.ui.components.AppText
+import com.ajijul.elnaz.core.ui.components.ItemsOnCenteredColumn
 
 @Composable
 fun SplashScreen(
@@ -28,6 +27,7 @@ fun SplashScreen(
         when (isAuthenticated.value) {
 
             is AuthState.AuthenticatedUser -> {
+
             }
 
             AuthState.Loading -> {
@@ -45,37 +45,40 @@ fun SplashScreen(
     when (isAuthenticated.value) {
 
         AuthState.Loading -> {
-            AppProgress()
+            SplashContent(showProgress = true)
         }
 
         is AuthState.AuthenticatedUser -> {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize(),             // occupy the whole screen
-                contentAlignment = Alignment.Center // center all children vertically & horizontally
-            )
-            {
-                AppText(
-                    text = stringResource(id = R.string.welcome),
-                    style = MaterialTheme.typography.titleLarge
-                )
-            }
-
+            SplashContent(stringResource(id = R.string.welcome))
         }
 
         AuthState.UnAuthenticatedUser -> {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize(),             // occupy the whole screen
-                contentAlignment = Alignment.Center // center all children vertically & horizontally
-            )
-            {
-                AppText(
-                    text = stringResource(id = R.string.please_login),
-                    style = MaterialTheme.typography.titleLarge
-                )
-            }
+            SplashContent(stringResource(id = R.string.please_login))
         }
     }
 
+}
+
+@Composable
+fun SplashContent(
+    text: String? = null,
+    showProgress: Boolean = false
+) {
+    ItemsOnCenteredColumn {
+//        Image(
+//            painter = painterResource(androidx.constraintlayout.widget.R.drawable.abc_ic_star_black_16dp),
+//            contentDescription = null
+//        )
+
+        if (showProgress) {
+            AppProgress()
+        }
+
+        text?.let {
+            AppText(
+                text = it,
+                style = MaterialTheme.typography.titleLarge
+            )
+        }
+    }
 }
