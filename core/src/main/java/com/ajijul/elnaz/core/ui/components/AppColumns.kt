@@ -4,30 +4,44 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.ajijul.elnaz.core.utils.AppDimens.formGap
+import com.ajijul.elnaz.core.utils.AppDimens.screenPadding
 
 @Composable
-fun ItemsOnCenteredColumn(
+fun ItemOnCenteredColumn(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
+        verticalArrangement = Arrangement.spacedBy(formGap, Alignment.CenterVertically),
+        content = content
+    )
+}
+
+@Composable
+fun ItemOnFormColumn(
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    Column(
+        modifier = modifier.padding(screenPadding),
+        verticalArrangement = Arrangement.spacedBy(formGap),
         content = content
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun PreviewItemsOnCenteredColumn(){
-    ItemsOnCenteredColumn{
+private fun PreviewItemsOnCenteredColumn() {
+    ItemOnCenteredColumn {
         AppText(text = "Hello", style = MaterialTheme.typography.titleLarge)
     }
 }

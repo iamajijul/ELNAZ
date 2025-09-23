@@ -5,6 +5,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.ajijul.elnaz.core.utils.AppTextSizes
 
 fun parastooTypography (fontFamily: FontFamily) = Typography(
     bodyLarge = TextStyle(
