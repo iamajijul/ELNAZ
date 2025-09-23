@@ -1,40 +1,37 @@
-package com.ajijul.elnaz.auth.ui
+package com.ajijul.elnaz.auth.ui.splash
 
-import androidx.compose.foundation.Image
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.ajijul.elnaz.auth.R
 import com.ajijul.elnaz.auth.presentation.AuthViewModel
-import com.ajijul.elnaz.auth.utils.AuthState
 import com.ajijul.elnaz.core.ui.components.AppProgress
 import com.ajijul.elnaz.core.ui.components.AppText
-import com.ajijul.elnaz.core.ui.components.ItemsOnCenteredColumn
+import com.ajijul.elnaz.core.ui.components.ItemOnCenteredColumn
 
 @Composable
 fun SplashScreen(
     nanHostController: NavHostController
 ) {
     val viewModel: AuthViewModel = hiltViewModel()
-    val isAuthenticated = viewModel.authState.collectAsState()
+    val isAuthenticated = viewModel.splashUiState.collectAsState()
 
     LaunchedEffect(isAuthenticated) {
         when (isAuthenticated.value) {
 
-            is AuthState.AuthenticatedUser -> {
+            is SplashUiState.AuthenticatedUser -> {
 
             }
 
-            AuthState.Loading -> {
+            SplashUiState.Loading -> {
 
             }
 
-            AuthState.UnAuthenticatedUser -> {
+            SplashUiState.UnAuthenticatedUser -> {
 
             }
 
@@ -44,15 +41,15 @@ fun SplashScreen(
 
     when (isAuthenticated.value) {
 
-        AuthState.Loading -> {
+        SplashUiState.Loading -> {
             SplashContent(showProgress = true)
         }
 
-        is AuthState.AuthenticatedUser -> {
+        is SplashUiState.AuthenticatedUser -> {
             SplashContent(stringResource(id = R.string.welcome))
         }
 
-        AuthState.UnAuthenticatedUser -> {
+        SplashUiState.UnAuthenticatedUser -> {
             SplashContent(stringResource(id = R.string.please_login))
         }
     }
@@ -64,7 +61,7 @@ fun SplashContent(
     text: String? = null,
     showProgress: Boolean = false
 ) {
-    ItemsOnCenteredColumn {
+    ItemOnCenteredColumn {
 //        Image(
 //            painter = painterResource(androidx.constraintlayout.widget.R.drawable.abc_ic_star_black_16dp),
 //            contentDescription = null

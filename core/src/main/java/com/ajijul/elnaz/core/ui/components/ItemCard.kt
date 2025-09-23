@@ -6,6 +6,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.ajijul.elnaz.core.utils.AppDimens.appElevation
+import com.ajijul.elnaz.core.utils.AppDimens.paddingLarge
+import com.ajijul.elnaz.core.utils.AppDimens.paddingMedium
 import com.ajijul.elnaz.domain.model.ProductModel
 
 @Composable
@@ -13,10 +16,10 @@ fun ItemCard(product: ProductModel) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            .padding(paddingMedium),
+        elevation = CardDefaults.cardElevation(defaultElevation = appElevation)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(modifier = Modifier.padding(paddingLarge)) {
             Text(text = product.name, style = MaterialTheme.typography.titleMedium)
             Text(text = "Barcode: ${product.barcode}")
             Text(text = "Buy Price: $${product.buyPrice}")

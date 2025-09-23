@@ -2,7 +2,7 @@ package com.ajijul.elnaz.auth.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ajijul.elnaz.auth.utils.AuthState
+import com.ajijul.elnaz.auth.ui.splash.SplashUiState
 import com.ajijul.elnaz.di.annotations.IODispatcher
 import com.ajijul.elnaz.domain.auth.UserModel
 import com.ajijul.elnaz.domain.auth.usecases.CurrentUserUseCase
@@ -25,17 +25,17 @@ class AuthViewModel @Inject constructor(
     private val logoutUseCase: LogoutUseCase,
     @IODispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
-    private val _authState = MutableStateFlow<AuthState>(AuthState.Loading)
-    val authState: StateFlow<AuthState> = _authState
+    private val _splashUiState = MutableStateFlow<SplashUiState>(SplashUiState.Loading)
+    val splashUiState: StateFlow<SplashUiState> = _splashUiState
 
     init {
         viewModelScope.launch(ioDispatcher) {
             val currentUserUseCase: Resource<UserModel?> = currentUserUseCase()
             when (currentUserUseCase) {
-                is Resource.Error -> _authState.value = AuthState.UnAuthenticatedUser
-                Resource.Loading -> _authState.value = AuthState.Loading
-                is Resource.Success<UserModel?> -> _authState.value =
-                    AuthState.AuthenticatedUser(currentUserUseCase.data)
+                is Resource.Error -> _splashUiState.value = SplashUiState.UnAuthenticatedUser
+                Resource.Loading -> _splashUiState.value = SplashUiState.Loading
+                is Resource.Success<UserModel?> -> _splashUiState.value =
+                    SplashUiState.AuthenticatedUser(currentUserUseCase.data)
             }
         }
     }
