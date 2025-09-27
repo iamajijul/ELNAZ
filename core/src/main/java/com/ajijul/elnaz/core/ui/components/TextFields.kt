@@ -28,7 +28,14 @@ fun AppTextFieldWithError(
             onValueChange = onValueChange,
             singleLine = singleLine,
             maxLines = maxLines,
-            label = label?.let { { AppText(it, MaterialTheme.typography.labelSmall) } },
+            label = label?.let {
+                {
+                    AppText(
+                        text = it,
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                }
+            },
             isError = isError,
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = keyboardOptions,
@@ -47,7 +54,7 @@ fun AppTextFieldWithError(
 
 @Preview(showBackground = true)
 @Composable
-private fun ShowSampleTextField(){
+private fun ShowSampleTextField() {
     AppTextFieldWithError(
         value = "email@gmail.com",
         onValueChange = {},

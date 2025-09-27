@@ -10,6 +10,7 @@ object AppDimens {
     val screenPadding = 16.dp
     val formGap = 10.dp
     val appProgressSize = 50.dp
-    val appStroke = 4.dp
+    val appStroke = 1.dp
+    val appProgressStroke = 4.dp
     val appElevation = 4.dp
 }

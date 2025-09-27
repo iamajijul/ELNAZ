@@ -2,6 +2,7 @@ package com.ajijul.elnaz.auth.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ajijul.elnaz.auth.ui.login.LoginUiState
 import com.ajijul.elnaz.auth.ui.splash.SplashUiState
 import com.ajijul.elnaz.di.annotations.IODispatcher
 import com.ajijul.elnaz.domain.auth.UserModel
@@ -25,8 +26,12 @@ class AuthViewModel @Inject constructor(
     private val logoutUseCase: LogoutUseCase,
     @IODispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
+
     private val _splashUiState = MutableStateFlow<SplashUiState>(SplashUiState.Loading)
     val splashUiState: StateFlow<SplashUiState> = _splashUiState
+
+    private val _loginUiState = MutableStateFlow(LoginUiState())
+    val loginUiState: StateFlow<LoginUiState> = _loginUiState
 
     init {
         viewModelScope.launch(ioDispatcher) {
@@ -36,6 +41,43 @@ class AuthViewModel @Inject constructor(
                 Resource.Loading -> _splashUiState.value = SplashUiState.Loading
                 is Resource.Success<UserModel?> -> _splashUiState.value =
                     SplashUiState.AuthenticatedUser(currentUserUseCase.data)
+            }
+        }
+    }
+
+    fun onEmailValueChange(email: String) {
+        _loginUiState.value = _loginUiState.value.copy(email = email)
+        validateLoginInput()
+    }
+
+    fun onPasswordValueChange(password: String) {
+        _loginUiState.value = _loginUiState.value.copy(password = password)
+        validateLoginInput()
+    }
+
+    private fun validateLoginInput() {
+        val email = _loginUiState.value.email
+        val password = _loginUiState.value.password
+        val isLoading = _loginUiState.value.isLoading
+        _loginUiState.value =
+            _loginUiState.value.copy(isLoggedInButtonEnabled = email.isNotEmpty() && password.isNotEmpty() && !isLoading)
+    }
+
+    fun login() {
+        viewModelScope.launch(ioDispatcher) {
+            val result = loginUseCase(_loginUiState.value.email, _loginUiState.value.password)
+            when (result) {
+                is Resource.Error -> {
+                    _loginUiState.value = _loginUiState.value.copy(isLoading = false)
+                }
+
+                Resource.Loading -> {
+                    _loginUiState.value = _loginUiState.value.copy(isLoading = true)
+                }
+
+                is Resource.Success<*> -> {
+                    _loginUiState.value = _loginUiState.value.copy(isLoading = false)
+                }
             }
         }
     }

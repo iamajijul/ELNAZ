@@ -44,10 +44,13 @@ dependencies {
 
     implementation(project(":domain"))
     implementation(libs.androidx.core.ktx)
+
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
     implementation(libs.material)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -8,19 +8,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.ajijul.elnaz.auth.R
+import com.ajijul.elnaz.auth.navigation.AuthScreen
 import com.ajijul.elnaz.auth.presentation.AuthViewModel
 import com.ajijul.elnaz.core.ui.components.AppProgress
 import com.ajijul.elnaz.core.ui.components.AppText
 import com.ajijul.elnaz.core.ui.components.ItemOnCenteredColumn
+import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
-    nanHostController: NavHostController
+    nanHostController: NavHostController? = null
 ) {
     val viewModel: AuthViewModel = hiltViewModel()
     val isAuthenticated = viewModel.splashUiState.collectAsState()
 
-    LaunchedEffect(isAuthenticated) {
+    LaunchedEffect(isAuthenticated.value) {
         when (isAuthenticated.value) {
 
             is SplashUiState.AuthenticatedUser -> {
@@ -28,11 +30,11 @@ fun SplashScreen(
             }
 
             SplashUiState.Loading -> {
-
             }
 
             SplashUiState.UnAuthenticatedUser -> {
-
+                delay(2000)
+                nanHostController?.navigate(AuthScreen.Login.route)
             }
 
         }
@@ -42,7 +44,7 @@ fun SplashScreen(
     when (isAuthenticated.value) {
 
         SplashUiState.Loading -> {
-            SplashContent(showProgress = true)
+            SplashContent()
         }
 
         is SplashUiState.AuthenticatedUser -> {
@@ -50,7 +52,7 @@ fun SplashScreen(
         }
 
         SplashUiState.UnAuthenticatedUser -> {
-            SplashContent(stringResource(id = R.string.please_login))
+            SplashContent()
         }
     }
 
@@ -59,7 +61,7 @@ fun SplashScreen(
 @Composable
 fun SplashContent(
     text: String? = null,
-    showProgress: Boolean = false
+    showProgress: Boolean = true
 ) {
     ItemOnCenteredColumn {
 //        Image(
