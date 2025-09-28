@@ -27,6 +27,7 @@ googleGmsServices = "4.4.3"
 datastore = "1.1.7"
 google-protobuf = "3.25.5"
 protobuf-plugin = "0.9.5"
+kotlin-jvm = "1.9.24"
 
 [libraries]
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
@@ -48,6 +49,7 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 junit = { module = "junit:junit", version.ref = "junit" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test" }
@@ -74,3 +76,4 @@ android-dynamic-feature = { id = "com.android.dynamic-feature", version.ref = "a
 google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsServices" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
 room = { id = "androidx.room", version.ref = "androidx-room" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-jvm" }
