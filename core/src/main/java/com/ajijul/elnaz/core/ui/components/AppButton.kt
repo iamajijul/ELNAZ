@@ -70,7 +70,7 @@ fun PrimaryTextButton(
     enabled: Boolean = true,
     colors: ButtonColors = ButtonDefaults.textButtonColors(),
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
-    contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
+    contentPadding: PaddingValues = PaddingValues.Zero,
     content: @Composable RowScope.() -> Unit
 ) {
     Button(

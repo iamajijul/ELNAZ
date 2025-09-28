@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -19,7 +20,9 @@ fun ItemOnCenteredColumn(
     content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(screenPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(formGap, Alignment.CenterVertically),
         content = content
@@ -32,7 +35,7 @@ fun ItemOnFormColumn(
     content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
-        modifier = modifier.padding(screenPadding),
+        modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(formGap),
         content = content
     )

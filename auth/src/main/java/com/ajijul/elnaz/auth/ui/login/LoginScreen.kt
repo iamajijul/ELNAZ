@@ -1,8 +1,11 @@
 package com.ajijul.elnaz.auth.ui.login
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -47,22 +50,9 @@ fun LoginScreen(
             errorMessage = stringResource(R.string.login_screen_invalid_password)
         )
 
-        PrimaryFilledButton(
-            onClick = {
-                viewModel.login()
-            },
-            enabled = loginUiState.value.isLoggedInButtonEnabled
-        ) {
-            if (loginUiState.value.isLoading) {
-                AppProgress()
-            } else {
-                AppTextOnFilledButton(text = stringResource(R.string.login_screen_login))
-            }
-        }
-
         PrimaryTextButton(onClick = {
             viewModel.login()
-        }) {
+        }, modifier = Modifier.align(Alignment.Start)) {
             if (loginUiState.value.isLoading) {
                 AppProgress()
             } else {
@@ -73,7 +63,24 @@ fun LoginScreen(
         PrimaryFilledButton(
             onClick = {
                 viewModel.login()
-            }) {
+            },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = loginUiState.value.isLoggedInButtonEnabled
+        ) {
+            if (loginUiState.value.isLoading) {
+                AppProgress()
+            } else {
+                AppTextOnFilledButton(text = stringResource(R.string.login_screen_login))
+            }
+        }
+
+
+        PrimaryFilledButton(
+            onClick = {
+                viewModel.login()
+            },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
             if (loginUiState.value.isLoading) {
                 AppProgress()
             } else {
