@@ -30,14 +30,15 @@ fun LoginScreen(
 
     ItemOnCenteredColumn {
 
+
         AppTextFieldWithError(
             value = loginUiState.value.email,
             onValueChange = { email ->
                 viewModel.onEmailValueChange(email)
             },
             label = stringResource(R.string.login_screen_email),
-            isError = loginUiState.value.error,
-            errorMessage = stringResource(R.string.login_screen_invalid_email)
+            isError = loginUiState.value.emailError != null,
+            errorMessage = loginUiState.value.emailError?.let { stringResource(it) }
         )
 
         AppTextFieldWithError(
@@ -46,8 +47,8 @@ fun LoginScreen(
                 viewModel.onPasswordValueChange(password)
             },
             label = stringResource(R.string.login_screen_password),
-            isError = loginUiState.value.error,
-            errorMessage = stringResource(R.string.login_screen_invalid_password)
+            isError = loginUiState.value.passwordError != null,
+            errorMessage = loginUiState.value.passwordError?.let { stringResource(it) }
         )
 
         PrimaryTextButton(onClick = {
@@ -65,7 +66,6 @@ fun LoginScreen(
                 viewModel.login()
             },
             modifier = Modifier.fillMaxWidth(),
-            enabled = loginUiState.value.isLoggedInButtonEnabled
         ) {
             if (loginUiState.value.isLoading) {
                 AppProgress()

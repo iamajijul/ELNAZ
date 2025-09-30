@@ -2,8 +2,10 @@ package com.ajijul.elnaz.auth.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ajijul.elnaz.auth.R
 import com.ajijul.elnaz.auth.ui.login.LoginUiState
 import com.ajijul.elnaz.auth.ui.splash.SplashUiState
+import com.ajijul.elnaz.core.utils.isValidEmail
 import com.ajijul.elnaz.di.annotations.IODispatcher
 import com.ajijul.elnaz.domain.auth.UserModel
 import com.ajijul.elnaz.domain.auth.usecases.CurrentUserUseCase
@@ -47,23 +49,14 @@ class AuthViewModel @Inject constructor(
 
     fun onEmailValueChange(email: String) {
         _loginUiState.value = _loginUiState.value.copy(email = email)
-        validateLoginInput()
     }
 
     fun onPasswordValueChange(password: String) {
         _loginUiState.value = _loginUiState.value.copy(password = password)
-        validateLoginInput()
-    }
-
-    private fun validateLoginInput() {
-        val email = _loginUiState.value.email
-        val password = _loginUiState.value.password
-        val isLoading = _loginUiState.value.isLoading
-        _loginUiState.value =
-            _loginUiState.value.copy(isLoggedInButtonEnabled = email.isNotEmpty() && password.isNotEmpty() && !isLoading)
     }
 
     fun login() {
+        if (validateLoginInput().not()) return
         viewModelScope.launch(ioDispatcher) {
             val result = loginUseCase(_loginUiState.value.email, _loginUiState.value.password)
             when (result) {
@@ -80,5 +73,27 @@ class AuthViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    private fun validateLoginInput(): Boolean {
+        val email = _loginUiState.value.email
+        var emailError: Int? = null
+        var passwordError: Int? = null
+
+        if (email.isEmpty() || !email.isValidEmail()) {
+            emailError = R.string.login_screen_invalid_email
+        }
+
+        val password = _loginUiState.value.password
+        if (password.isEmpty() || password.length < 6) {
+            passwordError = R.string.login_screen_invalid_password
+        }
+
+        _loginUiState.value = _loginUiState.value.copy(
+            emailError = emailError,
+            passwordError = passwordError
+        )
+
+        return emailError == null && passwordError == null
     }
 }
