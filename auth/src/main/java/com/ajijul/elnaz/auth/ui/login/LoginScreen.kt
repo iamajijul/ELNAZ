@@ -1,6 +1,7 @@
 package com.ajijul.elnaz.auth.ui.login
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -14,12 +15,14 @@ import com.ajijul.elnaz.auth.R
 import com.ajijul.elnaz.auth.navigation.AuthScreen
 import com.ajijul.elnaz.auth.presentation.AuthViewModel
 import com.ajijul.elnaz.core.ui.components.AppProgress
+import com.ajijul.elnaz.core.ui.components.AppProgressOnButton
 import com.ajijul.elnaz.core.ui.components.AppText
 import com.ajijul.elnaz.core.ui.components.AppTextFieldWithError
 import com.ajijul.elnaz.core.ui.components.AppTextOnFilledButton
 import com.ajijul.elnaz.core.ui.components.ItemOnCenteredColumn
 import com.ajijul.elnaz.core.ui.components.PrimaryFilledButton
 import com.ajijul.elnaz.core.ui.components.PrimaryTextButton
+import com.ajijul.elnaz.core.utils.AppDimens.appProgressSmallSize
 
 @Composable
 fun LoginScreen(
@@ -54,11 +57,7 @@ fun LoginScreen(
         PrimaryTextButton(onClick = {
             viewModel.login()
         }, modifier = Modifier.align(Alignment.Start)) {
-            if (loginUiState.value.isLoading) {
-                AppProgress()
-            } else {
-                AppText(text = stringResource(R.string.login_screen_forget_password))
-            }
+            AppText(text = stringResource(R.string.login_screen_forget_password))
         }
 
         PrimaryFilledButton(
@@ -66,9 +65,10 @@ fun LoginScreen(
                 viewModel.login()
             },
             modifier = Modifier.fillMaxWidth(),
+            enabled = !loginUiState.value.isLoading
         ) {
             if (loginUiState.value.isLoading) {
-                AppProgress()
+                AppProgressOnButton()
             } else {
                 AppTextOnFilledButton(text = stringResource(R.string.login_screen_login))
             }
@@ -77,15 +77,11 @@ fun LoginScreen(
 
         PrimaryFilledButton(
             onClick = {
-                viewModel.login()
+                // viewModel.login()
             },
             modifier = Modifier.fillMaxWidth(),
         ) {
-            if (loginUiState.value.isLoading) {
-                AppProgress()
-            } else {
-                AppTextOnFilledButton(text = stringResource(R.string.login_screen_register))
-            }
+            AppTextOnFilledButton(text = stringResource(R.string.login_screen_register))
         }
 
     }

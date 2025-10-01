@@ -4,21 +4,21 @@ import com.ajijul.elnaz.domain.auth.AuthRepository
 import com.ajijul.elnaz.domain.auth.UserModel
 import com.ajijul.elnaz.domain.model.enums.Resource
 import com.ajijul.elnaz.domain.user.UserPreferenceRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class LoginUseCase(
     private val repo: AuthRepository,
     private val userPreferenceRepository: UserPreferenceRepository
 ) {
-    suspend operator fun invoke(email: String, password: String): Resource<UserModel?> {
-        return when (val result = repo.login(email, password)) {
-            is Resource.Success -> {
-                result.data?.let { user ->
-                    userPreferenceRepository.updateUser(user)
-                }
-                result
+    operator fun invoke(email: String, password: String): Flow<Resource<UserModel?>> = flow {
+        emit(Resource.Loading)
+        val result = repo.login(email, password)
+        if (result is Resource.Success) {
+            result.data?.let { user ->
+                userPreferenceRepository.updateUser(user)
             }
-            is Resource.Error -> result // pass through error
-            is Resource.Loading -> Resource.Loading // forward loading state
         }
+        emit(result)
     }
 }

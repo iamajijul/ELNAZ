@@ -1,5 +1,8 @@
 package com.ajijul.elnaz.data.repository.auth
 
+import com.ajijul.elnaz.data.dto.UserDTO
+import com.ajijul.elnaz.data.mapper.toDto
+import com.ajijul.elnaz.data.mapper.toModel
 import com.ajijul.elnaz.data.network.FirebaseAuthSource
 import com.ajijul.elnaz.data.network.FirebaseFirestoreDataSource
 import com.ajijul.elnaz.data.network.firebase.FirestoreCollections
@@ -22,11 +25,12 @@ class AuthRepositoryImplementation @Inject constructor(
         return try {
             val user = authDataSource.login(email, password)
             if (user != null) {
-                val currentUser = firestoreDataSource.getFirestoreDocument<UserModel>(
+                val currentUser = firestoreDataSource.getFirestoreDocument<UserDTO>(
                     FirestoreCollections.USERS,
                     user.uid
                 )
-                Resource.Success(currentUser)
+
+                Resource.Success(currentUser?.toModel())
             } else {
                 Resource.Error(AppError.UserNotFound)
             }
@@ -38,6 +42,8 @@ class AuthRepositoryImplementation @Inject constructor(
     override suspend fun register(
         name: String,
         email: String,
+        mobile: String,
+        address: String,
         password: String,
         role: UserRole
     ): Resource<UserModel?> {
@@ -46,8 +52,10 @@ class AuthRepositoryImplementation @Inject constructor(
             if (user != null) {
                 val userModel = UserModel(
                     uid = user.uid,
-                    email = email,
                     name = name,
+                    email = email,
+                    mobile = mobile,
+                    address = address,
                     role = role,
                     createdAt = System.currentTimeMillis()
                 )
@@ -55,7 +63,7 @@ class AuthRepositoryImplementation @Inject constructor(
                 firestoreDataSource.setFirestoreDocument(
                     FirestoreCollections.USERS,
                     user.uid,
-                    userModel
+                    userModel.toDto()
                 )
                 Resource.Success(userModel)
             } else {
@@ -80,11 +88,11 @@ class AuthRepositoryImplementation @Inject constructor(
         return try {
             val user = authDataSource.getCurrentUser()
             if (user != null) {
-                val currentUser = firestoreDataSource.getFirestoreDocument<UserModel>(
+                val currentUser = firestoreDataSource.getFirestoreDocument<UserDTO>(
                     FirestoreCollections.USERS,
                     user.uid
                 )
-                Resource.Success(currentUser)
+                Resource.Success(currentUser?.toModel())
             } else {
                 Resource.Error(AppError.UserNotFound)
             }

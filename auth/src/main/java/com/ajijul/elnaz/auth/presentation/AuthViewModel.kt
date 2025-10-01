@@ -59,17 +59,19 @@ class AuthViewModel @Inject constructor(
         if (validateLoginInput().not()) return
         viewModelScope.launch(ioDispatcher) {
             val result = loginUseCase(_loginUiState.value.email, _loginUiState.value.password)
-            when (result) {
-                is Resource.Error -> {
-                    _loginUiState.value = _loginUiState.value.copy(isLoading = false)
-                }
+            result.collect {
+                when (it) {
+                    is Resource.Error -> {
+                        _loginUiState.value = _loginUiState.value.copy(isLoading = false)
+                    }
 
-                Resource.Loading -> {
-                    _loginUiState.value = _loginUiState.value.copy(isLoading = true)
-                }
+                    Resource.Loading -> {
+                        _loginUiState.value = _loginUiState.value.copy(isLoading = true)
+                    }
 
-                is Resource.Success<*> -> {
-                    _loginUiState.value = _loginUiState.value.copy(isLoading = false)
+                    is Resource.Success<*> -> {
+                        _loginUiState.value = _loginUiState.value.copy(isLoading = false)
+                    }
                 }
             }
         }

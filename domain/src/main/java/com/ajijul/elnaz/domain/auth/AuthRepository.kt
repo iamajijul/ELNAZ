@@ -9,6 +9,8 @@ interface AuthRepository {
     suspend fun register(
         name: String,
         email: String,
+        mobile : String,
+        address : String,
         password: String,
         role: UserRole = UserRole.STAFF
     ): Resource<UserModel?>

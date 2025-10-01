@@ -17,8 +17,10 @@ class UserPreferenceRepositoryImpl @Inject constructor(
         dataStore.updateData { prefs ->
             prefs.toBuilder()
                 .setUid(userModel.uid)
-                .setEmail(userModel.email)
                 .setName(userModel.name)
+                .setEmail(userModel.email)
+                .setMobile(userModel.mobile)
+                .setAddress(userModel.address)
                 .setRole(userModel.role.name)
                 .setCreatedAt(userModel.createdAt)
                 .build()
@@ -33,8 +35,10 @@ class UserPreferenceRepositoryImpl @Inject constructor(
 
         return UserModel(
             uid = dataStore.data.map { it.uid }.first(),
-            email = dataStore.data.map { it.email }.first(),
             name = dataStore.data.map { it.name }.first(),
+            email = dataStore.data.map { it.email }.first(),
+            mobile = dataStore.data.map { it.mobile }.first(),
+            address = dataStore.data.map { it.address }.first(),
             role = role,
             createdAt = dataStore.data.map { it.createdAt }.first()
         )

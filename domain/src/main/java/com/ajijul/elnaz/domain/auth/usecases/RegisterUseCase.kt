@@ -13,10 +13,19 @@ class RegisterUseCase(
     suspend operator fun invoke(
         name: String,
         email: String,
+        mobile: String,
+        address: String,
         password: String,
         role: UserRole
     ): Resource<UserModel?> {
-        return when (val result = repo.register(name, email, password, role)) {
+        return when (val result = repo.register(
+            name = name,
+            email = email,
+            mobile = mobile,
+            address = address,
+            password = password,
+            role = role
+        )) {
             is Resource.Error -> result
             is Resource.Loading -> result
             is Resource.Success -> {
