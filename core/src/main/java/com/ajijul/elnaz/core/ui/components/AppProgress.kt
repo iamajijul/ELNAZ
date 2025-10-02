@@ -28,20 +28,6 @@ fun AppProgress(
     )
 }
 
-@Composable
-fun AppProgressOnButton(
-    modifier: Modifier = Modifier,
-    color: Color = MaterialTheme.colorScheme.onPrimary,
-    size: Dp = appProgressSmallSize,
-    strokeWidth: Dp = appProgressSmallStroke
-) {
-    CircularProgressIndicator(
-        strokeWidth = strokeWidth,
-        color = color,
-        modifier = modifier.size(size)
-    )
-}
-
 @Preview(showBackground = true)
 @Composable
 fun AppProgressPreview() {

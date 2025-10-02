@@ -2,6 +2,7 @@
 <resources>
     <string name="welcome">Welcome!</string>
     <string name="please_login">Please Login or Register</string>
+    <string name="something_went_wrong">Something went wrong</string>
     <string name="login_screen_email">Email</string>
     <string name="login_screen_password">Password</string>
     <string name="login_screen_login">Login</string>
@@ -9,4 +10,5 @@
     <string name="login_screen_forget_password">Forget Password?</string>
     <string name="login_screen_invalid_email">Invalid email</string>
     <string name="login_screen_invalid_password">Invalid password</string>
+    <string name="login_screen_toast_welcome">Welcome %s</string>
 </resources>

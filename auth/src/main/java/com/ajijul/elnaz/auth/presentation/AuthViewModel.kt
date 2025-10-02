@@ -17,6 +17,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -55,6 +56,14 @@ class AuthViewModel @Inject constructor(
         _loginUiState.value = _loginUiState.value.copy(password = password)
     }
 
+    fun clearErrorMessage() {
+        _loginUiState.update { it.copy(loggedInErrorMsg = null) }
+    }
+
+    fun clearUserData() {
+        _loginUiState.update { it.copy(loggedInUserName = "") }
+    }
+
     fun login() {
         if (validateLoginInput().not()) return
         viewModelScope.launch(ioDispatcher) {
@@ -62,15 +71,24 @@ class AuthViewModel @Inject constructor(
             result.collect {
                 when (it) {
                     is Resource.Error -> {
-                        _loginUiState.value = _loginUiState.value.copy(isLoading = false)
+                        _loginUiState.value = _loginUiState.value.copy(
+                            isLoading = false,
+                            loggedInErrorMsg = R.string.something_went_wrong
+                        )
                     }
 
                     Resource.Loading -> {
-                        _loginUiState.value = _loginUiState.value.copy(isLoading = true)
+                        _loginUiState.value = _loginUiState.value.copy(
+                            isLoading = true
+                        )
                     }
 
-                    is Resource.Success<*> -> {
-                        _loginUiState.value = _loginUiState.value.copy(isLoading = false)
+                    is Resource.Success -> {
+                        _loginUiState.value = _loginUiState.value.copy(
+                            isLoading = false,
+                            isLoggedIn = true,
+                            loggedInUserName = it.data?.name.toString(),
+                        )
                     }
                 }
             }

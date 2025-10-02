@@ -7,6 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -19,6 +20,8 @@ fun AppTextFieldWithError(
     errorMessage: String? = null,
     singleLine: Boolean = true,
     maxLines: Int = 1,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
 ) {
@@ -38,6 +41,8 @@ fun AppTextFieldWithError(
             },
             isError = isError,
             modifier = Modifier.fillMaxWidth(),
+            trailingIcon = trailingIcon,
+            visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions
         )
