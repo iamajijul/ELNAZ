@@ -55,7 +55,9 @@ android {
         ":feature_order",
         ":feature_category",
         ":feature_customer",
-        ":feature_supplier"
+        ":feature_supplier",
+        ":feature_main_inventory",
+        ":feature_sample"
     )
 }
 
@@ -68,6 +70,7 @@ dependencies {
     implementation(project(":di"))
     implementation(project(":logger"))
     implementation(project(":extension"))
+    implementation(project(":module_contracts"))
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
@@ -77,13 +80,13 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.startup.runtime)
     kapt(libs.hilt.compiler)
-    implementation(libs.google.play.core)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
     implementation(libs.firebase.firestore)
     implementation(libs.google.gms.services)
     implementation(libs.accompanist.permissions)
     implementation(libs.kotlinx.coroutines)
+
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
 //    androidTestImplementation(libs.androidx.test.junit)

@@ -1,18 +1,12 @@
-package com.ajijul.elnaz.startup
+package com.ajijul.elnaz.core.contract
 
 import android.content.Context
 import com.ajijul.elnaz.logger.ElnazLogger
 import com.ajijul.elnaz.logger.TAG
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class FeatureModuleInstaller @Inject constructor(
-    @ApplicationContext context: Context
-) {
+class DynamicFeatureModuleInstaller(context: Context) {
 
     private val splitInstallManager = SplitInstallManagerFactory.create(context)
 

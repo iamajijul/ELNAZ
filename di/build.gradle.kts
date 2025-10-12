@@ -41,6 +41,8 @@ android {
 dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
+    implementation(project(":core"))
+    implementation(project(":module_contracts"))
 
     //Firebase
     implementation(platform(libs.firebase.bom))

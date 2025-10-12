@@ -7,6 +7,7 @@ plugins {
 android {
     namespace = "com.ajijul.elnaz.feature_inventory"
     compileSdk = 35
+    base
 
     defaultConfig {
         minSdk = 24
@@ -35,6 +36,12 @@ android {
 
 dependencies {
     implementation(project(":app"))
+    implementation(project(":core"))
+    implementation(project(":module_contracts"))
+    implementation(project(":logger"))
+
+    implementation(libs.androidx.navigation.compose)
+
     implementation(libs.androidx.core.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.junit)

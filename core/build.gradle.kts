@@ -43,6 +43,7 @@ android {
 dependencies {
 
     implementation(project(":domain"))
+    implementation(project(":logger"))
     implementation(libs.androidx.core.ktx)
 
     implementation(libs.androidx.compose.material3)
@@ -50,6 +51,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.material)
+
+    implementation(libs.google.play.core)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.junit)

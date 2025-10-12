@@ -10,4 +10,6 @@
     <string name="title_feature_category">Category</string>
     <string name="title_feature_customer">Customer</string>
     <string name="title_feature_supplier">Supplier</string>
+    <string name="title_feature_main_inventory">Main Inventory</string>
+    <string name="title_feature_sample">SAMPLE</string>
 </resources>

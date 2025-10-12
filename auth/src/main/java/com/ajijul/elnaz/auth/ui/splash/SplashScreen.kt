@@ -34,7 +34,7 @@ fun SplashScreen(
 
             SplashUiState.UnAuthenticatedUser -> {
                 delay(2000)
-                nanHostController?.navigate(AuthScreen.Login.route)
+                nanHostController?.navigate(AuthScreen.Login.identifier)
             }
 
         }

@@ -23,12 +23,15 @@
             <option value="$PROJECT_DIR$/feature_customer" />
             <option value="$PROJECT_DIR$/feature_discount" />
             <option value="$PROJECT_DIR$/feature_inventory" />
+            <option value="$PROJECT_DIR$/feature_main_inventory" />
             <option value="$PROJECT_DIR$/feature_order" />
             <option value="$PROJECT_DIR$/feature_product_management" />
             <option value="$PROJECT_DIR$/feature_products" />
+            <option value="$PROJECT_DIR$/feature_sample" />
             <option value="$PROJECT_DIR$/feature_supplier" />
             <option value="$PROJECT_DIR$/logger" />
             <option value="$PROJECT_DIR$/login" />
+            <option value="$PROJECT_DIR$/module_contracts" />
             <option value="$PROJECT_DIR$/user" />
           </set>
         </option>
