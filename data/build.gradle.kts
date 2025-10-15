@@ -12,7 +12,7 @@ plugins {
 
 android {
     namespace = "com.ajijul.elnaz.data"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 24

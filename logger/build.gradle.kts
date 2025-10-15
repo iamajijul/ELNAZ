@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.ajijul.elnaz.logger"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
 

@@ -3,11 +3,11 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.android.dynamic.feature)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
 }
 android {
     namespace = "com.ajijul.elnaz.feature_inventory"
-    compileSdk = 35
-    base
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 24
@@ -41,6 +41,10 @@ dependencies {
     implementation(project(":logger"))
 
     implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.androidx.hilt.navigation)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
     implementation(libs.androidx.core.ktx)
     testImplementation(libs.junit)

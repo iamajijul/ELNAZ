@@ -61,6 +61,15 @@ android {
     )
 }
 
+configurations.all {
+    // Remove the older Firebase protolite runtime globally
+    exclude(group = "com.google.firebase", module = "protolite-well-known-types")
+    // Force Gradle to use only the modern protobuf runtime
+    resolutionStrategy {
+        force(libs.google.protobuf)
+    }
+}
+
 dependencies {
 
     implementation(project(":core"))
@@ -80,10 +89,11 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.startup.runtime)
     kapt(libs.hilt.compiler)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
-    implementation(libs.firebase.firestore)
-    implementation(libs.google.gms.services)
+
+    //FireBase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+
     implementation(libs.accompanist.permissions)
     implementation(libs.kotlinx.coroutines)
 

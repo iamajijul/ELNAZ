@@ -4,7 +4,7 @@ plugins {
 }
 android {
     namespace = "com.ajijul.feature_sample"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 24

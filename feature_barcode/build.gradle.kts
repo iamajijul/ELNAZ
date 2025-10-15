@@ -6,7 +6,7 @@ plugins {
 }
 android {
     namespace = "com.ajijul.elnaz.feature_barcode"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 24
