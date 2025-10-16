@@ -1,6 +1,6 @@
 package com.ajijul.elnaz.module_contracts.common
 
 interface FeatureModuleContractor {
-    fun <T : FeatureContract> getApi(apiClass: Class<T>): T?
-    fun registerFeature(featureKey: String, api: FeatureContract)
+    fun <T : FeatureContract> getFeatureModule(apiClass: Class<T>): T?
+    fun registerFeatureModule(featureKey: String, api: FeatureContract)
 }

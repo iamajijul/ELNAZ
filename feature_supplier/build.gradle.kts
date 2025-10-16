@@ -11,6 +11,11 @@ android {
     defaultConfig {
         minSdk = 24
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "MODULE_NAME", "\"${project.name}\"")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
