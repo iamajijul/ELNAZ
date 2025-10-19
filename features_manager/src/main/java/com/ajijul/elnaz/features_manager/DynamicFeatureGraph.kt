@@ -6,15 +6,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
 import com.ajijul.elnaz.extension.toPascalCase
 import com.ajijul.elnaz.logger.ElnazLogger
+import com.ajijul.elnaz.logger.TAG
 
-fun NavGraphBuilder.dynamicFeature(
+fun NavGraphBuilder.gotoDynamicFeature(
     navController: NavHostController,
     featureInstaller: DynamicFeatureInstaller,
     moduleName: String,
@@ -31,35 +31,48 @@ fun NavGraphBuilder.dynamicFeature(
         deepLinks = moduleDeepLinks
     ) {
         var isInstalled by remember { mutableStateOf(featureInstaller.isModuleInstalled(moduleName)) }
-        val entryPoint = try {
-            val clazz =
-                Class.forName("com.ajijul.elnaz.$moduleName.${moduleName.toPascalCase()}Entry")
-            clazz.getDeclaredConstructor().newInstance() as ComposeFeatureModuleEntry
-        } catch (e: Exception) {
-            null
-        }
-        if (isInstalled) {
-            // Once registered, navigate to the newly available graph
-            LaunchedEffect(entryPoint) {
+
+        LaunchedEffect(moduleName) {
+            if (isInstalled) {
+                val entryPoint = try {
+                    val clazz =
+                        Class.forName("com.ajijul.elnaz.$moduleName.${moduleName.toPascalCase()}Entry")
+                    clazz.getDeclaredConstructor().newInstance() as ComposeFeatureModuleEntry
+                } catch (e: Exception) {
+                    ElnazLogger.e(TAG, "Exception during REFLECTION " + e.message)
+                    null
+                }
+                ElnazLogger.e(TAG, "Dynamic feature already INSTALLED $moduleName")
                 entryPoint?.let {
                     navController.navigate(it.getNavHostRoute()) {
-                        // Pop the intermediate deep link destination
                         popUpTo(routeAndDeepLinks.first) { inclusive = true }
                     }
                 }
-            }
-        } else {
-            val context = LocalContext.current
-            LaunchedEffect(moduleName) {
+            } else {
+                ElnazLogger.e(
+                    TAG,
+                    "Dynamic feature NOT INSTALLED $moduleName, starting installation"
+                )
                 featureInstaller.installModule(moduleName) {
                     try {
-                        entryPoint?.registerGraph(this@dynamicFeature, navController)
+                        val entryPoint = try {
+                            val clazz =
+                                Class.forName("com.ajijul.elnaz.$moduleName.${moduleName.toPascalCase()}Entry")
+                            clazz.getDeclaredConstructor().newInstance() as ComposeFeatureModuleEntry
+                        } catch (e: Exception) {
+                            ElnazLogger.e(TAG, "Exception during REFLECTION " + e.message)
+                            null
+                        }
+                        entryPoint?.registerGraph(this@gotoDynamicFeature, navController)
                         isInstalled = true
                     } catch (e: Exception) {
                         ElnazLogger.e("DynamicFeatureNav", "Failed to register graph: ${e.message}")
                     }
                 }
             }
+        }
+        if (!isInstalled) {
+            loadingContent()
         }
     }
 }
