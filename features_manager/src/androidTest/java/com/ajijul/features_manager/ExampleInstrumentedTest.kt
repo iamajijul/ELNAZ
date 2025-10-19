@@ -1,4 +1,4 @@
-package com.ajijul.feature_main_inventory
+package com.ajijul.features_manager
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.ajijul.feature_main_inventory", appContext.packageName)
+        assertEquals("com.ajijul.features_manager.test", appContext.packageName)
     }
 }

@@ -1,4 +1,4 @@
-package com.ajijul.feature_main_inventory
+package com.ajijul.features_manager
 
 import org.junit.Test
 

@@ -6,8 +6,13 @@
       <module name="ELNAZ.checkout" target="21" />
       <module name="ELNAZ.customer" target="21" />
       <module name="ELNAZ.discount" target="21" />
+      <module name="ELNAZ.dynamic-features-manager" target="21" />
       <module name="ELNAZ.feature_additem" target="21" />
+      <module name="ELNAZ.feature_main_inventory" target="21" />
+      <module name="ELNAZ.feature_sample" target="21" />
       <module name="ELNAZ.inventory" target="21" />
+      <module name="ELNAZ.login" target="21" />
+      <module name="ELNAZ.module_contracts" target="21" />
       <module name="ELNAZ.order" target="21" />
       <module name="ELNAZ.product_management" target="21" />
       <module name="ELNAZ.products" target="21" />

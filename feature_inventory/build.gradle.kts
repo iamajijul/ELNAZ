@@ -44,7 +44,7 @@ android {
 dependencies {
     implementation(project(":app"))
     implementation(project(":core"))
-    implementation(project(":module_contracts"))
+    implementation(project(":features_manager"))
     implementation(project(":logger"))
 
     implementation(libs.androidx.navigation.compose)

@@ -1,16 +1,22 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.android.dynamic.feature)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose.compiler)
 }
+
 android {
-    namespace = "com.ajijul.feature_main_inventory"
-    compileSdk = 36
+    namespace = "com.ajijul.elnaz.features_manager"
+    compileSdk {
+        version = release(36)
+    }
 
     defaultConfig {
         minSdk = 24
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -31,11 +37,19 @@ android {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+    buildFeatures{
+        compose = true
+    }
 }
 
 dependencies {
-    implementation(project(":app"))
-    implementation(libs.androidx.core.ktx)
+    implementation(project(":logger"))
+    implementation(project(":extension"))
+
+    implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.google.play.core)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.espresso.core)

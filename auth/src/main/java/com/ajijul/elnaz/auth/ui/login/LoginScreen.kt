@@ -7,8 +7,10 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.*
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -31,10 +33,12 @@ import com.ajijul.elnaz.core.ui.components.PrimaryTextButton
 import com.ajijul.elnaz.core.utils.AppDimens.appProgressSmallSize
 import com.ajijul.elnaz.core.utils.AppDimens.appProgressSmallStroke
 import com.ajijul.elnaz.core.utils.showToast
+import com.ajijul.elnaz.features_manager.DynamicFeatureInstaller
 
 @Composable
 fun LoginScreen(
     navHostController: NavHostController? = null,
+    dynamicFeatureInstaller: DynamicFeatureInstaller? = null,
     viewModel: AuthViewModel = hiltViewModel()
 ) {
     val loginUiState = viewModel.loginUiState.collectAsState()
@@ -103,7 +107,7 @@ fun LoginScreen(
                     loginUiState.value.loggedInUserName
                 )
             )
-            viewModel.clearUserData()
+            viewModel.clearLoginUiState()
         }
     }
 

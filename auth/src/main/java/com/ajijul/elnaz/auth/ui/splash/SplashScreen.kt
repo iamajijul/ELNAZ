@@ -13,11 +13,13 @@ import com.ajijul.elnaz.auth.presentation.AuthViewModel
 import com.ajijul.elnaz.core.ui.components.AppProgress
 import com.ajijul.elnaz.core.ui.components.AppText
 import com.ajijul.elnaz.core.ui.components.ItemOnCenteredColumn
+import com.ajijul.elnaz.features_manager.DynamicFeatureInstaller
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
-    nanHostController: NavHostController? = null
+    nanHostController: NavHostController? = null,
+    dynamicFeatureInstaller: DynamicFeatureInstaller
 ) {
     val viewModel: AuthViewModel = hiltViewModel()
     val isAuthenticated = viewModel.splashUiState.collectAsState()

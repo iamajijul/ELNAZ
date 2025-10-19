@@ -42,7 +42,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":core"))
-    implementation(project(":module_contracts"))
+    implementation(project(":features_manager"))
 
     //Firebase
     implementation(platform(libs.firebase.bom))

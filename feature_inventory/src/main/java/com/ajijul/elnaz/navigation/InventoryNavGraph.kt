@@ -3,13 +3,13 @@ package com.ajijul.elnaz.navigation
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.navigation
-import com.ajijul.elnaz.core.utils.AppNavGraphRoute
+import com.ajijul.elnaz.features_manager.MainNavGraphRoutes
 
 fun NavGraphBuilder.inventoryNavGraph(navController: NavHostController) {
 
     navigation(
         startDestination = InventoryScreen.Products.identifier,
-        route = AppNavGraphRoute.INVENTORY.identifier
+        route = MainNavGraphRoutes.INVENTORY.identifier
     ) {
 
     }

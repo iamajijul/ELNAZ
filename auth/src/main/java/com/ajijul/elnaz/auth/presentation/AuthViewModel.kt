@@ -60,7 +60,7 @@ class AuthViewModel @Inject constructor(
         _loginUiState.update { it.copy(loggedInErrorMsg = null) }
     }
 
-    fun clearUserData() {
+    fun clearLoginUiState() {
         _loginUiState.update { it.copy(loggedInUserName = "") }
     }
 

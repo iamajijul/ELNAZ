@@ -56,8 +56,6 @@ android {
         ":feature_category",
         ":feature_customer",
         ":feature_supplier",
-        ":feature_main_inventory",
-        ":feature_sample"
     )
 }
 
@@ -79,7 +77,7 @@ dependencies {
     implementation(project(":di"))
     implementation(project(":logger"))
     implementation(project(":extension"))
-    implementation(project(":module_contracts"))
+    implementation(project(":features_manager"))
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
