@@ -34,14 +34,7 @@ fun NavGraphBuilder.gotoDynamicFeature(
 
         LaunchedEffect(moduleName) {
             if (isInstalled) {
-                val entryPoint = try {
-                    val clazz =
-                        Class.forName("com.ajijul.elnaz.$moduleName.${moduleName.toPascalCase()}Entry")
-                    clazz.getDeclaredConstructor().newInstance() as ComposeFeatureModuleEntry
-                } catch (e: Exception) {
-                    ElnazLogger.e(TAG, "Exception during REFLECTION " + e.message)
-                    null
-                }
+                val entryPoint = getModuleEntryPoint(moduleName, TAG)
                 ElnazLogger.e(TAG, "Dynamic feature already INSTALLED $moduleName")
                 entryPoint?.let {
                     navController.navigate(it.getNavHostRoute()) {
@@ -53,18 +46,15 @@ fun NavGraphBuilder.gotoDynamicFeature(
                     TAG,
                     "Dynamic feature NOT INSTALLED $moduleName, starting installation"
                 )
-                featureInstaller.installModule(moduleName) {
+                featureInstaller.installModule(moduleName) { isSuccess ->
                     try {
-                        val entryPoint = try {
-                            val clazz =
-                                Class.forName("com.ajijul.elnaz.$moduleName.${moduleName.toPascalCase()}Entry")
-                            clazz.getDeclaredConstructor().newInstance() as ComposeFeatureModuleEntry
-                        } catch (e: Exception) {
-                            ElnazLogger.e(TAG, "Exception during REFLECTION " + e.message)
-                            null
+                        if (isSuccess) {
+                            val entryPoint = getModuleEntryPoint(moduleName, TAG)
+                            entryPoint?.registerGraph(this@gotoDynamicFeature, navController)
+                            isInstalled = true
+                        } else {
+                            ElnazLogger.e(TAG, "Dynamic feature installation FAILED $moduleName")
                         }
-                        entryPoint?.registerGraph(this@gotoDynamicFeature, navController)
-                        isInstalled = true
                     } catch (e: Exception) {
                         ElnazLogger.e("DynamicFeatureNav", "Failed to register graph: ${e.message}")
                     }
@@ -74,5 +64,16 @@ fun NavGraphBuilder.gotoDynamicFeature(
         if (!isInstalled) {
             loadingContent()
         }
+    }
+}
+
+private fun getModuleEntryPoint(moduleName: String, tag: String): ComposeFeatureModuleEntry? {
+    return try {
+        val clazz =
+            Class.forName("com.ajijul.elnaz.$moduleName.${moduleName.toPascalCase()}Entry")
+        clazz.getDeclaredConstructor().newInstance() as ComposeFeatureModuleEntry
+    } catch (e: Exception) {
+        ElnazLogger.e(tag, "Exception during REFLECTION " + e.message)
+        null
     }
 }

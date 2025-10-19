@@ -10,9 +10,10 @@ class DynamicFeatureInstaller(context: Context) {
 
     private val splitInstallManager = SplitInstallManagerFactory.create(context)
 
-    fun isModuleInstalled(moduleName: String): Boolean = splitInstallManager.installedModules.contains(moduleName)
+    fun isModuleInstalled(moduleName: String): Boolean =
+        splitInstallManager.installedModules.contains(moduleName)
 
-    fun installModule(moduleName: String, onSuccess: () -> Unit) {
+    fun installModule(moduleName: String, onResult: (isSuccess: Boolean) -> Unit) {
         val request = SplitInstallRequest.newBuilder()
             .addModule(moduleName)
             .build()
@@ -20,10 +21,11 @@ class DynamicFeatureInstaller(context: Context) {
         splitInstallManager.startInstall(request)
             .addOnSuccessListener {
                 ElnazLogger.d(TAG, "Module [$moduleName] installed successfully")
-                onSuccess()
+                onResult(true)
             }
             .addOnFailureListener {
                 ElnazLogger.d(TAG, "Failed to install module [$moduleName]: ${it.message}")
+                onResult(false)
             }
     }
 }
