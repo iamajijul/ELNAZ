@@ -17,19 +17,19 @@ import com.ajijul.elnaz.logger.TAG
 fun NavGraphBuilder.gotoDynamicFeature(
     navController: NavHostController,
     featureInstaller: DynamicFeatureInstaller,
-    moduleName: String,
-    routeAndDeepLinks: Pair<String, List<String>>,
+    moduleNameIdentifierAndDeepLinks: Triple<String, String, List<String>>,
     loadingContent: @Composable () -> Unit
 ) {
-    val moduleDeepLinks = routeAndDeepLinks.second.map { deepLink ->
+    val moduleDeepLinks = moduleNameIdentifierAndDeepLinks.third.map { deepLink ->
         navDeepLink {
             uriPattern = deepLink
         }
     }
     composable(
-        route = routeAndDeepLinks.first,
+        route = moduleNameIdentifierAndDeepLinks.second,
         deepLinks = moduleDeepLinks
     ) {
+        val moduleName = moduleNameIdentifierAndDeepLinks.first
         var isInstalled by remember { mutableStateOf(featureInstaller.isModuleInstalled(moduleName)) }
 
         LaunchedEffect(moduleName) {
@@ -38,7 +38,7 @@ fun NavGraphBuilder.gotoDynamicFeature(
                 ElnazLogger.e(TAG, "Dynamic feature already INSTALLED $moduleName")
                 entryPoint?.let {
                     navController.navigate(it.getNavHostRoute()) {
-                        popUpTo(routeAndDeepLinks.first) { inclusive = true }
+                        popUpTo(moduleNameIdentifierAndDeepLinks.second) { inclusive = true }
                     }
                 }
             } else {

@@ -9,7 +9,7 @@ import com.ajijul.elnaz.auth.ui.splash.SplashScreen
 import com.ajijul.elnaz.features_manager.MainNavGraphRoutes
 import com.ajijul.elnaz.features_manager.DynamicFeatureInstaller
 
-fun NavGraphBuilder.authNavGraph(
+fun NavGraphBuilder.navigateToAuthNavGraph(
     navController: NavHostController,
     dynamicFeatureInstaller: DynamicFeatureInstaller
 ) {

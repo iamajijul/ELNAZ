@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.protobuf)
     alias(libs.plugins.room)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -40,6 +41,7 @@ android {
         }
     }
 }
+
 protobuf {
     protoc {
         artifact = libs.google.protoc.get().toString()
