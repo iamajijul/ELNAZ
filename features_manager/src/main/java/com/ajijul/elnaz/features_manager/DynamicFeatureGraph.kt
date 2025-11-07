@@ -20,57 +20,84 @@ fun NavGraphBuilder.gotoDynamicFeature(
     moduleNameIdentifierAndDeepLinks: Triple<String, String, List<String>>,
     loadingContent: @Composable () -> Unit
 ) {
-    val moduleDeepLinks = moduleNameIdentifierAndDeepLinks.third.map { deepLink ->
-        navDeepLink {
-            uriPattern = deepLink
-        }
-    }
-    composable(
-        route = moduleNameIdentifierAndDeepLinks.second,
-        deepLinks = moduleDeepLinks
-    ) {
-        val moduleName = moduleNameIdentifierAndDeepLinks.first
-        var isInstalled by remember { mutableStateOf(featureInstaller.isModuleInstalled(moduleName)) }
+    val (moduleName, route, deepLinks) = moduleNameIdentifierAndDeepLinks
+    val deepLinkObjects = deepLinks.map { navDeepLink { uriPattern = it } }
+
+    composable(route = route, deepLinks = deepLinkObjects) {
+        var status by remember { mutableStateOf<SplitInstallSessionStatus?>(null) }
+        var didRegister by remember { mutableStateOf(false) }
 
         LaunchedEffect(moduleName) {
-            if (isInstalled) {
-                val entryPoint = getModuleEntryPoint(moduleName, TAG)
-                ElnazLogger.e(TAG, "Dynamic feature already INSTALLED $moduleName")
-                entryPoint?.let {
-                    navController.navigate(it.getNavHostRoute()) {
-                        popUpTo(moduleNameIdentifierAndDeepLinks.second) { inclusive = true }
-                    }
-                }
+            if (featureInstaller.isModuleInstalled(moduleName)) {
+                ElnazLogger.i(TAG, "DFM $moduleName already installed")
+                status = SplitInstallSessionStatus.INSTALLED
             } else {
-                ElnazLogger.e(
-                    TAG,
-                    "Dynamic feature NOT INSTALLED $moduleName, starting installation"
-                )
-                featureInstaller.installModule(moduleName) { isSuccess ->
-                    try {
-                        if (isSuccess) {
-                            val entryPoint = getModuleEntryPoint(moduleName, TAG)
-                            entryPoint?.registerGraph(this@gotoDynamicFeature, navController)
-                            isInstalled = true
-                        } else {
-                            ElnazLogger.e(TAG, "Dynamic feature installation FAILED $moduleName")
-                        }
-                    } catch (e: Exception) {
-                        ElnazLogger.e("DynamicFeatureNav", "Failed to register graph: ${e.message}")
-                    }
+                ElnazLogger.w(TAG, "DFM $moduleName installing")
+                featureInstaller.installModule(moduleName)
+                    .collect { installStatus -> status = installStatus }
+            }
+        }
+
+        // Just register, don't navigate!
+        LaunchedEffect(status) {
+            ElnazLogger.i(TAG, "DFM Status of installing $moduleName is $status")
+            if (status == SplitInstallSessionStatus.INSTALLED && !didRegister) {
+                didRegister = true
+                ElnazLogger.i(TAG, "DFM $moduleName registering graph")
+                val entryPoint = getModuleEntryPoint(moduleName, TAG)
+                if (entryPoint != null) {
+                    entryPoint.registerGraph(this@gotoDynamicFeature, navController)
+                    // NO navigation here! The route is already active
+                } else {
+                    ElnazLogger.e(TAG, "DFM $moduleName entry point is null")
                 }
             }
         }
-        if (!isInstalled) {
-            loadingContent()
+
+        when (status) {
+            SplitInstallSessionStatus.DOWNLOADING,
+            SplitInstallSessionStatus.INSTALLING,
+            SplitInstallSessionStatus.PENDING -> {
+                loadingContent()
+            }
+
+            SplitInstallSessionStatus.REQUIRES_USER_CONFIRMATION -> {
+//                Column(
+//                    modifier = Modifier.fillMaxSize(),
+//                    horizontalAlignment = Alignment.CenterHorizontally,
+//                    verticalArrangement = Arrangement.Center
+//                ) {
+//                    Text("Please confirm installation in Google Play")
+//                }
+            }
+
+            SplitInstallSessionStatus.FAILED -> {
+//                Column(
+//                    modifier = Modifier.fillMaxSize(),
+//                    horizontalAlignment = Alignment.CenterHorizontally,
+//                    verticalArrangement = Arrangement.Center
+//                ) {
+//                    Text("Installation failed")
+//                    Spacer(modifier = Modifier.height(16.dp))
+//                    Button(onClick = {
+//                        status = null
+//                        didRegister = false
+//                    }) {
+//                        Text("Retry")
+//                    }
+//                }
+            }
+
+            else -> {
+                loadingContent()
+            }
         }
     }
 }
-
 private fun getModuleEntryPoint(moduleName: String, tag: String): ComposeFeatureModuleEntry? {
     return try {
         val clazz =
-            Class.forName("com.ajijul.elnaz.$moduleName.${moduleName.toPascalCase()}Entry")
+            Class.forName("com.ajijul.elnaz.entry.${moduleName.toPascalCase()}Entry")
         clazz.getDeclaredConstructor().newInstance() as ComposeFeatureModuleEntry
     } catch (e: Exception) {
         ElnazLogger.e(tag, "Exception during REFLECTION " + e.message)

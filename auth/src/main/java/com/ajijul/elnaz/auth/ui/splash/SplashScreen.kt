@@ -4,6 +4,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -14,7 +15,13 @@ import com.ajijul.elnaz.core.ui.components.AppProgress
 import com.ajijul.elnaz.core.ui.components.AppText
 import com.ajijul.elnaz.core.ui.components.ItemOnCenteredColumn
 import com.ajijul.elnaz.features_manager.DynamicFeatureInstaller
+import com.ajijul.elnaz.features_manager.MainNavGraphRoutes
+import com.ajijul.elnaz.logger.ElnazLogger
+import com.ajijul.elnaz.logger.TAG
 import kotlinx.coroutines.delay
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 
 @Composable
 fun SplashScreen(
@@ -22,35 +29,36 @@ fun SplashScreen(
     dynamicFeatureInstaller: DynamicFeatureInstaller
 ) {
     val viewModel: AuthViewModel = hiltViewModel()
-    val isAuthenticated = viewModel.splashUiState.collectAsState()
+    val isAuthenticatedState = viewModel.splashUiState.collectAsState()
+    val isAuthenticatedValue = isAuthenticatedState.value
 
-    LaunchedEffect(isAuthenticated.value) {
-        when (isAuthenticated.value) {
-
-            is SplashUiState.AuthenticatedUser -> {
-
-            }
-
-            SplashUiState.Loading -> {
-            }
-
+    LaunchedEffect(isAuthenticatedValue) {
+        when (isAuthenticatedValue) {
             SplashUiState.UnAuthenticatedUser -> {
                 delay(2000)
                 nanHostController?.navigate(AuthScreen.Login.identifier)
             }
 
+            is SplashUiState.AuthenticatedUser -> {
+                ElnazLogger.i(TAG, "DFM SplashUiState.AuthenticatedUser")
+                nanHostController?.navigate(MainNavGraphRoutes.INVENTORY.identifier)
+            }
+
+            SplashUiState.Loading -> {
+
+            }
         }
 
     }
 
-    when (isAuthenticated.value) {
+    when (isAuthenticatedValue) {
 
         SplashUiState.Loading -> {
             SplashContent()
         }
 
         is SplashUiState.AuthenticatedUser -> {
-            SplashContent(stringResource(id = R.string.welcome))
+            SplashContent(stringResource(id = R.string.welcome), showProgress = false)
         }
 
         SplashUiState.UnAuthenticatedUser -> {
@@ -66,10 +74,6 @@ fun SplashContent(
     showProgress: Boolean = true
 ) {
     ItemOnCenteredColumn {
-//        Image(
-//            painter = painterResource(androidx.constraintlayout.widget.R.drawable.abc_ic_star_black_16dp),
-//            contentDescription = null
-//        )
 
         if (showProgress) {
             AppProgress()
@@ -81,5 +85,6 @@ fun SplashContent(
                 style = MaterialTheme.typography.titleLarge
             )
         }
+
     }
 }

@@ -23,7 +23,6 @@ object ElnazLogger {
         enableTimberFileLogger: Boolean = false
     ) {
         this.enableTimberFileLogger_ = enableTimberFileLogger
-        Timber.plant(Timber.DebugTree())
         if (BuildConfig.DEBUG) {
             if (enableTimberFileLogger) {
 //                Timber.plant(

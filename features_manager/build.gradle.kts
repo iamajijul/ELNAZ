@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.google.play.core)
+    implementation(libs.hilt.android)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.junit)

@@ -4,6 +4,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import com.ajijul.elnaz.features_manager.ComposeFeatureModuleEntry
 import com.ajijul.elnaz.features_manager.MainNavGraphRoutes
+import com.ajijul.elnaz.logger.ElnazLogger
+import com.ajijul.elnaz.logger.TAG
 
 class FeatureInventoryEntry : ComposeFeatureModuleEntry {
 
@@ -12,7 +14,7 @@ class FeatureInventoryEntry : ComposeFeatureModuleEntry {
         navGraphBuilder: NavGraphBuilder,
         navController: NavHostController
     ) {
-        TODO("Not yet implemented")
+        ElnazLogger.i(TAG, "DFM INVENTORY INSTALLED ....")
     }
 
 }

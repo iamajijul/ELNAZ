@@ -52,6 +52,7 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":domain"))
     implementation(project(":di"))
+    implementation(project(":logger"))
     implementation(project(":features_manager"))
 
     implementation(libs.androidx.core.ktx)

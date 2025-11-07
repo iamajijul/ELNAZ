@@ -34,6 +34,7 @@ import com.ajijul.elnaz.core.utils.AppDimens.appProgressSmallSize
 import com.ajijul.elnaz.core.utils.AppDimens.appProgressSmallStroke
 import com.ajijul.elnaz.core.utils.showToast
 import com.ajijul.elnaz.features_manager.DynamicFeatureInstaller
+import com.ajijul.elnaz.features_manager.MainNavGraphRoutes
 
 @Composable
 fun LoginScreen(
@@ -108,6 +109,7 @@ fun LoginScreen(
                 )
             )
             viewModel.clearLoginUiState()
+          //  navHostController?.navigate(MainNavGraphRoutes.INVENTORY.identifier)
         }
     }
 
