@@ -6,9 +6,9 @@ import com.ajijul.elnaz.data.mapper.toModel
 import com.ajijul.elnaz.data.network.FirebaseAuthSource
 import com.ajijul.elnaz.data.network.FirebaseFirestoreDataSource
 import com.ajijul.elnaz.data.network.firebase.FirestoreCollections
-import com.ajijul.elnaz.domain.auth.AuthRepository
-import com.ajijul.elnaz.domain.auth.UserModel
-import com.ajijul.elnaz.domain.auth.UserRole
+import com.ajijul.elnaz.domain.repository.auth.AuthRepository
+import com.ajijul.elnaz.domain.model.UserModel
+import com.ajijul.elnaz.domain.model.enums.UserRole
 import com.ajijul.elnaz.domain.model.enums.AppError
 import com.ajijul.elnaz.domain.model.enums.Resource
 import javax.inject.Inject

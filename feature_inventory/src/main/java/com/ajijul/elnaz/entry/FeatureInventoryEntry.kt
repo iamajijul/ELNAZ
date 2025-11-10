@@ -6,6 +6,7 @@ import com.ajijul.elnaz.features_manager.ComposeFeatureModuleEntry
 import com.ajijul.elnaz.features_manager.MainNavGraphRoutes
 import com.ajijul.elnaz.logger.ElnazLogger
 import com.ajijul.elnaz.logger.TAG
+import com.ajijul.elnaz.navigation.inventoryNavGraph
 
 class FeatureInventoryEntry : ComposeFeatureModuleEntry {
 
@@ -15,6 +16,7 @@ class FeatureInventoryEntry : ComposeFeatureModuleEntry {
         navController: NavHostController
     ) {
         ElnazLogger.i(TAG, "DFM INVENTORY INSTALLED ....")
+        navGraphBuilder.inventoryNavGraph(navController)
     }
 
 }

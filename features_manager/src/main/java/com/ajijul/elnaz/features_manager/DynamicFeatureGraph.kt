@@ -47,7 +47,6 @@ fun NavGraphBuilder.gotoDynamicFeature(
                 val entryPoint = getModuleEntryPoint(moduleName, TAG)
                 if (entryPoint != null) {
                     entryPoint.registerGraph(this@gotoDynamicFeature, navController)
-                    // NO navigation here! The route is already active
                 } else {
                     ElnazLogger.e(TAG, "DFM $moduleName entry point is null")
                 }

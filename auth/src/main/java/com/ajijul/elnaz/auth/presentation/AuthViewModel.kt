@@ -7,11 +7,11 @@ import com.ajijul.elnaz.auth.ui.login.LoginUiState
 import com.ajijul.elnaz.auth.ui.splash.SplashUiState
 import com.ajijul.elnaz.core.utils.isValidEmail
 import com.ajijul.elnaz.di.annotations.IODispatcher
-import com.ajijul.elnaz.domain.auth.UserModel
-import com.ajijul.elnaz.domain.auth.usecases.CurrentUserUseCase
-import com.ajijul.elnaz.domain.auth.usecases.LoginUseCase
-import com.ajijul.elnaz.domain.auth.usecases.LogoutUseCase
-import com.ajijul.elnaz.domain.auth.usecases.RegisterUseCase
+import com.ajijul.elnaz.domain.model.UserModel
+import com.ajijul.elnaz.domain.usecases.auth.CurrentUserUseCase
+import com.ajijul.elnaz.domain.usecases.auth.LoginUseCase
+import com.ajijul.elnaz.domain.usecases.auth.LogoutUseCase
+import com.ajijul.elnaz.domain.usecases.auth.RegisterUseCase
 import com.ajijul.elnaz.domain.model.enums.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher

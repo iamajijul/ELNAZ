@@ -30,18 +30,25 @@ fun SplashScreen(
 ) {
     val viewModel: AuthViewModel = hiltViewModel()
     val isAuthenticatedState = viewModel.splashUiState.collectAsState()
-    val isAuthenticatedValue = isAuthenticatedState.value
 
-    LaunchedEffect(isAuthenticatedValue) {
-        when (isAuthenticatedValue) {
+    LaunchedEffect(isAuthenticatedState.value) {
+        when (isAuthenticatedState.value) {
             SplashUiState.UnAuthenticatedUser -> {
                 delay(2000)
-                nanHostController?.navigate(AuthScreen.Login.identifier)
+                nanHostController?.navigate(AuthScreen.Login.identifier){
+                    popUpTo(AuthScreen.Splash.identifier) {
+                        inclusive = true
+                    }
+                }
             }
 
             is SplashUiState.AuthenticatedUser -> {
                 ElnazLogger.i(TAG, "DFM SplashUiState.AuthenticatedUser")
-                nanHostController?.navigate(MainNavGraphRoutes.INVENTORY.identifier)
+                nanHostController?.navigate(MainNavGraphRoutes.INVENTORY.identifier){
+                    popUpTo(AuthScreen.Splash.identifier) {
+                        inclusive = true
+                    }
+                }
             }
 
             SplashUiState.Loading -> {
@@ -51,7 +58,7 @@ fun SplashScreen(
 
     }
 
-    when (isAuthenticatedValue) {
+    when (isAuthenticatedState.value) {
 
         SplashUiState.Loading -> {
             SplashContent()

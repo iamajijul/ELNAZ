@@ -13,7 +13,7 @@ import com.ajijul.elnaz.data.local.dao.ProductDao
 import com.ajijul.elnaz.data.local.dao.SupplierDao
 import com.ajijul.elnaz.data.local.dao.WarehouseDao
 import com.ajijul.elnaz.data.local.dao.WarehousePricingDao
-import com.ajijul.elnaz.data.local.entity.Category
+import com.ajijul.elnaz.data.local.entity.category.Category
 import com.ajijul.elnaz.data.local.entity.Customer
 import com.ajijul.elnaz.data.local.entity.Discount
 import com.ajijul.elnaz.data.local.entity.DiscountAssignment
@@ -24,10 +24,18 @@ import com.ajijul.elnaz.data.local.entity.Product
 import com.ajijul.elnaz.data.local.entity.Supplier
 import com.ajijul.elnaz.data.local.entity.Warehouse
 import com.ajijul.elnaz.data.local.entity.WarehousePricing
+import com.ajijul.elnaz.data.local.entity.category.CategoryDiscountCrossRef
+import com.ajijul.elnaz.data.local.entity.category.CategoryProductCrossRef
+import com.ajijul.elnaz.data.local.entity.category.CategorySEO
+import com.ajijul.elnaz.data.local.entity.category.CategoryWarehouseCrossRef
 
 @Database(
     entities = [
         Category::class,
+        CategoryDiscountCrossRef::class,
+        CategoryProductCrossRef::class,
+        CategorySEO::class,
+        CategoryWarehouseCrossRef::class,
         Customer::class,
         Discount::class,
         DiscountAssignment::class,

@@ -1,6 +1,6 @@
 package com.ajijul.elnaz.auth.ui.splash
 
-import com.ajijul.elnaz.domain.auth.UserModel
+import com.ajijul.elnaz.domain.model.UserModel
 
 sealed class SplashUiState {
     object Loading : SplashUiState()

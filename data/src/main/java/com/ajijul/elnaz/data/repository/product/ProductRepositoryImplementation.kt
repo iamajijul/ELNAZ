@@ -5,7 +5,7 @@ import com.ajijul.elnaz.data.mapper.toDomain
 import com.ajijul.elnaz.data.mapper.toProductEntity
 import com.ajijul.elnaz.data.repository.DataFlowManager
 import com.ajijul.elnaz.domain.model.ProductModel
-import com.ajijul.elnaz.domain.repository.ProductRepository
+import com.ajijul.elnaz.domain.repository.product.ProductRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject

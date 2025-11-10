@@ -1,15 +1,15 @@
 package com.ajijul.elnaz.di.usecase
 
-import com.ajijul.elnaz.domain.auth.AuthRepository
-import com.ajijul.elnaz.domain.auth.usecases.CurrentUserUseCase
-import com.ajijul.elnaz.domain.auth.usecases.LoginUseCase
-import com.ajijul.elnaz.domain.auth.usecases.LogoutUseCase
-import com.ajijul.elnaz.domain.auth.usecases.RegisterUseCase
-import com.ajijul.elnaz.domain.repository.ProductRepository
-import com.ajijul.elnaz.domain.usecases.AddItemUseCase
-import com.ajijul.elnaz.domain.usecases.CheckStockAlertsUseCase
-import com.ajijul.elnaz.domain.usecases.GetProductsUseCase
-import com.ajijul.elnaz.domain.user.UserPreferenceRepository
+import com.ajijul.elnaz.domain.repository.auth.AuthRepository
+import com.ajijul.elnaz.domain.usecases.auth.CurrentUserUseCase
+import com.ajijul.elnaz.domain.usecases.auth.LoginUseCase
+import com.ajijul.elnaz.domain.usecases.auth.LogoutUseCase
+import com.ajijul.elnaz.domain.usecases.auth.RegisterUseCase
+import com.ajijul.elnaz.domain.repository.product.ProductRepository
+import com.ajijul.elnaz.domain.usecases.product.AddItemUseCase
+import com.ajijul.elnaz.domain.usecases.product.CheckStockAlertsUseCase
+import com.ajijul.elnaz.domain.usecases.product.GetProductsUseCase
+import com.ajijul.elnaz.domain.repository.user.UserPreferenceRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

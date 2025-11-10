@@ -1,7 +1,7 @@
 package com.ajijul.elnaz.data.mapper
 
 import com.ajijul.elnaz.data.dto.UserDTO
-import com.ajijul.elnaz.domain.auth.UserModel
+import com.ajijul.elnaz.domain.model.UserModel
 
 fun UserModel.toDto(): UserDTO {
     return UserDTO(

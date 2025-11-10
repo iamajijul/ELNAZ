@@ -12,13 +12,13 @@ import androidx.room.PrimaryKey
             entity = Product::class,
             parentColumns = ["id"],
             childColumns = ["productId"],
-            onDelete = ForeignKey.NO_ACTION
+            onUpdate = ForeignKey.CASCADE
         ),
         ForeignKey(
             entity = Warehouse::class,
             parentColumns = ["id"],
             childColumns = ["warehouseId"],
-            onDelete = ForeignKey.NO_ACTION
+            onUpdate = ForeignKey.CASCADE
         )
     ],
     indices = [Index("productId"), Index("warehouseId")]

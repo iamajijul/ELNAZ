@@ -31,4 +31,6 @@
     <color name="color_inverse_surface">#303030</color>
     <color name="color_inverse_on_surface">#FFFFFF</color>
     <color name="color_inverse_primary">#212121</color>
+
+    <color name="color_low_opacity_background">#1AFFFFFF</color>
 </resources>

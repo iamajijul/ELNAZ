@@ -6,6 +6,7 @@ import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Delete
 import com.ajijul.elnaz.data.local.entity.Discount
+import com.ajijul.elnaz.domain.model.enums.DiscountStatus
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -28,7 +29,10 @@ interface DiscountDao {
     @Query("SELECT * FROM discount WHERE id = :id")
     suspend fun getDiscountById(id: Long): Discount?
 
-    @Query("SELECT * FROM discount WHERE isActive = 1 ORDER BY priority DESC")
+    @Query("SELECT * FROM discount WHERE status = :status ORDER BY priority DESC")
+    fun getDiscountsByStatus(status: DiscountStatus): Flow<List<Discount>>
+
+    @Query("SELECT * FROM discount WHERE status = 'ACTIVE' ORDER BY priority DESC")
     fun getActiveDiscounts(): Flow<List<Discount>>
 
     @Query("DELETE FROM discount")

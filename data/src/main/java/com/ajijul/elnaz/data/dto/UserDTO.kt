@@ -1,6 +1,6 @@
 package com.ajijul.elnaz.data.dto
 
-import com.ajijul.elnaz.domain.auth.UserRole
+import com.ajijul.elnaz.domain.model.enums.UserRole
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.ServerTimestamp

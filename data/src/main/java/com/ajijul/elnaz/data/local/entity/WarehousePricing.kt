@@ -11,7 +11,8 @@ import androidx.room.PrimaryKey
         ForeignKey(
             entity = Warehouse::class,
             parentColumns = ["id"],
-            childColumns = ["warehouseId"]
+            childColumns = ["warehouseId"],
+            onUpdate = ForeignKey.CASCADE
         ),
         ForeignKey(entity = Product::class, parentColumns = ["id"], childColumns = ["productId"])
     ],

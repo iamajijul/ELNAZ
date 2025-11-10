@@ -2,9 +2,9 @@ package com.ajijul.elnaz.data.repository.user
 
 import androidx.datastore.core.DataStore
 import com.ajijul.elnaz.data.datastore.proto.UserPreferences
-import com.ajijul.elnaz.domain.auth.UserModel
-import com.ajijul.elnaz.domain.auth.UserRole
-import com.ajijul.elnaz.domain.user.UserPreferenceRepository
+import com.ajijul.elnaz.domain.model.UserModel
+import com.ajijul.elnaz.domain.model.enums.UserRole
+import com.ajijul.elnaz.domain.repository.user.UserPreferenceRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

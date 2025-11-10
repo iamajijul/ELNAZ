@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.ajijul.elnaz.auth.R
+import com.ajijul.elnaz.auth.navigation.AuthScreen
 import com.ajijul.elnaz.auth.presentation.AuthViewModel
 import com.ajijul.elnaz.core.ui.components.AppIconButton
 import com.ajijul.elnaz.core.ui.components.AppProgress
@@ -109,7 +110,11 @@ fun LoginScreen(
                 )
             )
             viewModel.clearLoginUiState()
-          //  navHostController?.navigate(MainNavGraphRoutes.INVENTORY.identifier)
+            navHostController?.navigate(MainNavGraphRoutes.INVENTORY.identifier) {
+                popUpTo(AuthScreen.Splash.identifier) {
+                    inclusive = true
+                }
+            }
         }
     }
 
