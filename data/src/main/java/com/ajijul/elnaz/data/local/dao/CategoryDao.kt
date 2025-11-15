@@ -1,4 +1,5 @@
 package com.ajijul.elnaz.data.local.dao
+
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -8,6 +9,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Transaction
 import com.ajijul.elnaz.data.local.entity.category.Category
 import com.ajijul.elnaz.data.local.entity.category.CategoryDiscountCrossRef
+import com.ajijul.elnaz.data.local.entity.category.CategoryProductCrossRef
 import com.ajijul.elnaz.data.local.entity.category.CategorySEO
 import com.ajijul.elnaz.data.local.entity.category.CategoryWarehouseCrossRef
 import com.ajijul.elnaz.data.local.relationships.CategoryWithDiscount
@@ -16,6 +18,7 @@ import com.ajijul.elnaz.data.local.relationships.CategoryWithSEO
 import com.ajijul.elnaz.data.local.relationships.CategoryWithWarehouse
 import com.ajijul.elnaz.data.local.relationships.WarehouseWithCategories
 import kotlinx.coroutines.flow.Flow
+
 @Dao
 interface CategoryDao {
 
@@ -41,15 +44,15 @@ interface CategoryDao {
     // ----- Relations (Transaction ensures consistency) -----
     @Transaction
     @Query("SELECT * FROM category WHERE id = :categoryId")
-    suspend fun getCategoryWithProducts(categoryId: Long): CategoryWithProducts?
+    fun getCategoryWithProducts(categoryId: Long): Flow<CategoryWithProducts?>
 
     @Transaction
     @Query("SELECT * FROM category WHERE id = :categoryId")
-    suspend fun getCategoryWithWarehouses(categoryId: Long): CategoryWithWarehouse?
+    fun getCategoryWithWarehouses(categoryId: Long): Flow<CategoryWithWarehouse?>
 
     @Transaction
     @Query("SELECT * FROM category WHERE id = :categoryId")
-    suspend fun getCategoryWithDiscounts(categoryId: Long): CategoryWithDiscount?
+    fun getCategoryWithDiscounts(categoryId: Long): Flow<CategoryWithDiscount?>
 
     @Transaction
     @Query("SELECT * FROM category WHERE id = :categoryId")
@@ -74,6 +77,15 @@ interface CategoryDao {
     @Query("DELETE FROM category_discount_cross_ref WHERE categoryId = :categoryId")
     suspend fun clearDiscountsForCategory(categoryId: Long)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCategoryProductCrossRef(prodRef: CategoryProductCrossRef)
+
+    @Query("DELETE FROM category_product_cross_ref WHERE categoryId = :categoryId AND productId = :productId")
+    suspend fun deleteCategoryProductCrossRef(categoryId: Long, productId: Long)
+
+    @Query("DELETE FROM category_product_cross_ref WHERE categoryId = :categoryId")
+    suspend fun clearProductForCategory(categoryId: Long)
+
     // ----- SEO -----
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrUpdateCategorySEO(seo: CategorySEO): Long
@@ -81,13 +93,7 @@ interface CategoryDao {
     @Query("DELETE FROM category_seo WHERE categoryId = :categoryId")
     suspend fun deleteSEOForCategory(categoryId: Long)
 
-    // ----- Warehouse-side query -----
-    @Transaction
-    @Query("SELECT * FROM warehouse WHERE id = :warehouseId")
-    suspend fun getWarehouseWithCategories(warehouseId: Long): WarehouseWithCategories?
-
-    // ----- Additional helpers -----
     @Query("SELECT * FROM category WHERE parentId = :parentId")
-    fun getCategoriesByParent(parentId: Long): Flow<List<Category>>
+    fun getAllSubCategories(parentId: Long): Flow<List<Category>>
 }
 

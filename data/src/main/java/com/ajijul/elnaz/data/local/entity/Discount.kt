@@ -21,7 +21,7 @@ data class Discount(
     val name: String,
     val description: String? = null,
 
-    val discountType: DiscountType = DiscountType.PERCENTAGE, // 👈 NEW
+    val discountType: DiscountType = DiscountType.PERCENTAGE, // percentage or fixed amount
     val discountValue: Double,                                // 10% or ₹50
     val maxDiscountAmount: Double? = null,                    // for "up to ₹100"
     val minOrderAmount: Double? = null,                       // optional threshold
@@ -29,7 +29,7 @@ data class Discount(
     val startDate: Long,
     val endDate: Long?,
     val status: DiscountStatus = DiscountStatus.ACTIVE,
-    val priority: Int = 0      // higher = takes precedence
+    val priority: Int = 0                                    // higher = takes precedence
 )
 
 

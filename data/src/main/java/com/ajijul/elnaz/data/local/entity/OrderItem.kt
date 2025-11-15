@@ -27,7 +27,7 @@ data class OrderItem(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val orderId: Long,
     val productId: Long,
-    val quantity: Int,
+    val quantity: Double,
     val price: Double,          // price at purchase time
     val appliedDiscountId: Long? = null, // optional, track which discount applied
     val finalPrice: Double

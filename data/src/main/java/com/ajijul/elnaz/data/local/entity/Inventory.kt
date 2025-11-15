@@ -27,6 +27,6 @@ data class Inventory(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val productId: Long,
     val warehouseId: Long,
-    val quantity: Int
+    val quantity: Double
 )
 

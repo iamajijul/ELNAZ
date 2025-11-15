@@ -9,7 +9,9 @@ import com.ajijul.elnaz.domain.repository.product.ProductRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ProductRepositoryImplementation @Inject constructor(
     private val productDao: ProductDao,
     private val dataFlowManager: DataFlowManager

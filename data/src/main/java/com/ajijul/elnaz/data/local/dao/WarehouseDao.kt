@@ -5,7 +5,9 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Delete
+import androidx.room.Transaction
 import com.ajijul.elnaz.data.local.entity.Warehouse
+import com.ajijul.elnaz.data.local.relationships.WarehouseWithCategories
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -33,4 +35,9 @@ interface WarehouseDao {
 
     @Query("DELETE FROM warehouse")
     suspend fun deleteAllWarehouses()
+
+    @Transaction
+    @Query("SELECT * FROM warehouse WHERE id = :warehouseId")
+    fun getWarehouseWithCategories(warehouseId: Long): Flow<WarehouseWithCategories?>
+
 }

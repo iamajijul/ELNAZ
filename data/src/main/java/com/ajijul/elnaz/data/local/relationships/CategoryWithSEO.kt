@@ -11,5 +11,5 @@ data class CategoryWithSEO(
         parentColumn = "id",
         entityColumn = "categoryId"
     )
-    val seo: CategorySEO?
+    val seo: CategorySEO
 )

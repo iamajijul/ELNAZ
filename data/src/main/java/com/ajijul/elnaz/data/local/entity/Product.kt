@@ -25,9 +25,21 @@ import com.ajijul.elnaz.domain.model.enums.ProductStatus
             parentColumns = ["id"],
             childColumns = ["supplierId"],
             onUpdate = ForeignKey.CASCADE
+        ),
+        ForeignKey(
+            entity = UnitOfMeasure::class,
+            parentColumns = ["id"],
+            childColumns = ["unitId"],
+            onUpdate = ForeignKey.CASCADE
         )
+
     ],
-    indices = [Index("categoryId"), Index("supplierId"), Index("name")]
+    indices = [
+        Index("categoryId"),
+        Index("supplierId"),
+        Index("name"),
+        Index("unitId")
+    ]
 )
 @TypeConverters(Converters::class)
 data class Product(
@@ -42,6 +54,7 @@ data class Product(
     val lastUpdated: Long,
     val firstAddedOn: Long = System.currentTimeMillis(),
     val status: ProductStatus = ProductStatus.ACTIVE,
-    )
+    val unitId: Long,
+)
 
 
