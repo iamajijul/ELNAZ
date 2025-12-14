@@ -29,6 +29,7 @@
             <option value="$PROJECT_DIR$/feature_supplier" />
             <option value="$PROJECT_DIR$/features_manager" />
             <option value="$PROJECT_DIR$/logger" />
+            <option value="$PROJECT_DIR$/resources" />
             <option value="$PROJECT_DIR$/user" />
           </set>
         </option>

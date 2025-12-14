@@ -17,6 +17,7 @@ interface CategoryRepository {
     suspend fun insertCategory(category: CategoryModel): Long
     suspend fun updateCategory(category: CategoryModel)
     suspend fun deleteCategory(categoryModel: CategoryModel)
+    suspend fun deleteCategoryById(categoryId: Long)
     fun getCategoryWithProducts(categoryId: Long): Flow<CategoryWithProductsModel?>
     fun getCategoryWithWarehouses(categoryId: Long): Flow<CategoryWithWarehouseModel?>
     fun getCategoryWithDiscounts(categoryId: Long): Flow<CategoryWithDiscountsModel?>

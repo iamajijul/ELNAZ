@@ -8,7 +8,7 @@ import com.ajijul.elnaz.features_manager.MainNavGraphRoutes
 fun NavGraphBuilder.inventoryNavGraph(navController: NavHostController) {
 
     navigation(
-        startDestination = InventoryScreen.Products.identifier,
+        startDestination = AllInventoryScreenTypes.Products.identifier,
         route = MainNavGraphRoutes.INVENTORY.identifier
     ) {
 

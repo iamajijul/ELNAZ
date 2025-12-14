@@ -1,4 +1,4 @@
-package com.ajijul.elnaz.auth.ui.splash
+package com.ajijul.elnaz.auth.utils
 
 import com.ajijul.elnaz.domain.model.UserModel
 

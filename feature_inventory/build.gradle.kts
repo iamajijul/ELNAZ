@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.dynamic.feature)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.compose.compiler)
 }
 android {
     namespace = "com.ajijul.elnaz.feature_inventory"
@@ -17,6 +18,7 @@ android {
 
     buildFeatures {
         buildConfig = true
+        compose = true
     }
 
     buildTypes {
@@ -46,8 +48,12 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":features_manager"))
     implementation(project(":logger"))
+    implementation(project(":resources"))
+    implementation(project(":domain"))
+    implementation(project(":di"))
 
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.compose.material3)
 
     implementation(libs.androidx.hilt.navigation)
     implementation(libs.hilt.android)

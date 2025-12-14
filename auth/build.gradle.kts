@@ -54,6 +54,7 @@ dependencies {
     implementation(project(":di"))
     implementation(project(":logger"))
     implementation(project(":features_manager"))
+    implementation(project(":resources"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

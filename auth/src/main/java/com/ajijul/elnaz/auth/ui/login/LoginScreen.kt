@@ -14,13 +14,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.ajijul.elnaz.auth.R
+import com.ajijul.elnaz.resources.R
 import com.ajijul.elnaz.auth.navigation.AuthScreen
 import com.ajijul.elnaz.auth.presentation.AuthViewModel
 import com.ajijul.elnaz.core.ui.components.AppIconButton
@@ -80,7 +83,7 @@ fun LoginScreen(
 
         PrimaryTextButton(onClick = {
             viewModel.login()
-        }, modifier = Modifier.align(Alignment.Start)) {
+        }, modifier = Modifier.align(Alignment.Start).testTag("textButton").semantics { contentDescription = "textButton1" }) {
             AppText(text = stringResource(R.string.login_screen_forget_password))
         }
 
@@ -88,7 +91,7 @@ fun LoginScreen(
             onClick = {
                 viewModel.login()
             },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().testTag("filledButton").semantics { contentDescription = "filledButton1" },
             enabled = !loginUiState.value.isLoading
         ) {
             if (loginUiState.value.isLoading) {

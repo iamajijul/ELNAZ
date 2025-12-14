@@ -1,14 +1,13 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose.compiler)
 }
 
 android {
-    namespace = "com.ajijul.elnaz.core"
-    compileSdk = 36
+    namespace = "com.ajijul.elnaz.resources"
+    compileSdk {
+        version = release(36)
+    }
 
     defaultConfig {
         minSdk = 24
@@ -27,34 +26,18 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
-     kotlin {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
-        }
-    }
-    buildFeatures {
-        compose = true
+    kotlinOptions {
+        jvmTarget = "11"
     }
 }
 
 dependencies {
-
-    implementation(project(":domain"))
-    implementation(project(":logger"))
-    implementation(project(":resources"))
     implementation(libs.androidx.core.ktx)
-
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.preview)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-
+    implementation(libs.androidx.appcompat)
     implementation(libs.material)
-
-    implementation(libs.google.play.core)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.espresso.core)

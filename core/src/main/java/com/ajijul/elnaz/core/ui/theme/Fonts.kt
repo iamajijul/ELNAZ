@@ -3,7 +3,7 @@ package com.ajijul.elnaz.core.ui.theme
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import com.ajijul.elnaz.core.R
+import com.ajijul.elnaz.resources.R
 
 val parastooFontFamily = FontFamily(
     Font(R.font.parastoo_regular, weight = FontWeight.Normal),

@@ -8,7 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.ajijul.elnaz.auth.R
+import com.ajijul.elnaz.resources.R
 import com.ajijul.elnaz.auth.navigation.AuthScreen
 import com.ajijul.elnaz.auth.presentation.AuthViewModel
 import com.ajijul.elnaz.core.ui.components.AppProgress
@@ -22,6 +22,7 @@ import kotlinx.coroutines.delay
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import com.ajijul.elnaz.auth.utils.SplashUiState
 
 @Composable
 fun SplashScreen(

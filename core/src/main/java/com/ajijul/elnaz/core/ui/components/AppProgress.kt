@@ -17,12 +17,12 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.ajijul.elnaz.core.R
 import com.ajijul.elnaz.core.utils.AppDimens.appProgressSize
 import com.ajijul.elnaz.core.utils.AppDimens.appProgressSmallSize
 import com.ajijul.elnaz.core.utils.AppDimens.appProgressSmallStroke
 import com.ajijul.elnaz.core.utils.AppDimens.appProgressStroke
 import com.ajijul.elnaz.core.utils.AppDimens.roundedCornerSize
+import com.ajijul.elnaz.resources.R
 
 @Composable
 fun AppProgress(

@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 class GetAllSubCategoriesUseCase(val categoryRepository: CategoryRepository) {
 
-    operator fun invoke(parentCategoryId: Int): Flow<List<CategoryModel>> = categoryRepository.getAllSubCategories(parentCategoryId)
+    operator fun invoke(parentCategoryId: Long): Flow<List<CategoryModel>> = categoryRepository.getAllSubCategories(parentCategoryId)
 
 }

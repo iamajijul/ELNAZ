@@ -22,6 +22,7 @@ import com.ajijul.elnaz.data.local.entity.Order
 import com.ajijul.elnaz.data.local.entity.OrderItem
 import com.ajijul.elnaz.data.local.entity.Product
 import com.ajijul.elnaz.data.local.entity.Supplier
+import com.ajijul.elnaz.data.local.entity.UnitOfMeasure
 import com.ajijul.elnaz.data.local.entity.Warehouse
 import com.ajijul.elnaz.data.local.entity.WarehousePricing
 import com.ajijul.elnaz.data.local.entity.category.CategoryDiscountCrossRef
@@ -44,6 +45,7 @@ import com.ajijul.elnaz.data.local.entity.category.CategoryWarehouseCrossRef
         OrderItem::class,
         Product::class,
         Supplier::class,
+        UnitOfMeasure::class,
         Warehouse::class,
         WarehousePricing::class
     ], version = 1

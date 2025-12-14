@@ -2,9 +2,9 @@ package com.ajijul.elnaz.auth.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ajijul.elnaz.auth.R
+import com.ajijul.elnaz.resources.R
 import com.ajijul.elnaz.auth.ui.login.LoginUiState
-import com.ajijul.elnaz.auth.ui.splash.SplashUiState
+import com.ajijul.elnaz.auth.utils.SplashUiState
 import com.ajijul.elnaz.core.utils.isValidEmail
 import com.ajijul.elnaz.di.annotations.IODispatcher
 import com.ajijul.elnaz.domain.model.UserModel
@@ -27,7 +27,7 @@ class AuthViewModel @Inject constructor(
     private val registerUseCase: RegisterUseCase,
     private val loginUseCase: LoginUseCase,
     private val logoutUseCase: LogoutUseCase,
-    @IODispatcher private val ioDispatcher: CoroutineDispatcher
+    @param:IODispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _splashUiState = MutableStateFlow<SplashUiState>(SplashUiState.Loading)

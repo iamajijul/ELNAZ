@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--region AuthScreen-->
     <string name="welcome">Welcome!</string>
     <string name="please_login">Please Login or Register</string>
     <string name="something_went_wrong">Something went wrong</string>
@@ -11,4 +12,12 @@
     <string name="login_screen_invalid_email">Invalid email</string>
     <string name="login_screen_invalid_password">Invalid password</string>
     <string name="login_screen_toast_welcome">Welcome %s</string>
+
+   <!-- region InventoriesScreen-->
+    <string name="nav_products_title">Products</string>
+    <string name="nav_orders_title">Orders</string>
+    <string name="nav_warehouse_title">Warehouses</string>
+    <string name="nav_category_title">Category</string>
+    <string name="nav_users_title">Users</string>
+
 </resources>

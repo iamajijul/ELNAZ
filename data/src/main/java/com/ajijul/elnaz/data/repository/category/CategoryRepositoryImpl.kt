@@ -48,6 +48,10 @@ class CategoryRepositoryImpl @Inject constructor(
     override suspend fun deleteCategory(categoryModel: CategoryModel) =
         categoryDao.deleteCategory(categoryModel.toEntity())
 
+    override suspend fun deleteCategoryById(categoryId: Long) {
+        categoryDao.deleteCategoryById(categoryId)
+    }
+
     override fun getCategoryWithProducts(categoryId: Long): Flow<CategoryWithProductsModel?> =
         categoryDao.getCategoryWithProducts(categoryId).map { categoryWithProducts ->
             categoryWithProducts?.toDomain()
