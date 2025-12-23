@@ -3,7 +3,7 @@ package com.ajijul.elnaz.navigation
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.navigation
-import com.ajijul.elnaz.features_manager.MainNavGraphRoutes
+import com.ajijul.elnaz.features_manager.routes.MainNavGraphRoutes
 
 fun NavGraphBuilder.inventoryNavGraph(navController: NavHostController) {
 

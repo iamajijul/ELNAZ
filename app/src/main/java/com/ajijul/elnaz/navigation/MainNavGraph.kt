@@ -6,7 +6,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ajijul.elnaz.auth.navigation.navigateToAuthNavGraph
 import com.ajijul.elnaz.core.ui.components.AppProgressOnScreen
 import com.ajijul.elnaz.features_manager.DynamicFeatureInstaller
-import com.ajijul.elnaz.features_manager.MainNavGraphRoutes
+import com.ajijul.elnaz.features_manager.routes.MainNavGraphRoutes
 import com.ajijul.elnaz.features_manager.gotoDynamicFeature
 
 @Composable

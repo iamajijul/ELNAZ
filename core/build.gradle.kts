@@ -45,11 +45,13 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":logger"))
     implementation(project(":resources"))
+    implementation(project(":features_manager"))
     implementation(libs.androidx.core.ktx)
 
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.navigation.compose)
 
     implementation(libs.material)
 

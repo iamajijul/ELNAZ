@@ -1,4 +1,4 @@
-package com.ajijul.elnaz.features_manager
+package com.ajijul.elnaz.features_manager.routes
 
 sealed class MainNavGraphRoutes(
     val identifier: String,
@@ -7,5 +7,5 @@ sealed class MainNavGraphRoutes(
 ) {
     object AUTH : MainNavGraphRoutes("auth_graph", "auth", emptyList())
 
-    object INVENTORY : MainNavGraphRoutes("inventory_graph", "feature_inventory", emptyList())
+    object INVENTORY : MainNavGraphRoutes("inventory_graph",  "feature_inventory", emptyList())
 }

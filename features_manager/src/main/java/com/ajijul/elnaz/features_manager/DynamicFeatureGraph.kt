@@ -25,74 +25,46 @@ fun NavGraphBuilder.gotoDynamicFeature(
 
     composable(route = route, deepLinks = deepLinkObjects) {
         var status by remember { mutableStateOf<SplitInstallSessionStatus?>(null) }
-        var didRegister by remember { mutableStateOf(false) }
+
+        fun doRegisterGraphAndNavigate() {
+            val entryPoint = getModuleEntryPoint(moduleName, TAG)
+            if (entryPoint != null) {
+                entryPoint.registerGraph(navController)
+                navController.navigate(entryPoint.getDFMGraphRoute()) {
+                    popUpTo(route) {
+                        inclusive = true
+                    }
+                }
+            } else {
+                ElnazLogger.e(TAG, "DFM $moduleName entry point is null")
+            }
+        }
 
         LaunchedEffect(moduleName) {
             if (featureInstaller.isModuleInstalled(moduleName)) {
                 ElnazLogger.i(TAG, "DFM $moduleName already installed")
-                status = SplitInstallSessionStatus.INSTALLED
+                doRegisterGraphAndNavigate()
             } else {
                 ElnazLogger.w(TAG, "DFM $moduleName installing")
                 featureInstaller.installModule(moduleName)
                     .collect { installStatus -> status = installStatus }
             }
         }
-
-        // Just register, don't navigate!
-        LaunchedEffect(status) {
-            ElnazLogger.i(TAG, "DFM Status of installing $moduleName is $status")
-            if (status == SplitInstallSessionStatus.INSTALLED && !didRegister) {
-                didRegister = true
-                ElnazLogger.i(TAG, "DFM $moduleName registering graph")
-                val entryPoint = getModuleEntryPoint(moduleName, TAG)
-                if (entryPoint != null) {
-                    entryPoint.registerGraph(this@gotoDynamicFeature, navController)
-                } else {
-                    ElnazLogger.e(TAG, "DFM $moduleName entry point is null")
+        status?.let {
+            when (status) {
+                SplitInstallSessionStatus.INSTALLED -> {
+                    LaunchedEffect(Unit) {
+                        doRegisterGraphAndNavigate()
+                    }
                 }
-            }
-        }
-
-        when (status) {
-            SplitInstallSessionStatus.DOWNLOADING,
-            SplitInstallSessionStatus.INSTALLING,
-            SplitInstallSessionStatus.PENDING -> {
-                loadingContent()
-            }
-
-            SplitInstallSessionStatus.REQUIRES_USER_CONFIRMATION -> {
-//                Column(
-//                    modifier = Modifier.fillMaxSize(),
-//                    horizontalAlignment = Alignment.CenterHorizontally,
-//                    verticalArrangement = Arrangement.Center
-//                ) {
-//                    Text("Please confirm installation in Google Play")
-//                }
-            }
-
-            SplitInstallSessionStatus.FAILED -> {
-//                Column(
-//                    modifier = Modifier.fillMaxSize(),
-//                    horizontalAlignment = Alignment.CenterHorizontally,
-//                    verticalArrangement = Arrangement.Center
-//                ) {
-//                    Text("Installation failed")
-//                    Spacer(modifier = Modifier.height(16.dp))
-//                    Button(onClick = {
-//                        status = null
-//                        didRegister = false
-//                    }) {
-//                        Text("Retry")
-//                    }
-//                }
-            }
-
-            else -> {
-                loadingContent()
+                else -> {
+                    loadingContent()
+                }
             }
         }
     }
 }
+
 private fun getModuleEntryPoint(moduleName: String, tag: String): ComposeFeatureModuleEntry? {
     return try {
         val clazz =

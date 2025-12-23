@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.dynamic.feature)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.compose.compiler)
 }
 android {
