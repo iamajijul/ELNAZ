@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.ajijul.elnaz.data.local.entity.category.Category
+import com.ajijul.elnaz.data.local.entity.category.CategoryEntity
 
 @Entity(
     tableName = "discount_assignment",
@@ -22,7 +22,7 @@ import com.ajijul.elnaz.data.local.entity.category.Category
             onUpdate = ForeignKey.CASCADE
         ),
         ForeignKey(
-            entity = Category::class,
+            entity = CategoryEntity::class,
             parentColumns = ["id"],
             childColumns = ["categoryId"],
             onUpdate = ForeignKey.CASCADE

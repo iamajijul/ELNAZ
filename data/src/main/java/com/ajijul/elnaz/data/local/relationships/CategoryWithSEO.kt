@@ -2,14 +2,14 @@ package com.ajijul.elnaz.data.local.relationships
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.ajijul.elnaz.data.local.entity.category.Category
-import com.ajijul.elnaz.data.local.entity.category.CategorySEO
+import com.ajijul.elnaz.data.local.entity.category.CategoryEntity
+import com.ajijul.elnaz.data.local.entity.category.CategorySEOEntity
 
 data class CategoryWithSEO(
-    @Embedded val category: Category,
+    @Embedded val categoryEntity: CategoryEntity,
     @Relation(
         parentColumn = "id",
         entityColumn = "categoryId"
     )
-    val seo: CategorySEO
+    val seo: CategorySEOEntity
 )

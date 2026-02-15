@@ -1,21 +1,41 @@
 package com.ajijul.elnaz.domain.model.enums
 
-sealed class AppError {
+sealed interface AppError {
+    sealed interface Auth : AppError {
+        object InvalidEmail : Auth
+        object InvalidPassword : Auth
+        object InvalidCredentials : Auth
+        object UserNotFound : Auth
+        object UserAlreadyExists : Auth
+        object Unauthorized : Auth
+    }
 
-    //Login or Registration Related
-    object InvalidEmail : AppError()
-    object InvalidPassword : AppError()
-    object InvalidCredentials : AppError()
+    sealed interface Network : AppError {
+        object NoInternet : Network
+        object Timeout : Network
+        object ServerError : Network
+        object Serialization : Network
+    }
 
-    // Common network-related errors
-    object NetworkError : AppError()
-    object TimeoutError : AppError()
-    object Unauthorized : AppError()
+    sealed interface Storage : AppError {
+        object ItemNotFound : Storage
+        object ItemAlreadyExists : Storage
+        object OperationFailed : Storage
+        object DiskFull : Storage
+    }
 
-    // Firebase specific
-    object UserNotFound : AppError()
-    object DocumentNotFound : AppError()
+    sealed interface Validation : AppError {
 
-    // Catch-all for unexpected
-    data class Unknown(val throwable: Throwable) : AppError()
+        object FieldEmpty : Validation
+
+        data class MinLength(val requiredLength: Int) : Validation
+
+        data class PatternMismatch(val description: String) : Validation
+
+        object InvalidFormat : Validation
+
+        data class Custom(val message: String) : Validation
+    }
+
+    data class Unknown(val throwable: Throwable? = null) : AppError
 }

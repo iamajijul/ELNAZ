@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,7 +21,8 @@ fun AppText(
     color: Color = MaterialTheme.colorScheme.onBackground,
     textAlign: TextAlign? = TextAlign.Center,
     maxLines: Int = Int.MAX_VALUE,
-    overflow: TextOverflow = TextOverflow.Ellipsis
+    overflow: TextOverflow = TextOverflow.Ellipsis,
+    fontWeight: FontWeight = FontWeight.Normal
 ) {
     Text(
         text = text,
@@ -29,7 +31,8 @@ fun AppText(
         textAlign = textAlign,
         modifier = modifier,
         maxLines = maxLines,
-        overflow = overflow
+        overflow = overflow,
+        fontWeight = fontWeight
     )
 }
 

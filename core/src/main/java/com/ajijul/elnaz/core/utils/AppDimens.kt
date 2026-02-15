@@ -15,4 +15,5 @@ object AppDimens {
     val appProgressSmallStroke = 2.dp
     val appElevation = 4.dp
     val roundedCornerSize = 16.dp
+    val appNavIconSize = 26.dp
 }

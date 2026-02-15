@@ -48,7 +48,7 @@ android {
     dynamicFeatures += setOf(
         ":feature_barcode",
         ":feature_discount",
-        ":feature_inventory",
+        ":dfm:inventory:feature_inventory",
         ":feature_products",
         ":feature_product_management",
         ":feature_checkout",
@@ -70,6 +70,8 @@ dependencies {
     implementation(project(":logger"))
     implementation(project(":extension"))
     implementation(project(":features_manager"))
+    implementation(project(":dfm:inventory:inventory_presentation"))
+
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)

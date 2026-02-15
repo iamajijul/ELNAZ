@@ -2,11 +2,10 @@ package com.ajijul.elnaz.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import androidx.room.ForeignKey.Companion.NO_ACTION
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.ajijul.elnaz.data.local.entity.category.Category
+import com.ajijul.elnaz.data.local.entity.category.CategoryEntity
 import com.ajijul.elnaz.data.local.entity.utilities.Converters
 import com.ajijul.elnaz.domain.model.enums.ProductStatus
 
@@ -14,7 +13,7 @@ import com.ajijul.elnaz.domain.model.enums.ProductStatus
     tableName = "product",
     foreignKeys = [
         ForeignKey(
-            entity = Category::class,
+            entity = CategoryEntity::class,
             parentColumns = ["id"],
             childColumns = ["categoryId"],
             onUpdate = ForeignKey.CASCADE

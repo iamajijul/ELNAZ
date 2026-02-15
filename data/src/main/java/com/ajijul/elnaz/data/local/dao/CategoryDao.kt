@@ -2,98 +2,112 @@ package com.ajijul.elnaz.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import androidx.room.Delete
-import androidx.room.OnConflictStrategy
-import androidx.room.Transaction
-import com.ajijul.elnaz.data.local.entity.category.Category
-import com.ajijul.elnaz.data.local.entity.category.CategoryDiscountCrossRef
-import com.ajijul.elnaz.data.local.entity.category.CategoryProductCrossRef
-import com.ajijul.elnaz.data.local.entity.category.CategorySEO
-import com.ajijul.elnaz.data.local.entity.category.CategoryWarehouseCrossRef
+import com.ajijul.elnaz.data.local.entity.category.CategoryEntity
+import com.ajijul.elnaz.data.local.entity.category.CategoryDiscountCrossRefEntity
+import com.ajijul.elnaz.data.local.entity.category.CategoryProductCrossRefEntity
+import com.ajijul.elnaz.data.local.entity.category.CategorySEOEntity
+import com.ajijul.elnaz.data.local.entity.category.CategoryWarehouseCrossRefEntity
 import com.ajijul.elnaz.data.local.relationships.CategoryWithDiscount
 import com.ajijul.elnaz.data.local.relationships.CategoryWithProducts
 import com.ajijul.elnaz.data.local.relationships.CategoryWithSEO
 import com.ajijul.elnaz.data.local.relationships.CategoryWithWarehouse
-import com.ajijul.elnaz.data.local.relationships.WarehouseWithCategories
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CategoryDao {
 
     // ----- Category CRUD -----
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCategory(category: Category): Long
+    suspend fun insertCategory(categoryEntity: CategoryEntity): Long
+
+    // Added for Sync: Insert a whole list from Firebase at once
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCategories(categories: List<CategoryEntity>): List<Long>
 
     @Update
-    suspend fun updateCategory(category: Category)
+    suspend fun updateCategory(categoryEntity: CategoryEntity): Int
 
     @Delete
-    suspend fun deleteCategory(category: Category)
+    suspend fun deleteCategory(categoryEntity: CategoryEntity): Int
 
     @Query("DELETE FROM category WHERE id = :id")
-    suspend fun deleteCategoryById(id: Long)
+    suspend fun deleteCategoryById(id: String): Int
 
-    @Query("SELECT * FROM category ORDER BY name ASC")
-    fun getAllCategoriesFlow(): Flow<List<Category>>
+
+    @Query("SELECT * FROM category ORDER BY popularityScore DESC, name ASC")
+    fun getAllCategoriesFlow(): Flow<List<CategoryEntity>>
 
     @Query("SELECT * FROM category WHERE id = :id")
-    suspend fun getCategoryById(id: Long): Category?
+    suspend fun getCategoryById(id: String): Flow<CategoryEntity?>
 
     // ----- Relations (Transaction ensures consistency) -----
-    @Transaction
-    @Query("SELECT * FROM category WHERE id = :categoryId")
-    fun getCategoryWithProducts(categoryId: Long): Flow<CategoryWithProducts?>
 
     @Transaction
     @Query("SELECT * FROM category WHERE id = :categoryId")
-    fun getCategoryWithWarehouses(categoryId: Long): Flow<CategoryWithWarehouse?>
+    fun getCategoryWithProducts(categoryId: String): Flow<CategoryWithProducts?>
 
     @Transaction
     @Query("SELECT * FROM category WHERE id = :categoryId")
-    fun getCategoryWithDiscounts(categoryId: Long): Flow<CategoryWithDiscount?>
+    fun getCategoryWithWarehouses(categoryId: String): Flow<CategoryWithWarehouse?>
 
     @Transaction
     @Query("SELECT * FROM category WHERE id = :categoryId")
-    suspend fun getCategoryWithSEO(categoryId: Long): CategoryWithSEO?
+    fun getCategoryWithDiscounts(categoryId: String): Flow<CategoryWithDiscount?>
 
-    // ----- CrossRef operations -----
+    @Transaction
+    @Query("SELECT * FROM category WHERE id = :categoryId")
+    suspend fun getCategoryWithSEO(categoryId: String): Flow<CategoryWithSEO?>
+
+    // ----- CrossRef operations (String IDs) -----
+
+    // 1. Warehouses
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCategoryWarehouseCrossRef(ref: CategoryWarehouseCrossRef)
+    suspend fun insertCategoryWarehouseCrossRef(ref: CategoryWarehouseCrossRefEntity): Long?
 
     @Query("DELETE FROM category_warehouse_cross_ref WHERE categoryId = :categoryId AND warehouseId = :warehouseId")
-    suspend fun deleteCategoryWarehouseCrossRef(categoryId: Long, warehouseId: Long)
+    suspend fun deleteCategoryWarehouseCrossRef(categoryId: String, warehouseId: String): Int?
 
     @Query("DELETE FROM category_warehouse_cross_ref WHERE categoryId = :categoryId")
-    suspend fun clearWarehousesForCategory(categoryId: Long)
+    suspend fun clearWarehousesForCategory(categoryId: String): Int?
 
+    // 2. Discounts
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCategoryDiscountCrossRef(ref: CategoryDiscountCrossRef)
+    suspend fun insertCategoryDiscountCrossRef(ref: CategoryDiscountCrossRefEntity): Long?
 
     @Query("DELETE FROM category_discount_cross_ref WHERE categoryId = :categoryId AND discountId = :discountId")
-    suspend fun deleteCategoryDiscountCrossRef(categoryId: Long, discountId: Long)
+    suspend fun deleteCategoryDiscountCrossRef(categoryId: String, discountId: String): Int?
 
     @Query("DELETE FROM category_discount_cross_ref WHERE categoryId = :categoryId")
-    suspend fun clearDiscountsForCategory(categoryId: Long)
+    suspend fun clearDiscountsForCategory(categoryId: String): Int?
 
+    // 3. Products (The one we discussed!)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCategoryProductCrossRef(prodRef: CategoryProductCrossRef)
+    suspend fun insertCategoryProductCrossRef(prodRef: CategoryProductCrossRefEntity): Long
+
+    // Added Bulk Insert for Syncing CrossRefs from Firebase
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCategoryProductCrossRefs(prodRefs: List<CategoryProductCrossRefEntity>)
 
     @Query("DELETE FROM category_product_cross_ref WHERE categoryId = :categoryId AND productId = :productId")
-    suspend fun deleteCategoryProductCrossRef(categoryId: Long, productId: Long)
+    suspend fun deleteCategoryProductCrossRef(categoryId: String, productId: String): Int?
 
     @Query("DELETE FROM category_product_cross_ref WHERE categoryId = :categoryId")
-    suspend fun clearProductForCategory(categoryId: Long)
+    suspend fun clearProductForCategory(categoryId: String): Int?
 
     // ----- SEO -----
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrUpdateCategorySEO(seo: CategorySEO): Long
+    suspend fun insertOrUpdateCategorySEO(seo: CategorySEOEntity): Long?
 
     @Query("DELETE FROM category_seo WHERE categoryId = :categoryId")
-    suspend fun deleteSEOForCategory(categoryId: Long)
+    suspend fun deleteSEOForCategory(categoryId: String): Int?
 
+    // Sub-Categories (String ID)
     @Query("SELECT * FROM category WHERE parentId = :parentId")
-    fun getAllSubCategories(parentId: Long): Flow<List<Category>>
+    fun getAllSubCategories(parentId: String): Flow<List<CategoryEntity>>
 }
-

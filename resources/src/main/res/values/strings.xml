@@ -13,11 +13,44 @@
     <string name="login_screen_invalid_password">Invalid password</string>
     <string name="login_screen_toast_welcome">Welcome %s</string>
 
-   <!-- region InventoriesScreen-->
+    <!--end region-->
+
+
+    <!-- region InventoriesScreen-->
     <string name="nav_products_title">Products</string>
     <string name="nav_orders_title">Orders</string>
     <string name="nav_warehouse_title">Warehouses</string>
     <string name="nav_category_title">Category</string>
     <string name="nav_users_title">Users</string>
+
+    <!--end region-->
+
+
+    <!--Error Strings-->
+    <string name="err_invalid_email">The email address is invalid.</string>
+    <string name="err_invalid_password">The password is invalid.</string>
+    <string name="err_invalid_credentials">Incorrect email or password.</string>
+    <string name="err_user_not_found">Account not found.</string>
+    <string name="err_user_exists">An account with this email already exists.</string>
+    <string name="err_unauthorized">Session expired. Please log in again.</string>
+
+    <string name="err_no_internet">No internet connection.</string>
+    <string name="err_timeout">The connection timed out. Please try again.</string>
+    <string name="err_server_error">Server error. Please try again later.</string>
+    <string name="err_serialization">Data format error.</string>
+
+    <string name="err_item_not_found">Item not found.</string>
+    <string name="err_item_exists">This item already exists.</string>
+    <string name="err_operation_failed">Operation failed. Please try again.</string>
+    <string name="err_disk_full">Not enough storage space.</string>
+
+    <string name="err_field_empty">This field cannot be empty.</string>
+    <string name="err_min_length">Must be at least %1$d characters.</string>
+    <string name="err_pattern_mismatch">Format error: %1$s</string>
+    <string name="err_invalid_format">Invalid format.</string>
+
+    <string name="err_unknown">An unexpected error occurred.</string>
+
+    <!--end region-->
 
 </resources>

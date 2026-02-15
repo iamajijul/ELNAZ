@@ -1,7 +1,7 @@
 package com.ajijul.elnaz.data.mapper
 
-import com.ajijul.elnaz.data.local.entity.category.Category
-import com.ajijul.elnaz.data.local.entity.category.CategorySEO
+import com.ajijul.elnaz.data.local.entity.category.CategoryEntity
+import com.ajijul.elnaz.data.local.entity.category.CategorySEOEntity
 import com.ajijul.elnaz.data.local.relationships.CategoryWithDiscount
 import com.ajijul.elnaz.data.local.relationships.CategoryWithProducts
 import com.ajijul.elnaz.data.local.relationships.CategoryWithSEO
@@ -13,27 +13,29 @@ import com.ajijul.elnaz.domain.model.CategoryWithProductsModel
 import com.ajijul.elnaz.domain.model.CategoryWithSEOModel
 import com.ajijul.elnaz.domain.model.CategoryWithWarehouseModel
 
-fun Category.toDomain() = CategoryModel(
+fun CategoryEntity.toDomain() = CategoryModel(
     id = id,
     name = name,
     description = description,
+    categoryImage = categoryImage,
     parentId = parentId,
     status = status,
     popularityScore = popularityScore,
     createdAt = createdAt
 )
 
-fun CategoryModel.toEntity() = Category(
+fun CategoryModel.toEntity() = CategoryEntity(
     id = id,
     name = name,
     description = description,
+    categoryImage = categoryImage,
     parentId = parentId,
     status = status,
     popularityScore = popularityScore,
     createdAt = createdAt
 )
 
-fun CategorySEO.toDomain() = CategorySeoModel(
+fun CategorySEOEntity.toDomain() = CategorySeoModel(
     id = id,
     categoryId = categoryId,
     seoTitle = seoTitle,
@@ -41,7 +43,7 @@ fun CategorySEO.toDomain() = CategorySeoModel(
     seoSlug = seoSlug
 )
 
-fun CategorySeoModel.toEntity() = CategorySEO(
+fun CategorySeoModel.toEntity() = CategorySEOEntity(
     id = id,
     categoryId = categoryId,
     seoTitle = seoTitle,
@@ -51,14 +53,14 @@ fun CategorySeoModel.toEntity() = CategorySEO(
 
 fun CategoryWithProducts.toDomain(): CategoryWithProductsModel {
     return CategoryWithProductsModel(
-        category = category.toDomain(),
+        category = categoryEntity.toDomain(),
         products = products.map { it.toDomain() }
     )
 }
 
 fun CategoryWithWarehouse.toDomain(): CategoryWithWarehouseModel {
     return CategoryWithWarehouseModel(
-        category = category.toDomain(),
+        category = categoryEntity.toDomain(),
         warehouses = warehouses.map { it.toDomain() }
     )
 }
@@ -66,14 +68,14 @@ fun CategoryWithWarehouse.toDomain(): CategoryWithWarehouseModel {
 
 fun CategoryWithDiscount.toDomain(): CategoryWithDiscountsModel {
     return CategoryWithDiscountsModel(
-        category = category.toDomain(),
+        category = categoryEntity.toDomain(),
         discounts = discounts.map { it.toDomain() }
     )
 }
 
 fun CategoryWithSEO.toDomain(): CategoryWithSEOModel {
     return CategoryWithSEOModel(
-        category = category.toDomain(),
+        category = categoryEntity.toDomain(),
         seo = seo.toDomain()
     )
 }

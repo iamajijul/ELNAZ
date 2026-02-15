@@ -1,14 +1,21 @@
 package com.ajijul.elnaz.data.local.relationships
 
 import androidx.room.Embedded
+import androidx.room.Junction
 import androidx.room.Relation
 import com.ajijul.elnaz.data.local.entity.Product
-import com.ajijul.elnaz.data.local.entity.category.Category
+import com.ajijul.elnaz.data.local.entity.category.CategoryEntity
+import com.ajijul.elnaz.data.local.entity.category.CategoryProductCrossRefEntity
 
 data class CategoryWithProducts(
-    @Embedded val category: Category,
+    @Embedded val categoryEntity: CategoryEntity,
     @Relation(
         parentColumn = "id",
-        entityColumn = "categoryId"
+        entityColumn = "id",
+        associateBy = Junction(
+            CategoryProductCrossRefEntity::class,
+            parentColumn = "categoryId",
+            entityColumn = "productId"
+        )
     ) val products: List<Product>
 )

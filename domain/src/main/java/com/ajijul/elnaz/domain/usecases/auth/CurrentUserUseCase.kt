@@ -12,6 +12,6 @@ class CurrentUserUseCase(
         val user = userPreferenceRepository.getUser()
         return if (user != null && user.uid.isNotEmpty())
             Resource.Success(user)
-        else Resource.Error(AppError.Unauthorized)
+        else Resource.Error(AppError.Auth.Unauthorized)
     }
 }

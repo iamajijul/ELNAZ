@@ -1,9 +1,11 @@
 package com.ajijul.elnaz.di.repositories
 
 import com.ajijul.elnaz.data.repository.auth.AuthRepositoryImplementation
+import com.ajijul.elnaz.data.repository.category.CategoryRepositoryImpl
 import com.ajijul.elnaz.data.repository.product.ProductRepositoryImplementation
 import com.ajijul.elnaz.data.repository.user.UserPreferenceRepositoryImpl
 import com.ajijul.elnaz.domain.repository.auth.AuthRepository
+import com.ajijul.elnaz.domain.repository.category.CategoryRepository
 import com.ajijul.elnaz.domain.repository.product.ProductRepository
 import com.ajijul.elnaz.domain.repository.user.UserPreferenceRepository
 import dagger.Binds
@@ -33,5 +35,11 @@ abstract class RepositoryModule {
     abstract fun bindUserPreferenceRepositoryWithImplementation(
         userPreferenceRepositoryImpl: UserPreferenceRepositoryImpl
     ): UserPreferenceRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindCategoryRepositoryWithImplementation(
+        categoryRepositoryImpl: CategoryRepositoryImpl
+    ): CategoryRepository
 
 }
