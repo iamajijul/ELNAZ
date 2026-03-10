@@ -44,7 +44,7 @@ interface CategoryDao {
     fun getAllCategoriesFlow(): Flow<List<CategoryEntity>>
 
     @Query("SELECT * FROM category WHERE id = :id")
-    suspend fun getCategoryById(id: String): Flow<CategoryEntity?>
+    fun getCategoryById(id: String): Flow<CategoryEntity?>
 
     // ----- Relations (Transaction ensures consistency) -----
 
@@ -62,7 +62,7 @@ interface CategoryDao {
 
     @Transaction
     @Query("SELECT * FROM category WHERE id = :categoryId")
-    suspend fun getCategoryWithSEO(categoryId: String): Flow<CategoryWithSEO?>
+    fun getCategoryWithSEO(categoryId: String): Flow<CategoryWithSEO?>
 
     // ----- CrossRef operations (String IDs) -----
 

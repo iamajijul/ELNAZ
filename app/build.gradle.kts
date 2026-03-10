@@ -53,9 +53,9 @@ android {
         ":feature_product_management",
         ":feature_checkout",
         ":feature_order",
-        ":feature_category",
         ":feature_customer",
         ":feature_supplier",
+        ":dfm:category:feature_category"
     )
 }
 
@@ -70,7 +70,6 @@ dependencies {
     implementation(project(":logger"))
     implementation(project(":extension"))
     implementation(project(":features_manager"))
-    implementation(project(":dfm:inventory:inventory_presentation"))
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core.ktx)

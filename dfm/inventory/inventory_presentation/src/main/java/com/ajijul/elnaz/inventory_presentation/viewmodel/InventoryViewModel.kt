@@ -1,25 +1,21 @@
-package com.ajijul.elnaz.inventory_presentation
+package com.ajijul.elnaz.inventory_presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ajijul.elnaz.di.annotations.IODispatcher
 import com.ajijul.elnaz.domain.model.UserModel
 import com.ajijul.elnaz.domain.model.enums.Resource
 import com.ajijul.elnaz.domain.model.enums.UserRole
 import com.ajijul.elnaz.domain.usecases.auth.CurrentUserUseCase
 import com.ajijul.elnaz.inventory_presentation.utils.InventoryBottomNavItems
 import com.ajijul.elnaz.inventory_presentation.utils.InventoryUiState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class InventoryViewModel @Inject constructor(
+class InventoryViewModel(
     private val currentUserUseCase: CurrentUserUseCase,
-    @param:IODispatcher private val ioDispatcher: CoroutineDispatcher
+    ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _inventoryUiState = MutableStateFlow<InventoryUiState>(InventoryUiState.Loading)
     val inventoryUiState: StateFlow<InventoryUiState> = _inventoryUiState

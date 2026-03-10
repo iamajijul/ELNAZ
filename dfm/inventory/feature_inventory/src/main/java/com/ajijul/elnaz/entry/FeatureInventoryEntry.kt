@@ -6,7 +6,7 @@ import com.ajijul.elnaz.features_manager.ComposeFeatureModuleEntry
 import com.ajijul.elnaz.features_manager.routes.MainNavGraphRoutes
 import com.ajijul.elnaz.logger.ElnazLogger
 import com.ajijul.elnaz.logger.TAG
-import com.ajijul.elnaz.ui.InventoryLandingScreen
+import com.ajijul.elnaz.inventory_presentation.ui.InventoryLandingScreen
 
 class FeatureInventoryEntry : ComposeFeatureModuleEntry {
 

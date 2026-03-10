@@ -1,4 +1,4 @@
-package com.ajijul.elnaz.ui
+package com.ajijul.elnaz.inventory_presentation.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -17,24 +17,45 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.ajijul.elnaz.core.ui.components.AppProgressOnScreen
 import com.ajijul.elnaz.core.ui.components.AppText
 import com.ajijul.elnaz.core.ui.extensions.logoutOrUnauthenticatedNavigation
 import com.ajijul.elnaz.core.utils.AppDimens.appNavIconSize
+import com.ajijul.elnaz.di.entrypoints.InventoryDependenciesEntryPoint
 import com.ajijul.elnaz.inventory_presentation.utils.InventoryBottomNavItems
-import com.ajijul.elnaz.inventory_presentation.InventoryViewModel
+import com.ajijul.elnaz.inventory_presentation.viewmodel.InventoryViewModel
 import com.ajijul.elnaz.inventory_presentation.utils.InventoryUiState
+import com.ajijul.elnaz.inventory_presentation.viewmodel.InventoryViewModelFactory
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.android.EntryPointAccessors.fromApplication
 
 @Composable
 fun InventoryLandingScreen(
     navController: NavHostController
 ) {
-    val viewModel: InventoryViewModel = hiltViewModel()
+    val context = LocalContext.current
+
+    // 1. Grab the bridge from the Application Context
+    // We use 'remember' so it only fetches this once, not on every UI redraw
+    val dependencies = remember(context) {
+        fromApplication(
+            context.applicationContext,
+            InventoryDependenciesEntryPoint::class.java
+        )
+    }
+
+    // 2. Create the Factory
+    val factory = remember(dependencies) {
+        InventoryViewModelFactory(dependencies)
+    }
+
+    val viewModel: InventoryViewModel = viewModel(factory = factory)
 
     val uiState by viewModel.inventoryUiState.collectAsState()
 

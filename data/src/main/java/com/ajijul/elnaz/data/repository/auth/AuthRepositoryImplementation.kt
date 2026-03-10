@@ -32,7 +32,7 @@ class AuthRepositoryImplementation @Inject constructor(
 
                 Resource.Success(currentUser?.toModel())
             } else {
-                Resource.Error(AppError.UserNotFound)
+                Resource.Error(AppError.Auth.UserNotFound)
             }
         } catch (e: Exception) {
             Resource.Error(AppError.Unknown(e))
@@ -67,7 +67,7 @@ class AuthRepositoryImplementation @Inject constructor(
                 )
                 Resource.Success(userModel)
             } else {
-                Resource.Error(AppError.Unauthorized)
+                Resource.Error(AppError.Auth.Unauthorized)
             }
         } catch (e: Exception) {
             Resource.Error(AppError.Unknown(e))
@@ -94,7 +94,7 @@ class AuthRepositoryImplementation @Inject constructor(
                 )
                 Resource.Success(currentUser?.toModel())
             } else {
-                Resource.Error(AppError.UserNotFound)
+                Resource.Error(AppError.Auth.UserNotFound)
             }
         } catch (e: Exception) {
             Resource.Error(AppError.Unknown(e))
