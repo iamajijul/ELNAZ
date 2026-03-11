@@ -30,7 +30,7 @@ import com.ajijul.elnaz.core.utils.AppDimens.appNavIconSize
 import com.ajijul.elnaz.di.entrypoints.InventoryDependenciesEntryPoint
 import com.ajijul.elnaz.inventory_presentation.utils.InventoryBottomNavItems
 import com.ajijul.elnaz.inventory_presentation.viewmodel.InventoryViewModel
-import com.ajijul.elnaz.inventory_presentation.utils.InventoryUiState
+import com.ajijul.elnaz.inventory_presentation.viewmodel.InventoryUiState
 import com.ajijul.elnaz.inventory_presentation.viewmodel.InventoryViewModelFactory
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.android.EntryPointAccessors.fromApplication

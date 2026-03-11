@@ -7,7 +7,7 @@ import com.ajijul.elnaz.domain.model.enums.Resource
 import com.ajijul.elnaz.domain.model.enums.UserRole
 import com.ajijul.elnaz.domain.usecases.auth.CurrentUserUseCase
 import com.ajijul.elnaz.inventory_presentation.utils.InventoryBottomNavItems
-import com.ajijul.elnaz.inventory_presentation.utils.InventoryUiState
+import com.ajijul.elnaz.inventory_presentation.viewmodel.InventoryUiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
