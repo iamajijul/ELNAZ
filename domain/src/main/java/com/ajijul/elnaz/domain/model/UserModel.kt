@@ -10,4 +10,8 @@ data class UserModel(
     val address: String,
     val role: UserRole,
     val createdAt: Long
-)
+){
+
+    val canManageUsers: Boolean
+        get() = role == UserRole.SUPER_ADMIN
+}

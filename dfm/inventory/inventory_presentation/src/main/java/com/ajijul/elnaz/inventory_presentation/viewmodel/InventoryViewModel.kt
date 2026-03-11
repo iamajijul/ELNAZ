@@ -41,7 +41,7 @@ class InventoryViewModel(
             InventoryBottomNavItems.Warehouse,
         )
 
-        if (userModel.role == UserRole.SUPER_ADMIN) {
+        if (userModel.canManageUsers) {
             tabs.add(InventoryBottomNavItems.Users)
         }
         return InventoryUiState.AuthenticatedUser(userModel, tabs)
