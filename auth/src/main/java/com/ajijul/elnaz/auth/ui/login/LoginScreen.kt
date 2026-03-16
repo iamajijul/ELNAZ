@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.ajijul.elnaz.resources.R
-import com.ajijul.elnaz.features_manager.routes.AuthNavGraphRoutes
+import com.ajijul.elnaz.features_manager.routes.AuthSubNavGraphRoutes
 import com.ajijul.elnaz.auth.presentation.AuthViewModel
 import com.ajijul.elnaz.core.ui.components.AppIconButton
 import com.ajijul.elnaz.core.ui.components.AppProgress
@@ -37,13 +37,11 @@ import com.ajijul.elnaz.core.ui.components.PrimaryTextButton
 import com.ajijul.elnaz.core.utils.AppDimens.appProgressSmallSize
 import com.ajijul.elnaz.core.utils.AppDimens.appProgressSmallStroke
 import com.ajijul.elnaz.core.utils.showToast
-import com.ajijul.elnaz.features_manager.DynamicFeatureInstaller
 import com.ajijul.elnaz.features_manager.routes.MainNavGraphRoutes
 
 @Composable
 fun LoginScreen(
     navHostController: NavHostController? = null,
-    dynamicFeatureInstaller: DynamicFeatureInstaller? = null,
     viewModel: AuthViewModel = hiltViewModel()
 ) {
     val loginUiState = viewModel.loginUiState.collectAsState()
@@ -114,7 +112,7 @@ fun LoginScreen(
             )
             viewModel.clearLoginUiState()
             navHostController?.navigate(MainNavGraphRoutes.INVENTORY.identifier) {
-                popUpTo(AuthNavGraphRoutes.Splash.identifier) {
+                popUpTo(AuthSubNavGraphRoutes.Splash.identifier) {
                     inclusive = true
                 }
             }

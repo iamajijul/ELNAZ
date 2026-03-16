@@ -10,13 +10,13 @@ import com.ajijul.elnaz.features_manager.routes.MainNavGraphRoutes
 import com.ajijul.elnaz.features_manager.gotoDynamicFeature
 
 @Composable
-fun MainNavGraph(dynamicFeatureInstaller: DynamicFeatureInstaller) {
+fun MainNavHost(dynamicFeatureInstaller: DynamicFeatureInstaller) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = MainNavGraphRoutes.AUTH.identifier
     ) {
-        navigateToAuthNavGraph(navController, dynamicFeatureInstaller)
+        navigateToAuthNavGraph(navController)
         gotoDynamicFeature(
             navController = navController,
             featureInstaller = dynamicFeatureInstaller,

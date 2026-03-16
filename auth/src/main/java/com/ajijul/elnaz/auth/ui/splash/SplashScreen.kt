@@ -8,12 +8,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.ajijul.elnaz.resources.R
-import com.ajijul.elnaz.features_manager.routes.AuthNavGraphRoutes
+import com.ajijul.elnaz.features_manager.routes.AuthSubNavGraphRoutes
 import com.ajijul.elnaz.auth.presentation.AuthViewModel
 import com.ajijul.elnaz.core.ui.components.AppProgress
 import com.ajijul.elnaz.core.ui.components.AppText
 import com.ajijul.elnaz.core.ui.components.ItemOnCenteredColumn
-import com.ajijul.elnaz.features_manager.DynamicFeatureInstaller
 import com.ajijul.elnaz.features_manager.routes.MainNavGraphRoutes
 import com.ajijul.elnaz.logger.ElnazLogger
 import com.ajijul.elnaz.logger.TAG
@@ -22,8 +21,7 @@ import com.ajijul.elnaz.auth.utils.SplashUiState
 
 @Composable
 fun SplashScreen(
-    nanHostController: NavHostController? = null,
-    dynamicFeatureInstaller: DynamicFeatureInstaller
+    nanHostController: NavHostController? = null
 ) {
     val viewModel: AuthViewModel = hiltViewModel()
     val isAuthenticatedState = viewModel.splashUiState.collectAsState()
@@ -32,8 +30,8 @@ fun SplashScreen(
         when (isAuthenticatedState.value) {
             SplashUiState.UnAuthenticatedUser -> {
                 delay(2000)
-                nanHostController?.navigate(AuthNavGraphRoutes.Login.identifier){
-                    popUpTo(AuthNavGraphRoutes.Splash.identifier) {
+                nanHostController?.navigate(AuthSubNavGraphRoutes.Login.identifier){
+                    popUpTo(AuthSubNavGraphRoutes.Splash.identifier) {
                         inclusive = true
                     }
                 }
@@ -42,7 +40,7 @@ fun SplashScreen(
             is SplashUiState.AuthenticatedUser -> {
                 ElnazLogger.i(TAG, "DFM SplashUiState.AuthenticatedUser")
                 nanHostController?.navigate(MainNavGraphRoutes.INVENTORY.identifier){
-                    popUpTo(AuthNavGraphRoutes.Splash.identifier) {
+                    popUpTo(AuthSubNavGraphRoutes.Splash.identifier) {
                         inclusive = true
                     }
                 }

@@ -17,7 +17,6 @@ android {
 
     buildFeatures {
         buildConfig = true
-        compose = true
     }
 
     buildTypes {
@@ -45,9 +44,8 @@ android {
 dependencies {
     implementation(project(":app"))
     implementation(project(":features_manager"))
-    implementation(project(":core"))
     implementation(project(":logger"))
-    implementation(project(":domain"))
+    implementation(project(":core"))
     implementation(project(":dfm:inventory:inventory_presentation"))
 
     implementation(libs.androidx.navigation.compose)

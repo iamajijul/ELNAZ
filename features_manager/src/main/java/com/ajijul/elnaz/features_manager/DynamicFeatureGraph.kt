@@ -42,7 +42,7 @@ fun NavGraphBuilder.gotoDynamicFeature(
 
         LaunchedEffect(moduleName) {
             if (featureInstaller.isModuleInstalled(moduleName)) {
-                ElnazLogger.i(TAG, "DFM $moduleName already installed")
+                ElnazLogger.v(TAG, "DFM $moduleName already installed")
                 doRegisterGraphAndNavigate()
             } else {
                 ElnazLogger.w(TAG, "DFM $moduleName installing")
@@ -68,7 +68,7 @@ fun NavGraphBuilder.gotoDynamicFeature(
 private fun getModuleEntryPoint(moduleName: String, tag: String): ComposeFeatureModuleEntry? {
     return try {
         val clazz =
-            Class.forName("com.ajijul.elnaz.entry.${moduleName.toPascalCase()}Entry")
+            Class.forName("com.ajijul.elnaz.$moduleName.entry.${moduleName.toPascalCase()}Entry")
         clazz.getDeclaredConstructor().newInstance() as ComposeFeatureModuleEntry
     } catch (e: Exception) {
         ElnazLogger.e(tag, "Exception during REFLECTION " + e.message)

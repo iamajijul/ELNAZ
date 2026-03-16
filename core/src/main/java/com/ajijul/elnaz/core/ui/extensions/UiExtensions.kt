@@ -1,13 +1,12 @@
 package com.ajijul.elnaz.core.ui.extensions
 
 import androidx.navigation.NavHostController
-import com.ajijul.elnaz.features_manager.routes.AuthNavGraphRoutes
+import com.ajijul.elnaz.features_manager.routes.AuthSubNavGraphRoutes
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.ComposeNavigator
 
 fun NavHostController.logoutOrUnauthenticatedNavigation() {
-    navigate(AuthNavGraphRoutes.Login.identifier) {
+    navigate(AuthSubNavGraphRoutes.Login.identifier) {
         popUpTo(graph.startDestinationId) {
             inclusive = true
         }

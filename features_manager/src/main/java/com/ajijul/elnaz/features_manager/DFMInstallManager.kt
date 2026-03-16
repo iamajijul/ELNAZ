@@ -1,6 +1,8 @@
 package com.ajijul.elnaz.features_manager
 
 import android.content.Context
+import com.ajijul.elnaz.logger.ElnazLogger
+import com.ajijul.elnaz.logger.TAG
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
 import com.google.android.play.core.splitinstall.SplitInstallStateUpdatedListener
@@ -78,6 +80,13 @@ class DFMInstallManager @Inject constructor(
         // Cleanup on cancel
         awaitClose {
             manager.unregisterListener(listener)
+        }
+    }
+
+    override fun prefetchModule(moduleName: String) {
+        if (!isModuleInstalled(moduleName)) {
+            ElnazLogger.i(TAG, "Silently prefetching DFM: $moduleName")
+            manager.deferredInstall(listOf(moduleName))
         }
     }
 }

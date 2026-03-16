@@ -12,6 +12,7 @@ class InventoryViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return InventoryViewModel(
             inventoryDependenciesEntryPoint.getCurrentUserUseCase(),
+            inventoryDependenciesEntryPoint.getDFMInstaller(),
             inventoryDependenciesEntryPoint.getIoDispatcher()
         ) as T
     }

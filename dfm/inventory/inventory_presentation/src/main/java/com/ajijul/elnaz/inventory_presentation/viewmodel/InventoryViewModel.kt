@@ -4,10 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ajijul.elnaz.domain.model.UserModel
 import com.ajijul.elnaz.domain.model.enums.Resource
-import com.ajijul.elnaz.domain.model.enums.UserRole
 import com.ajijul.elnaz.domain.usecases.auth.CurrentUserUseCase
+import com.ajijul.elnaz.features_manager.DynamicFeatureInstaller
+import com.ajijul.elnaz.features_manager.routes.InventorySubNavHostRoutes
+import com.ajijul.elnaz.features_manager.routes.MainNavGraphRoutes
 import com.ajijul.elnaz.inventory_presentation.utils.InventoryBottomNavItems
-import com.ajijul.elnaz.inventory_presentation.viewmodel.InventoryUiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 
 class InventoryViewModel(
     private val currentUserUseCase: CurrentUserUseCase,
+    val dfmInstaller: DynamicFeatureInstaller,
     ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
     private val _inventoryUiState = MutableStateFlow<InventoryUiState>(InventoryUiState.Loading)
@@ -34,16 +36,33 @@ class InventoryViewModel(
     }
 
     private fun getListOfTabsAsPerUser(userModel: UserModel): InventoryUiState {
-        val tabs = mutableListOf(
-            InventoryBottomNavItems.Products,
-            InventoryBottomNavItems.Orders,
-            InventoryBottomNavItems.Category,
-            InventoryBottomNavItems.Warehouse,
-        )
+        val tabs = arrayListOf<InventoryBottomNavItems>()
+
+        if (userModel.canSeeProductsTab) {
+            tabs.add(InventoryBottomNavItems.Products)
+            dfmInstaller.prefetchModule(InventorySubNavHostRoutes.PRODUCTS.moduleName)
+        }
+
+        if (userModel.canSeeOrdersTab) {
+            tabs.add(InventoryBottomNavItems.Orders)
+            dfmInstaller.prefetchModule(InventorySubNavHostRoutes.ORDERS.moduleName)
+        }
+
+        if (userModel.canSeeCategoriesTab) {
+            tabs.add(InventoryBottomNavItems.Category)
+            dfmInstaller.prefetchModule(InventorySubNavHostRoutes.CATEGORY.moduleName)
+        }
+
+        if (userModel.canSeeWarehousesTab) {
+            tabs.add(InventoryBottomNavItems.Warehouse)
+            dfmInstaller.prefetchModule(InventorySubNavHostRoutes.WAREHOUSE.moduleName)
+        }
 
         if (userModel.canManageUsers) {
             tabs.add(InventoryBottomNavItems.Users)
+            dfmInstaller.prefetchModule(InventorySubNavHostRoutes.USERS.moduleName)
         }
+
         return InventoryUiState.AuthenticatedUser(userModel, tabs)
     }
 }

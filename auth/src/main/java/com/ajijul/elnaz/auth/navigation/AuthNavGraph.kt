@@ -6,24 +6,22 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.ajijul.elnaz.auth.ui.login.LoginScreen
 import com.ajijul.elnaz.auth.ui.splash.SplashScreen
-import com.ajijul.elnaz.features_manager.routes.AuthNavGraphRoutes
+import com.ajijul.elnaz.features_manager.routes.AuthSubNavGraphRoutes
 import com.ajijul.elnaz.features_manager.routes.MainNavGraphRoutes
-import com.ajijul.elnaz.features_manager.DynamicFeatureInstaller
 
 fun NavGraphBuilder.navigateToAuthNavGraph(
-    navController: NavHostController,
-    dynamicFeatureInstaller: DynamicFeatureInstaller
+    navController: NavHostController
 ) {
 
     navigation(
-        startDestination = AuthNavGraphRoutes.Splash.identifier,
-        route = MainNavGraphRoutes.AUTH.identifier
+        route = MainNavGraphRoutes.AUTH.identifier,
+        startDestination = AuthSubNavGraphRoutes.Splash.identifier
     ) {
-        composable(AuthNavGraphRoutes.Splash.identifier) {
-            SplashScreen(navController, dynamicFeatureInstaller)
+        composable(AuthSubNavGraphRoutes.Splash.identifier) {
+            SplashScreen(navController)
         }
-        composable(AuthNavGraphRoutes.Login.identifier) {
-            LoginScreen(navController, dynamicFeatureInstaller)
+        composable(AuthSubNavGraphRoutes.Login.identifier) {
+            LoginScreen(navController)
         }
     }
 

@@ -52,6 +52,7 @@ dependencies {
     implementation(project(":logger"))
     implementation(project(":resources"))
     implementation(project(":core"))
+    implementation(project(":features_manager"))
 
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.navigation.compose)

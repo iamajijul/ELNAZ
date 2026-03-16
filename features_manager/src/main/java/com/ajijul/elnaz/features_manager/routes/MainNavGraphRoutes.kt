@@ -8,4 +8,5 @@ sealed class MainNavGraphRoutes(
     object AUTH : MainNavGraphRoutes("auth_graph", "auth", emptyList())
 
     object INVENTORY : MainNavGraphRoutes("inventory_graph",  "feature_inventory", emptyList())
+
 }

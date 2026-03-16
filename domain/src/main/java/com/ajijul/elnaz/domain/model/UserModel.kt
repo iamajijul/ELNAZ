@@ -11,7 +11,47 @@ data class UserModel(
     val role: UserRole,
     val createdAt: Long
 ){
+    // ----------------------------------------------------------------
+    // 1. BOTTOM NAVIGATION VISIBILITY (UI Structure)
+    // ----------------------------------------------------------------
 
+    val canSeeOrdersTab: Boolean
+        get() = true
+
+    val canSeeProductsTab: Boolean
+        get() = true
+
+
+    val canSeeCategoriesTab: Boolean
+        get() = role == UserRole.SUPER_ADMIN || role == UserRole.ADMIN
+
+    val canSeeWarehousesTab: Boolean
+        get() = role == UserRole.SUPER_ADMIN || role == UserRole.ADMIN
+
+
+    val canSeeUsersTab: Boolean
+        get() = role == UserRole.SUPER_ADMIN
+
+    // ----------------------------------------------------------------
+    // 2. ON-SCREEN ACTION PERMISSIONS (Buttons inside the tabs)
+    // ----------------------------------------------------------------
+
+    // USERS SCREEN
     val canManageUsers: Boolean
         get() = role == UserRole.SUPER_ADMIN
+
+    // WAREHOUSES SCREEN
+    val canAddWarehouse: Boolean
+        get() = role == UserRole.SUPER_ADMIN
+
+    // CATEGORIES SCREEN
+    val canManageCategory: Boolean
+        get() = role == UserRole.SUPER_ADMIN || role == UserRole.ADMIN
+
+    // PRODUCTS SCREEN
+    val canEditProduct: Boolean
+        get() = role == UserRole.SUPER_ADMIN || role == UserRole.ADMIN
+
+    val canRestockOrSell: Boolean
+        get() = true
 }
