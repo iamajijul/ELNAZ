@@ -24,54 +24,38 @@ fun NavGraphBuilder.gotoDynamicFeature(
     val deepLinkObjects = deepLinks.map { navDeepLink { uriPattern = it } }
 
     composable(route = route, deepLinks = deepLinkObjects) {
-        var status by remember { mutableStateOf<SplitInstallSessionStatus?>(null) }
-
-        fun doRegisterGraphAndNavigate() {
-            val entryPoint = getModuleEntryPoint(moduleName, TAG)
-            if (entryPoint != null) {
-                entryPoint.registerGraph(navController)
-                navController.navigate(entryPoint.getDFMGraphRoute()) {
-                    popUpTo(route) {
-                        inclusive = true
-                    }
+        //1. Check if it is installed BEFORE the first frame is drawn!
+        var entryPoint by remember(moduleName) {
+            mutableStateOf(
+                if (featureInstaller.isModuleInstalled(moduleName)) {
+                    // If it's already on the phone, load it instantly. No null state!
+                    DfmEntryPointCache.get(moduleName, TAG)
+                } else {
+                    null
                 }
-            } else {
-                ElnazLogger.e(TAG, "DFM $moduleName entry point is null")
-            }
+            )
         }
-
+        // 2. Fetch the DFM or trigger the download
         LaunchedEffect(moduleName) {
-            if (featureInstaller.isModuleInstalled(moduleName)) {
-                ElnazLogger.v(TAG, "DFM $moduleName already installed")
-                doRegisterGraphAndNavigate()
-            } else {
+            if (entryPoint == null) {
                 ElnazLogger.w(TAG, "DFM $moduleName installing")
                 featureInstaller.installModule(moduleName)
-                    .collect { installStatus -> status = installStatus }
-            }
-        }
-        status?.let {
-            when (status) {
-                SplitInstallSessionStatus.INSTALLED -> {
-                    LaunchedEffect(Unit) {
-                        doRegisterGraphAndNavigate()
+                    .collect { installStatus ->
+                        if (installStatus == SplitInstallSessionStatus.INSTALLED) {
+                            ElnazLogger.v(TAG, "DFM $moduleName install complete")
+                            entryPoint = DfmEntryPointCache.get(moduleName, TAG)
+                        }
                     }
-                }
-                else -> {
-                    loadingContent()
-                }
             }
         }
-    }
-}
 
-private fun getModuleEntryPoint(moduleName: String, tag: String): ComposeFeatureModuleEntry? {
-    return try {
-        val clazz =
-            Class.forName("com.ajijul.elnaz.$moduleName.entry.${moduleName.toPascalCase()}Entry")
-        clazz.getDeclaredConstructor().newInstance() as ComposeFeatureModuleEntry
-    } catch (e: Exception) {
-        ElnazLogger.e(tag, "Exception during REFLECTION " + e.message)
-        null
+        // 3. The "Drawing" DFM UI
+        if (entryPoint != null) {
+            ElnazLogger.v(TAG, "DFM Entry Point for $moduleName is NOT NULL")
+            entryPoint?.DrawEntry(navController)
+        } else {
+            ElnazLogger.v(TAG, "DFM Entry Point for $moduleName is NULL")
+            loadingContent()
+        }
     }
 }

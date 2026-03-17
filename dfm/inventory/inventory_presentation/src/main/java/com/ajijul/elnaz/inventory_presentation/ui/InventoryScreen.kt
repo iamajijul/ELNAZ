@@ -1,5 +1,7 @@
 package com.ajijul.elnaz.inventory_presentation.ui
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -111,7 +113,11 @@ fun InventoryScreen(
                     startDestination = InventorySubNavHostRoutes.PRODUCTS.identifier,
                     modifier = Modifier
                         .padding(paddingValues)
-                        .background(MaterialTheme.colorScheme.onSurfaceVariant)
+                        .background(MaterialTheme.colorScheme.background),
+                    enterTransition = { EnterTransition.None },
+                    exitTransition = { ExitTransition.None },
+                    popEnterTransition = { EnterTransition.None },
+                    popExitTransition = { ExitTransition.None }
                 ) {
 
                     if (userModel?.canSeeProductsTab == true) {

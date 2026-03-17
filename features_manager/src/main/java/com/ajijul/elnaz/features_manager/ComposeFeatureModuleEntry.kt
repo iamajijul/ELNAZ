@@ -1,8 +1,9 @@
 package com.ajijul.elnaz.features_manager
 
+import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 
 interface ComposeFeatureModuleEntry {
-    fun getDFMGraphRoute(): String
-    fun registerGraph(navController: NavHostController)
+    @Composable
+    fun DrawEntry(navController: NavHostController)
 }
