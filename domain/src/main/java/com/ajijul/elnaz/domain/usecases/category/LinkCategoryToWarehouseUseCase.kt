@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 class LinkCategoryToWarehouseUseCase(val categoryRepository: CategoryRepository) {
 
-    suspend operator fun invoke(categoryId: String, warehouseId: String): Resource<Long> =
-        categoryRepository.linkCategoryToWarehouse(categoryId, warehouseId)
+    suspend operator fun invoke(shopId: String, categoryId: String, warehouseId: String): Resource<Long> =
+        categoryRepository.linkCategoryToWarehouse(shopId, categoryId, warehouseId)
 
 }

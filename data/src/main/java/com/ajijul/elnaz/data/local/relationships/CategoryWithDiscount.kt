@@ -3,7 +3,7 @@ package com.ajijul.elnaz.data.local.relationships
 import androidx.room.Embedded
 import androidx.room.Junction
 import androidx.room.Relation
-import com.ajijul.elnaz.data.local.entity.Discount
+import com.ajijul.elnaz.data.local.entity.DiscountEntity
 import com.ajijul.elnaz.data.local.entity.category.CategoryEntity
 import com.ajijul.elnaz.data.local.entity.category.CategoryDiscountCrossRefEntity
 
@@ -15,5 +15,5 @@ data class CategoryWithDiscount(
         associateBy = Junction(CategoryDiscountCrossRefEntity::class,
             parentColumn = "categoryId",
             entityColumn = "discountId")
-    ) val discounts: List<Discount>
+    ) val discountEntities: List<DiscountEntity>
 )

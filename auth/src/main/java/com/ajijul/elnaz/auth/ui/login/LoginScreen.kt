@@ -34,8 +34,8 @@ import com.ajijul.elnaz.core.ui.components.AppTextOnFilledButton
 import com.ajijul.elnaz.core.ui.components.ItemOnCenteredColumn
 import com.ajijul.elnaz.core.ui.components.PrimaryFilledButton
 import com.ajijul.elnaz.core.ui.components.PrimaryTextButton
-import com.ajijul.elnaz.core.utils.AppDimens.appProgressSmallSize
-import com.ajijul.elnaz.core.utils.AppDimens.appProgressSmallStroke
+import com.ajijul.elnaz.core.ui.theme.AppDimens.appProgressSmallSize
+import com.ajijul.elnaz.core.ui.theme.AppDimens.appProgressSmallStroke
 import com.ajijul.elnaz.core.utils.showToast
 import com.ajijul.elnaz.features_manager.routes.MainNavGraphRoutes
 

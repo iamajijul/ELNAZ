@@ -2,6 +2,7 @@ package com.ajijul.elnaz.inventory_presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ajijul.elnaz.di.entrypoints.InventoryDependenciesEntryPoint
 import com.ajijul.elnaz.domain.model.UserModel
 import com.ajijul.elnaz.domain.model.enums.Resource
 import com.ajijul.elnaz.domain.usecases.auth.CurrentUserUseCase
@@ -15,16 +16,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class InventoryViewModel(
-    private val currentUserUseCase: CurrentUserUseCase,
-    val dfmInstaller: DynamicFeatureInstaller,
-    ioDispatcher: CoroutineDispatcher
+    val inventoryDependencies: InventoryDependenciesEntryPoint
 ) : ViewModel() {
     private val _inventoryUiState = MutableStateFlow<InventoryUiState>(InventoryUiState.Loading)
     val inventoryUiState: StateFlow<InventoryUiState> = _inventoryUiState
 
     init {
-        viewModelScope.launch(ioDispatcher) {
-            when (val currentUserUseCase: Resource<UserModel?> = currentUserUseCase()) {
+        viewModelScope.launch(inventoryDependencies.getIoDispatcher()) {
+            when (val currentUserUseCase: Resource<UserModel?> = inventoryDependencies.getCurrentUserUseCase().invoke()) {
                 is Resource.Error -> _inventoryUiState.value = InventoryUiState.UnAuthenticatedUser
                 Resource.Loading -> _inventoryUiState.value = InventoryUiState.Loading
                 is Resource.Success<UserModel?> -> _inventoryUiState.value =
@@ -37,6 +36,7 @@ class InventoryViewModel(
 
     private fun getListOfTabsAsPerUser(userModel: UserModel): InventoryUiState {
         val tabs = arrayListOf<InventoryBottomNavItems>()
+        val dfmInstaller = inventoryDependencies.getDFMInstaller()
 
         if (userModel.canSeeProductsTab) {
             tabs.add(InventoryBottomNavItems.Products)

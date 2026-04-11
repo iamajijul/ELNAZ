@@ -5,36 +5,36 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Delete
-import com.ajijul.elnaz.data.local.entity.Order
+import com.ajijul.elnaz.data.local.entity.InvoiceEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface OrderDao {
     @Insert
-    suspend fun insertOrder(order: Order)
+    suspend fun insertOrder(order: InvoiceEntity)
 
     @Insert
-    suspend fun insertAllOrders(orders: List<Order>)
+    suspend fun insertAllOrders(orders: List<InvoiceEntity>)
 
     @Update
-    suspend fun updateOrder(order: Order)
+    suspend fun updateOrder(order: InvoiceEntity)
 
     @Delete
-    suspend fun deleteOrder(order: Order)
+    suspend fun deleteOrder(order: InvoiceEntity)
 
-    @Query("SELECT * FROM 'order'")
-    fun getAllOrders(): Flow<List<Order>>
+    @Query("SELECT * FROM 'invoice'")
+    fun getAllOrders(): Flow<List<InvoiceEntity>>
 
-    @Query("SELECT * FROM 'order' WHERE id = :id")
-    suspend fun getOrderById(id: Long): Order?
+    @Query("SELECT * FROM 'invoice' WHERE id = :id")
+    suspend fun getOrderById(id: Long): InvoiceEntity?
 
-    @Query("SELECT * FROM 'order' WHERE customerId = :customerId")
-    fun getOrdersByCustomerId(customerId: Long?): Flow<List<Order>>
+    @Query("SELECT * FROM 'invoice' WHERE customerId = :customerId")
+    fun getOrdersByCustomerId(customerId: Long?): Flow<List<InvoiceEntity>>
 
     @Query("""
         SELECT c.id AS customerId, c.name, COUNT(o.id) AS orderCount, SUM(o.totalAmount) AS totalSpent
         FROM customer c
-        LEFT JOIN 'order' o ON c.id = o.customerId
+        LEFT JOIN 'invoice' o ON c.id = o.customerId
         GROUP BY c.id, c.name
         ORDER BY orderCount DESC, totalSpent DESC
     """)
@@ -47,6 +47,6 @@ interface OrderDao {
         val totalSpent: Double
     )
 
-    @Query("DELETE FROM 'order'")
+    @Query("DELETE FROM 'invoice'")
     suspend fun deleteAllOrders()
 }

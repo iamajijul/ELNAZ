@@ -62,7 +62,6 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material.icon)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     implementation(libs.androidx.hilt.navigation)

@@ -5,31 +5,31 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Delete
-import com.ajijul.elnaz.data.local.entity.Customer
+import com.ajijul.elnaz.data.local.entity.CustomerEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CustomerDao {
     @Insert
-    suspend fun insertCustomer(customer: Customer)
+    suspend fun insertCustomer(customerEntity: CustomerEntity)
 
     @Insert
-    suspend fun insertAllCustomers(customers: List<Customer>)
+    suspend fun insertAllCustomers(customerEntities: List<CustomerEntity>)
 
     @Update
-    suspend fun updateCustomer(customer: Customer)
+    suspend fun updateCustomer(customerEntity: CustomerEntity)
 
     @Delete
-    suspend fun deleteCustomer(customer: Customer)
+    suspend fun deleteCustomer(customerEntity: CustomerEntity)
 
     @Query("SELECT * FROM customer")
-    fun getAllCustomers(): Flow<List<Customer>>
+    fun getAllCustomers(): Flow<List<CustomerEntity>>
 
     @Query("SELECT * FROM customer WHERE id = :id")
-    suspend fun getCustomerById(id: Long): Customer?
+    suspend fun getCustomerById(id: Long): CustomerEntity?
 
     @Query("SELECT * FROM customer WHERE email = :email")
-    suspend fun getCustomerByEmail(email: String): Customer?
+    suspend fun getCustomerByEmail(email: String): CustomerEntity?
 
     @Query("DELETE FROM customer")
     suspend fun deleteAllCustomers()

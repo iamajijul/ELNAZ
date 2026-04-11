@@ -5,35 +5,35 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Delete
-import com.ajijul.elnaz.data.local.entity.Discount
+import com.ajijul.elnaz.data.local.entity.DiscountEntity
 import com.ajijul.elnaz.domain.model.enums.DiscountStatus
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DiscountDao {
     @Insert
-    suspend fun insertDiscount(discount: Discount)
+    suspend fun insertDiscount(discountEntity: DiscountEntity)
 
     @Insert
-    suspend fun insertAllDiscounts(discounts: List<Discount>)
+    suspend fun insertAllDiscounts(discountEntities: List<DiscountEntity>)
 
     @Update
-    suspend fun updateDiscount(discount: Discount)
+    suspend fun updateDiscount(discountEntity: DiscountEntity)
 
     @Delete
-    suspend fun deleteDiscount(discount: Discount)
+    suspend fun deleteDiscount(discountEntity: DiscountEntity)
 
     @Query("SELECT * FROM discount")
-    fun getAllDiscounts(): Flow<List<Discount>>
+    fun getAllDiscounts(): Flow<List<DiscountEntity>>
 
     @Query("SELECT * FROM discount WHERE id = :id")
-    suspend fun getDiscountById(id: Long): Discount?
+    suspend fun getDiscountById(id: Long): DiscountEntity?
 
     @Query("SELECT * FROM discount WHERE status = :status ORDER BY priority DESC")
-    fun getDiscountsByStatus(status: DiscountStatus): Flow<List<Discount>>
+    fun getDiscountsByStatus(status: DiscountStatus): Flow<List<DiscountEntity>>
 
     @Query("SELECT * FROM discount WHERE status = 'ACTIVE' ORDER BY priority DESC")
-    fun getActiveDiscounts(): Flow<List<Discount>>
+    fun getActiveDiscounts(): Flow<List<DiscountEntity>>
 
     @Query("DELETE FROM discount")
     suspend fun deleteAllDiscounts()

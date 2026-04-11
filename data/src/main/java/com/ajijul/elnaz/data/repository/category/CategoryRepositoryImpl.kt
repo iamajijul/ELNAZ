@@ -92,13 +92,15 @@ class CategoryRepositoryImpl @Inject constructor(
         }
 
     override suspend fun linkCategoryToProduct(
+        shopId: String,
         categoryId: String,
         productId: String
     ): Resource<Long> = safeCall {
         categoryDao.insertCategoryProductCrossRef(
             CategoryProductCrossRefEntity(
-                categoryId,
-                productId
+                shopId = shopId,
+                categoryId = categoryId,
+                productId = productId
             )
         )
     }
@@ -115,11 +117,16 @@ class CategoryRepositoryImpl @Inject constructor(
     }
 
     override suspend fun linkCategoryToWarehouse(
+        shopId: String,
         categoryId: String,
         warehouseId: String
     ): Resource<Long> = safeCall {
         categoryDao.insertCategoryWarehouseCrossRef(
-            CategoryWarehouseCrossRefEntity(categoryId, warehouseId)
+            CategoryWarehouseCrossRefEntity(
+                shopId = shopId,
+                categoryId = categoryId,
+                warehouseId = warehouseId
+            )
         )
     }
 
@@ -134,12 +141,17 @@ class CategoryRepositoryImpl @Inject constructor(
     }
 
     override suspend fun linkCategoryToDiscount(
+        shopId: String,
         categoryId: String,
         discountId: String
     ): Resource<Long> =
         safeCall {
             categoryDao.insertCategoryDiscountCrossRef(
-                CategoryDiscountCrossRefEntity(categoryId, discountId)
+                CategoryDiscountCrossRefEntity(
+                    shopId = shopId,
+                    categoryId = categoryId,
+                    discountId = discountId
+                )
             )
         }
 

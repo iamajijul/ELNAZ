@@ -12,9 +12,13 @@ import com.ajijul.elnaz.domain.model.CategoryWithDiscountsModel
 import com.ajijul.elnaz.domain.model.CategoryWithProductsModel
 import com.ajijul.elnaz.domain.model.CategoryWithSEOModel
 import com.ajijul.elnaz.domain.model.CategoryWithWarehouseModel
+import java.util.UUID
+
+// --- CATEGORY MAPPING ---
 
 fun CategoryEntity.toDomain() = CategoryModel(
     id = id,
+    shopId = shopId,
     name = name,
     description = description,
     categoryImage = categoryImage,
@@ -25,18 +29,23 @@ fun CategoryEntity.toDomain() = CategoryModel(
 )
 
 fun CategoryModel.toEntity() = CategoryEntity(
-    id = id,
+    id = id.ifBlank { UUID.randomUUID().toString() },
+    shopId = shopId, // Internal mapping from model
     name = name,
     description = description,
     categoryImage = categoryImage,
     parentId = parentId,
     status = status,
     popularityScore = popularityScore,
-    createdAt = createdAt
+    createdAt = createdAt,
+    lastUpdated = System.currentTimeMillis()
 )
+
+// --- SEO MAPPING ---
 
 fun CategorySEOEntity.toDomain() = CategorySeoModel(
     id = id,
+    shopId = shopId,
     categoryId = categoryId,
     seoTitle = seoTitle,
     seoDescription = seoDescription,
@@ -44,38 +53,48 @@ fun CategorySEOEntity.toDomain() = CategorySeoModel(
 )
 
 fun CategorySeoModel.toEntity() = CategorySEOEntity(
-    id = id,
+    id = id.ifBlank { UUID.randomUUID().toString() },
+    shopId = shopId,
     categoryId = categoryId,
     seoTitle = seoTitle,
     seoDescription = seoDescription,
-    seoSlug = seoSlug
+    seoSlug = seoSlug,
+    lastUpdated = System.currentTimeMillis()
 )
+
+// --- RELATIONSHIP MAPPERS ---
+
+fun CategoryWithSEO.toDomain(): CategoryWithSEOModel {
+    return CategoryWithSEOModel(
+        category = categoryEntity.toDomain(),
+        // Soft-delete safety check
+        seo = if (seo != null && !seo.isDeleted) seo.toDomain() else null
+    )
+}
+
+/**
+ * NOTE: For Many-to-Many (Products, Warehouses, Discounts),
+ * we use these mappers ONLY if we use Room's @Relation.
+ * If using custom DAO JOINs (Recommended), these are handled in the Repository.
+ */
 
 fun CategoryWithProducts.toDomain(): CategoryWithProductsModel {
     return CategoryWithProductsModel(
         category = categoryEntity.toDomain(),
-        products = products.map { it.toDomain() }
+        products = productEntities.map { it.toDomain() }
     )
 }
 
 fun CategoryWithWarehouse.toDomain(): CategoryWithWarehouseModel {
     return CategoryWithWarehouseModel(
         category = categoryEntity.toDomain(),
-        warehouses = warehouses.map { it.toDomain() }
+        warehouses = warehouseEntities.map { it.toDomain() }
     )
 }
-
 
 fun CategoryWithDiscount.toDomain(): CategoryWithDiscountsModel {
     return CategoryWithDiscountsModel(
         category = categoryEntity.toDomain(),
-        discounts = discounts.map { it.toDomain() }
-    )
-}
-
-fun CategoryWithSEO.toDomain(): CategoryWithSEOModel {
-    return CategoryWithSEOModel(
-        category = categoryEntity.toDomain(),
-        seo = seo.toDomain()
+        discounts = discountEntities.map { it.toDomain() }
     )
 }

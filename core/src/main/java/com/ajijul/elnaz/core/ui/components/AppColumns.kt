@@ -11,8 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.ajijul.elnaz.core.utils.AppDimens.formGap
-import com.ajijul.elnaz.core.utils.AppDimens.screenPadding
+import com.ajijul.elnaz.core.ui.theme.AppDimens.formGap
+import com.ajijul.elnaz.core.ui.theme.AppDimens.screenPadding
 
 @Composable
 fun ItemOnCenteredColumn(

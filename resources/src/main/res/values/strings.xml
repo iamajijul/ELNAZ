@@ -53,5 +53,19 @@
     <string name="err_unknown">An unexpected error occurred.</string>
 
     <!--end region-->
+    <!--region Ui Text Strings-->
+    <string name="payment_status_unpaid">Unpaid</string>
+    <string name="payment_status_partial">Partially Paid</string>
+    <string name="payment_status_paid">Fully Paid</string>
+
+    <string name="balance_type_receivable">To Collect</string>
+    <string name="balance_type_payable">To Pay</string>
+    <!--end region-->
+
+    <!--Category module-->
+    <string name="navigation_back">Navigation Back</string>
+    <string name="categories">Categories</string>
+    <string name="add_new_category">"Add New Category"</string>
+    <string name="no_category_found">"No category found, click '+' to add one"</string>
 
 </resources>

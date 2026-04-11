@@ -5,31 +5,31 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Delete
-import com.ajijul.elnaz.data.local.entity.Supplier
+import com.ajijul.elnaz.data.local.entity.SupplierEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SupplierDao {
     @Insert
-    suspend fun insertSupplier(supplier: Supplier)
+    suspend fun insertSupplier(supplierEntity: SupplierEntity)
 
     @Insert
-    suspend fun insertAllSuppliers(suppliers: List<Supplier>)
+    suspend fun insertAllSuppliers(supplierEntities: List<SupplierEntity>)
 
     @Update
-    suspend fun updateSupplier(supplier: Supplier)
+    suspend fun updateSupplier(supplierEntity: SupplierEntity)
 
     @Delete
-    suspend fun deleteSupplier(supplier: Supplier)
+    suspend fun deleteSupplier(supplierEntity: SupplierEntity)
 
     @Query("SELECT * FROM supplier")
-    fun getAllSuppliers(): Flow<List<Supplier>>
+    fun getAllSuppliers(): Flow<List<SupplierEntity>>
 
     @Query("SELECT * FROM supplier WHERE id = :id")
-    suspend fun getSupplierById(id: Long): Supplier?
+    suspend fun getSupplierById(id: Long): SupplierEntity?
 
     @Query("SELECT * FROM supplier WHERE name = :name")
-    suspend fun getSupplierByName(name: String): Supplier?
+    suspend fun getSupplierByName(name: String): SupplierEntity?
 
     @Query("DELETE FROM supplier")
     suspend fun deleteAllSuppliers()

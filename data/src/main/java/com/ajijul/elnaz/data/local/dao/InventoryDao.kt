@@ -5,28 +5,28 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Delete
-import com.ajijul.elnaz.data.local.entity.Inventory
+import com.ajijul.elnaz.data.local.entity.InventoryEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface InventoryDao {
     @Insert
-    suspend fun insertInventory(inventory: Inventory)
+    suspend fun insertInventory(inventoryEntity: InventoryEntity)
 
     @Insert
-    suspend fun insertAllInventories(inventories: List<Inventory>)
+    suspend fun insertAllInventories(inventories: List<InventoryEntity>)
 
     @Update
-    suspend fun updateInventory(inventory: Inventory)
+    suspend fun updateInventory(inventoryEntity: InventoryEntity)
 
     @Delete
-    suspend fun deleteInventory(inventory: Inventory)
+    suspend fun deleteInventory(inventoryEntity: InventoryEntity)
 
     @Query("SELECT * FROM inventory")
-    fun getAllInventories(): Flow<List<Inventory>>
+    fun getAllInventories(): Flow<List<InventoryEntity>>
 
     @Query("SELECT * FROM inventory WHERE productId = :productId AND warehouseId = :warehouseId")
-    fun getInventoryByProductAndWarehouse(productId: Long, warehouseId: Long): Flow<Inventory?>
+    fun getInventoryByProductAndWarehouse(productId: Long, warehouseId: Long): Flow<InventoryEntity?>
 
     @Query("SELECT SUM(quantity) FROM inventory WHERE productId = :productId")
     fun getTotalQuantityByProduct(productId: Long): Flow<Int?>

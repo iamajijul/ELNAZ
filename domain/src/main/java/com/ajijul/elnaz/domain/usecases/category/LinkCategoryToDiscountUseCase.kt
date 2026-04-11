@@ -7,7 +7,11 @@ import kotlinx.coroutines.flow.Flow
 
 class LinkCategoryToDiscountUseCase(val categoryRepository: CategoryRepository) {
 
-    suspend operator fun invoke(categoryId: String, discountId: String): Resource<Long> =
-        categoryRepository.linkCategoryToDiscount(categoryId, discountId)
+    suspend operator fun invoke(
+        shopId: String,
+        categoryId: String,
+        discountId: String
+    ): Resource<Long> =
+        categoryRepository.linkCategoryToDiscount(shopId, categoryId, discountId)
 
 }

@@ -7,15 +7,20 @@ import androidx.room.TypeConverters
 import com.ajijul.elnaz.data.local.entity.utilities.Converters
 import com.ajijul.elnaz.domain.model.enums.DiscountStatus
 import com.ajijul.elnaz.domain.model.enums.DiscountType
+import com.ajijul.elnaz.domain.model.enums.SyncStatus
+import java.util.UUID
 
 @Entity(
     tableName = "discount",
-    indices = [Index(value = ["code"], unique = true)]
+    indices = [
+        // CRITICAL FIX: Allows Shop A and Shop B to both have a "NEWYEAR20" code!
+        Index(value = ["shopId", "code"], unique = true)
+    ]
 )
 @TypeConverters(Converters::class)
-data class Discount(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+data class DiscountEntity(
+    @PrimaryKey val id: String = UUID.randomUUID().toString(),
+    val shopId: String,
 
     val code: String,
     val name: String,
@@ -29,7 +34,10 @@ data class Discount(
     val startDate: Long,
     val endDate: Long?,
     val status: DiscountStatus = DiscountStatus.ACTIVE,
-    val priority: Int = 0                                    // higher = takes precedence
+    val priority: Int = 0, // Helps decide which discount applies if multiple are valid
+
+    // The SaaS Base
+    val lastUpdated: Long = System.currentTimeMillis(),
+    val syncState: SyncStatus = SyncStatus.PENDING_INSERT,
+    val isDeleted: Boolean = false // Soft delete for offline sync
 )
-
-

@@ -1,14 +1,13 @@
 package com.ajijul.elnaz.data.mapper
 
-import com.ajijul.elnaz.data.local.entity.Warehouse
-import com.ajijul.elnaz.data.local.relationships.CategoryWithWarehouse
-import com.ajijul.elnaz.data.local.relationships.WarehouseWithCategories
-import com.ajijul.elnaz.domain.model.CategoryWithWarehouseModel
+import com.ajijul.elnaz.data.local.entity.WarehouseEntity
 import com.ajijul.elnaz.domain.model.WarehouseModel
-import com.ajijul.elnaz.domain.model.WarehouseWithCategoryModel
+import java.util.UUID
 
-
-fun Warehouse.toDomain() = WarehouseModel(
+/**
+ * Maps Database Entity -> Domain Model (For UI)
+ */
+fun WarehouseEntity.toDomain() = WarehouseModel(
     id = id,
     code = code,
     name = name,
@@ -19,20 +18,22 @@ fun Warehouse.toDomain() = WarehouseModel(
     createdAt = createdAt
 )
 
-fun WarehouseModel.toEntity() = Warehouse(
-    id = id,
+/**
+ * Maps Domain Model -> Database Entity (For Saving)
+ * Requires [shopId] to ensure multi-tenant safety.
+ */
+fun WarehouseModel.toEntity(shopId: String) = WarehouseEntity(
+    id = id.ifBlank { UUID.randomUUID().toString() },
+    shopId = shopId,
     code = code,
     name = name,
     location = location,
     contactNumber = contactNumber,
     managerName = managerName,
     status = status,
-    createdAt = createdAt
-)
 
-fun WarehouseWithCategories.toDomain(): WarehouseWithCategoryModel {
-    return WarehouseWithCategoryModel(
-        warehouse = warehouse.toDomain(),
-        categories = categories.map { it.toDomain() }
-    )
-}
+    // SaaS/Sync Defaults
+    createdAt = createdAt,
+    lastUpdated = System.currentTimeMillis()
+    // syncState and isDeleted will use Entity defaults
+)

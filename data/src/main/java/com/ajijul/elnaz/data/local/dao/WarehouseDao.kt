@@ -6,32 +6,32 @@ import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Delete
 import androidx.room.Transaction
-import com.ajijul.elnaz.data.local.entity.Warehouse
+import com.ajijul.elnaz.data.local.entity.WarehouseEntity
 import com.ajijul.elnaz.data.local.relationships.WarehouseWithCategories
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WarehouseDao {
     @Insert
-    suspend fun insertWarehouse(warehouse: Warehouse)
+    suspend fun insertWarehouse(warehouseEntity: WarehouseEntity)
 
     @Insert
-    suspend fun insertAllWarehouses(warehouses: List<Warehouse>)
+    suspend fun insertAllWarehouses(warehouseEntities: List<WarehouseEntity>)
 
     @Update
-    suspend fun updateWarehouse(warehouse: Warehouse)
+    suspend fun updateWarehouse(warehouseEntity: WarehouseEntity)
 
     @Delete
-    suspend fun deleteWarehouse(warehouse: Warehouse)
+    suspend fun deleteWarehouse(warehouseEntity: WarehouseEntity)
 
     @Query("SELECT * FROM warehouse")
-    fun getAllWarehouses(): Flow<List<Warehouse>>
+    fun getAllWarehouses(): Flow<List<WarehouseEntity>>
 
     @Query("SELECT * FROM warehouse WHERE id = :id")
-    suspend fun getWarehouseById(id: Long): Warehouse?
+    suspend fun getWarehouseById(id: Long): WarehouseEntity?
 
     @Query("SELECT * FROM warehouse WHERE name = :name")
-    suspend fun getWarehouseByName(name: String): Warehouse?
+    suspend fun getWarehouseByName(name: String): WarehouseEntity?
 
     @Query("DELETE FROM warehouse")
     suspend fun deleteAllWarehouses()

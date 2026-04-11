@@ -1,12 +1,11 @@
 package com.ajijul.elnaz.data.repository
 
 import com.ajijul.elnaz.data.local.dao.ProductDao
-import com.ajijul.elnaz.data.local.entity.Product
+import com.ajijul.elnaz.data.local.entity.ProductEntity
 import com.ajijul.elnaz.data.mapper.toDomain
 import com.ajijul.elnaz.data.network.FirebaseFirestoreDataSource
 import com.ajijul.elnaz.domain.model.ProductModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -39,7 +38,7 @@ class DataFlowManager @Inject constructor(
         }
     }
 
-    private fun mergeItems(local: List<Product>, remote: List<Product>): List<Product> {
+    private fun mergeItems(local: List<ProductEntity>, remote: List<ProductEntity>): List<ProductEntity> {
         val remoteMap = remote.associateBy { it.barcode }
         return local.map { localItem ->
             remoteMap[localItem.barcode]?.let { remoteItem ->

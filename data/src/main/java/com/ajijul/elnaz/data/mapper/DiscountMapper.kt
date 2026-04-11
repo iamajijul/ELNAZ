@@ -1,12 +1,11 @@
 package com.ajijul.elnaz.data.mapper
 
-import com.ajijul.elnaz.data.local.entity.Discount
+import com.ajijul.elnaz.data.local.entity.DiscountEntity
 import com.ajijul.elnaz.domain.model.DiscountModel
-import com.ajijul.elnaz.domain.model.enums.DiscountStatus
-import com.ajijul.elnaz.domain.model.enums.DiscountType
 
-fun Discount.toDomain() = DiscountModel(
+fun DiscountEntity.toDomain() = DiscountModel(
     id = id,
+    shopId = shopId,
     code = code,
     name = name,
     description = description,
@@ -20,8 +19,9 @@ fun Discount.toDomain() = DiscountModel(
     priority = priority
 )
 
-fun DiscountModel.toEntity() = Discount(
+fun DiscountModel.toEntity() = DiscountEntity(
     id = id,
+    shopId = shopId,
     code = code,
     name = name,
     description = description,

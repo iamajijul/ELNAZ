@@ -5,32 +5,32 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Delete
-import com.ajijul.elnaz.data.local.entity.OrderItem
+import com.ajijul.elnaz.data.local.entity.InvoiceItemEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface OrderItemDao {
     @Insert
-    suspend fun insertOrderItem(orderItem: OrderItem)
+    suspend fun insertOrderItem(orderItemEntity: InvoiceItemEntity)
 
     @Insert
-    suspend fun insertAllOrderItems(orderItems: List<OrderItem>)
+    suspend fun insertAllOrderItems(orderItemEntities: List<InvoiceItemEntity>)
 
     @Update
-    suspend fun updateOrderItem(orderItem: OrderItem)
+    suspend fun updateOrderItem(orderItemEntity: InvoiceItemEntity)
 
     @Delete
-    suspend fun deleteOrderItem(orderItem: OrderItem)
+    suspend fun deleteOrderItem(orderItemEntity: InvoiceItemEntity)
 
-    @Query("SELECT * FROM order_item")
-    fun getAllOrderItems(): Flow<List<OrderItem>>
+    @Query("SELECT * FROM invoice_item")
+    fun getAllOrderItems(): Flow<List<InvoiceItemEntity>>
 
-    @Query("SELECT * FROM order_item WHERE orderId = :orderId")
-    fun getOrderItemsByOrderId(orderId: Long): Flow<List<OrderItem>>
+    @Query("SELECT * FROM invoice_item WHERE invoiceId = :invoiceId")
+    fun getOrderItemsByOrderId(invoiceId: Long): Flow<List<InvoiceItemEntity>>
 
-    @Query("SELECT * FROM order_item WHERE productId = :productId")
-    fun getOrderItemsByProductId(productId: Long): Flow<List<OrderItem>>
+    @Query("SELECT * FROM invoice_item WHERE productId = :productId")
+    fun getOrderItemsByProductId(productId: Long): Flow<List<InvoiceItemEntity>>
 
-    @Query("DELETE FROM order_item")
+    @Query("DELETE FROM invoice_item")
     suspend fun deleteAllOrderItems()
 }

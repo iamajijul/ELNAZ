@@ -1,4 +1,4 @@
-package com.ajijul.elnaz.core.utils
+package com.ajijul.elnaz.core.ui.extensions
 
 import android.content.Context
 import androidx.annotation.StringRes

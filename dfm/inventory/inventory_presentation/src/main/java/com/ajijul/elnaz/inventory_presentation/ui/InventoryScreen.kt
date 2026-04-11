@@ -17,7 +17,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -30,15 +29,16 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.ajijul.elnaz.core.ui.components.AppProgressOnScreen
 import com.ajijul.elnaz.core.ui.components.AppText
+import com.ajijul.elnaz.core.ui.components.navBarItemColorCombination
 import com.ajijul.elnaz.core.ui.extensions.logoutOrUnauthenticatedNavigation
-import com.ajijul.elnaz.core.utils.AppDimens.appNavIconSize
+import com.ajijul.elnaz.core.ui.theme.AppDimens.appNavIconSize
 import com.ajijul.elnaz.core.utils.showToast
 import com.ajijul.elnaz.di.entrypoints.InventoryDependenciesEntryPoint
 import com.ajijul.elnaz.features_manager.gotoDynamicFeature
 import com.ajijul.elnaz.features_manager.routes.InventorySubNavHostRoutes
 import com.ajijul.elnaz.inventory_presentation.utils.InventoryBottomNavItems
-import com.ajijul.elnaz.inventory_presentation.viewmodel.InventoryViewModel
 import com.ajijul.elnaz.inventory_presentation.viewmodel.InventoryUiState
+import com.ajijul.elnaz.inventory_presentation.viewmodel.InventoryViewModel
 import com.ajijul.elnaz.inventory_presentation.viewmodel.InventoryViewModelFactory
 import com.ajijul.elnaz.resources.R
 import dagger.hilt.android.EntryPointAccessors
@@ -120,10 +120,11 @@ fun InventoryScreen(
                     popExitTransition = { ExitTransition.None }
                 ) {
 
+                    val dfmInstaller = viewModel.inventoryDependencies.getDFMInstaller()
                     if (userModel?.canSeeProductsTab == true) {
                         gotoDynamicFeature(
                             navController = bottomNavController,
-                            viewModel.dfmInstaller,
+                            dfmInstaller,
                             moduleNameIdentifierAndDeepLinks = Triple(
                                 InventorySubNavHostRoutes.PRODUCTS.moduleName,
                                 InventorySubNavHostRoutes.PRODUCTS.identifier,
@@ -137,7 +138,7 @@ fun InventoryScreen(
                     if (userModel?.canSeeOrdersTab == true) {
                         gotoDynamicFeature(
                             navController = bottomNavController,
-                            viewModel.dfmInstaller,
+                            dfmInstaller,
                             moduleNameIdentifierAndDeepLinks = Triple(
                                 InventorySubNavHostRoutes.ORDERS.moduleName,
                                 InventorySubNavHostRoutes.ORDERS.identifier,
@@ -151,7 +152,7 @@ fun InventoryScreen(
                     if (userModel?.canSeeCategoriesTab == true) {
                         gotoDynamicFeature(
                             navController = bottomNavController,
-                            viewModel.dfmInstaller,
+                            dfmInstaller,
                             moduleNameIdentifierAndDeepLinks = Triple(
                                 InventorySubNavHostRoutes.CATEGORY.moduleName,
                                 InventorySubNavHostRoutes.CATEGORY.identifier,
@@ -165,7 +166,7 @@ fun InventoryScreen(
                     if (userModel?.canSeeWarehousesTab == true) {
                         gotoDynamicFeature(
                             navController = bottomNavController,
-                            viewModel.dfmInstaller,
+                            dfmInstaller,
                             moduleNameIdentifierAndDeepLinks = Triple(
                                 InventorySubNavHostRoutes.WAREHOUSE.moduleName,
                                 InventorySubNavHostRoutes.WAREHOUSE.identifier,
@@ -180,7 +181,7 @@ fun InventoryScreen(
                     if (userModel?.canSeeUsersTab == true) {
                         gotoDynamicFeature(
                             navController = bottomNavController,
-                            viewModel.dfmInstaller,
+                            dfmInstaller,
                             moduleNameIdentifierAndDeepLinks = Triple(
                                 InventorySubNavHostRoutes.USERS.moduleName,
                                 InventorySubNavHostRoutes.USERS.identifier,
@@ -232,17 +233,7 @@ fun InventoryNavBottomBar(
                         modifier = Modifier.size(appNavIconSize)
                     )
                 },
-                colors = NavigationBarItemDefaults.colors(
-
-                    // SELECTED STATE
-                    indicatorColor = MaterialTheme.colorScheme.primary,
-                    selectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
-
-                    // UNSELECTED STATE
-                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                colors = navBarItemColorCombination()
             )
         }
     }

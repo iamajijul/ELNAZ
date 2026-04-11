@@ -24,15 +24,30 @@ interface CategoryRepository {
     fun getCategoryWithDiscounts(categoryId: String): Flow<Resource<CategoryWithDiscountsModel?>>
     suspend fun getCategoryWithSEO(categoryId: String): Flow<Resource<CategoryWithSEOModel?>>
 
-    suspend fun linkCategoryToProduct(categoryId: String, productId: String): Resource<Long>
+    suspend fun linkCategoryToProduct(
+        shopId: String,
+        categoryId: String,
+        productId: String
+    ): Resource<Long>
+
     suspend fun unlinkCategoryFromProducts(categoryId: String, productId: String): Resource<Int>
     suspend fun clearProductsForCategory(categoryId: String): Resource<Int>
 
-    suspend fun linkCategoryToWarehouse(categoryId: String, warehouseId: String): Resource<Long>
+    suspend fun linkCategoryToWarehouse(
+        shopId: String,
+        categoryId: String,
+        warehouseId: String
+    ): Resource<Long>
+
     suspend fun unlinkCategoryFromWarehouse(categoryId: String, warehouseId: String): Resource<Int>
     suspend fun clearWarehousesForCategory(categoryId: String): Resource<Int>
 
-    suspend fun linkCategoryToDiscount(categoryId: String, discountId: String): Resource<Long>
+    suspend fun linkCategoryToDiscount(
+        shopId: String,
+        categoryId: String,
+        discountId: String
+    ): Resource<Long>
+
     suspend fun unlinkCategoryFromDiscount(categoryId: String, discountId: String): Resource<Int>
     suspend fun clearDiscountsForCategory(categoryId: String): Resource<Int>
 

@@ -2,7 +2,7 @@ package com.ajijul.elnaz.data.repository.product
 
 import com.ajijul.elnaz.data.local.dao.ProductDao
 import com.ajijul.elnaz.data.mapper.toDomain
-import com.ajijul.elnaz.data.mapper.toProductEntity
+import com.ajijul.elnaz.data.mapper.toEntity
 import com.ajijul.elnaz.data.repository.DataFlowManager
 import com.ajijul.elnaz.domain.model.ProductModel
 import com.ajijul.elnaz.domain.repository.product.ProductRepository
@@ -20,7 +20,7 @@ class ProductRepositoryImplementation @Inject constructor(
     override fun getAllProducts(): Flow<List<ProductModel>> = dataFlowManager.itemsFlow
 
     override suspend fun addProduct(product: ProductModel) {
-        val entity = product.toProductEntity()
+        val entity = product.toEntity()
         productDao.insertProduct(entity)
         dataFlowManager.syncData()
     }

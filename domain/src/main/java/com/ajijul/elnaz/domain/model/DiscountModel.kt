@@ -4,7 +4,8 @@ import com.ajijul.elnaz.domain.model.enums.DiscountStatus
 import com.ajijul.elnaz.domain.model.enums.DiscountType
 
 data class DiscountModel(
-    val id: Long = 0,
+    val id: String,
+    val shopId : String,
 
     val code: String,
     val name: String,

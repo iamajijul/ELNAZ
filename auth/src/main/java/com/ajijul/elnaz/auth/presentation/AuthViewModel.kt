@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.ajijul.elnaz.resources.R
 import com.ajijul.elnaz.auth.ui.login.LoginUiState
 import com.ajijul.elnaz.auth.utils.SplashUiState
-import com.ajijul.elnaz.core.utils.isValidEmail
+import com.ajijul.elnaz.core.ui.extensions.isValidEmail
 import com.ajijul.elnaz.di.annotations.IODispatcher
 import com.ajijul.elnaz.domain.model.UserModel
 import com.ajijul.elnaz.domain.usecases.auth.CurrentUserUseCase

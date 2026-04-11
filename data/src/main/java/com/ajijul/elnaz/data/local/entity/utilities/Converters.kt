@@ -1,11 +1,14 @@
 package com.ajijul.elnaz.data.local.entity.utilities
 
 import androidx.room.TypeConverter
+import com.ajijul.elnaz.domain.model.enums.BalanceType
 import com.ajijul.elnaz.domain.model.enums.CategoryStatus
 import com.ajijul.elnaz.domain.model.enums.DiscountStatus
 import com.ajijul.elnaz.domain.model.enums.DiscountType
+import com.ajijul.elnaz.domain.model.enums.PaymentStatus
 import com.ajijul.elnaz.domain.model.enums.ProductStatus
 import com.ajijul.elnaz.domain.model.enums.SupplierStatus
+import com.ajijul.elnaz.domain.model.enums.SyncStatus
 import com.ajijul.elnaz.domain.model.enums.WarehouseStatus
 
 class Converters {
@@ -47,5 +50,23 @@ class Converters {
     fun fromSupplierStatus(value: SupplierStatus): String = value.name
     @TypeConverter
     fun toSupplierStatus(value: String): SupplierStatus = SupplierStatus.valueOf(value)
+
+    // --- BalanceType ---
+    @TypeConverter
+    fun fromBalanceType(value: BalanceType): String = value.name
+    @TypeConverter
+    fun toBalanceType(value: String): BalanceType = BalanceType.valueOf(value)
+
+    // --- PaymentStatus ---
+    @TypeConverter
+    fun fromPaymentStatus(value: PaymentStatus): String = value.name
+    @TypeConverter
+    fun toPaymentStatus(value: String): PaymentStatus = PaymentStatus.valueOf(value)
+
+    // --- SyncStatus ---
+    @TypeConverter
+    fun fromSyncStatus(value: SyncStatus): String = value.name
+    @TypeConverter
+    fun toSyncStatus(value: String): SyncStatus = SyncStatus.valueOf(value)
 
 }

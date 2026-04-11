@@ -13,19 +13,19 @@ import com.ajijul.elnaz.data.local.dao.ProductDao
 import com.ajijul.elnaz.data.local.dao.SupplierDao
 import com.ajijul.elnaz.data.local.dao.WarehouseDao
 import com.ajijul.elnaz.data.local.dao.WarehousePricingDao
-import com.ajijul.elnaz.data.local.entity.category.CategoryEntity
-import com.ajijul.elnaz.data.local.entity.Customer
-import com.ajijul.elnaz.data.local.entity.Discount
+import com.ajijul.elnaz.data.local.entity.CustomerEntity
 import com.ajijul.elnaz.data.local.entity.DiscountAssignment
-import com.ajijul.elnaz.data.local.entity.Inventory
-import com.ajijul.elnaz.data.local.entity.Order
-import com.ajijul.elnaz.data.local.entity.OrderItem
-import com.ajijul.elnaz.data.local.entity.Product
-import com.ajijul.elnaz.data.local.entity.Supplier
-import com.ajijul.elnaz.data.local.entity.UnitOfMeasure
-import com.ajijul.elnaz.data.local.entity.Warehouse
-import com.ajijul.elnaz.data.local.entity.WarehousePricing
+import com.ajijul.elnaz.data.local.entity.DiscountEntity
+import com.ajijul.elnaz.data.local.entity.InventoryEntity
+import com.ajijul.elnaz.data.local.entity.InvoiceEntity
+import com.ajijul.elnaz.data.local.entity.InvoiceItemEntity
+import com.ajijul.elnaz.data.local.entity.ProductEntity
+import com.ajijul.elnaz.data.local.entity.SupplierEntity
+import com.ajijul.elnaz.data.local.entity.UnitOfMeasureEntity
+import com.ajijul.elnaz.data.local.entity.WarehouseEntity
+import com.ajijul.elnaz.data.local.entity.WarehousePricingEntity
 import com.ajijul.elnaz.data.local.entity.category.CategoryDiscountCrossRefEntity
+import com.ajijul.elnaz.data.local.entity.category.CategoryEntity
 import com.ajijul.elnaz.data.local.entity.category.CategoryProductCrossRefEntity
 import com.ajijul.elnaz.data.local.entity.category.CategorySEOEntity
 import com.ajijul.elnaz.data.local.entity.category.CategoryWarehouseCrossRefEntity
@@ -37,17 +37,17 @@ import com.ajijul.elnaz.data.local.entity.category.CategoryWarehouseCrossRefEnti
         CategoryProductCrossRefEntity::class,
         CategorySEOEntity::class,
         CategoryWarehouseCrossRefEntity::class,
-        Customer::class,
-        Discount::class,
+        CustomerEntity::class,
+        DiscountEntity::class,
         DiscountAssignment::class,
-        Inventory::class,
-        Order::class,
-        OrderItem::class,
-        Product::class,
-        Supplier::class,
-        UnitOfMeasure::class,
-        Warehouse::class,
-        WarehousePricing::class
+        InventoryEntity::class,
+        InvoiceEntity::class,
+        InvoiceItemEntity::class,
+        ProductEntity::class,
+        SupplierEntity::class,
+        UnitOfMeasureEntity::class,
+        WarehouseEntity::class,
+        WarehousePricingEntity::class
     ], version = 1
 )
 abstract class AppDatabase : RoomDatabase() {

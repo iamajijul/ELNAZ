@@ -3,7 +3,7 @@ package com.ajijul.elnaz.data.local.relationships
 import androidx.room.Embedded
 import androidx.room.Junction
 import androidx.room.Relation
-import com.ajijul.elnaz.data.local.entity.Product
+import com.ajijul.elnaz.data.local.entity.ProductEntity
 import com.ajijul.elnaz.data.local.entity.category.CategoryEntity
 import com.ajijul.elnaz.data.local.entity.category.CategoryProductCrossRefEntity
 
@@ -17,5 +17,5 @@ data class CategoryWithProducts(
             parentColumn = "categoryId",
             entityColumn = "productId"
         )
-    ) val products: List<Product>
+    ) val productEntities: List<ProductEntity>
 )
