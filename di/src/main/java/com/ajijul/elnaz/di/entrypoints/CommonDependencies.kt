@@ -3,6 +3,7 @@ package com.ajijul.elnaz.di.entrypoints
 import com.ajijul.elnaz.di.annotations.DefaultDispatcher
 import com.ajijul.elnaz.di.annotations.IODispatcher
 import com.ajijul.elnaz.di.annotations.MainDispatcher
+import com.ajijul.elnaz.domain.usecases.auth.CurrentUserUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 
 interface CommonDependencies {
@@ -15,5 +16,7 @@ interface CommonDependencies {
 
     @MainDispatcher
     fun getMainDispatcher(): CoroutineDispatcher
+
+    fun getCurrentUserUseCase() : CurrentUserUseCase
 
 }

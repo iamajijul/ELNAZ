@@ -35,7 +35,6 @@ import dagger.hilt.android.EntryPointAccessors
 
 @Composable
 fun CategoryScreen(navHostController: NavHostController) {
-    AppText("CATEGORY SCREEN")
     val context = LocalContext.current
 
     // 1. Grab the entry point of category screen dependencies from the Application Context

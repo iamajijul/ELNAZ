@@ -11,5 +11,4 @@ import dagger.hilt.components.SingletonComponent
 interface InventoryDependenciesEntryPoint : CommonDependencies{
 
     fun getDFMInstaller() : DynamicFeatureInstaller
-    fun getCurrentUserUseCase() : CurrentUserUseCase
 }
